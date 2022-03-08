@@ -1,6 +1,7 @@
 import { ActionFunction, json, LoaderFunction } from 'remix'
 import invariant from 'tiny-invariant'
 import Hero from '~/components/Hero/Hero'
+import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 
@@ -50,6 +51,7 @@ export default function Index() {
     <>
       <Hero />
       <Tool />
+      <Project />
     </>
   )
 }
