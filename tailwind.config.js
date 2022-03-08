@@ -45,6 +45,7 @@ module.exports = {
       },
       fontFamily: {
         code: ['Fira Code', ...defaultTheme.fontFamily.mono],
+        sans: ['Raleway', ...defaultTheme.fontFamily.sans],
       },
     },
   },
