@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Form, useMatches } from 'remix'
 import { useTheme } from '~/hooks/useTheme'
 import { ActionType } from '~/routes'
@@ -15,7 +16,11 @@ export default function ThemeSwitcher({ isMobile }: Props) {
   return (
     <Form method="post" replace={true}>
       <button
-        className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
+        className={clsx(
+          isMobile
+            ? 'w-full rounded-md py-2 px-3 text-left text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12'
+            : 'group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8',
+        )}
         name="action"
         value={ActionType.SET_THEME}
       >
