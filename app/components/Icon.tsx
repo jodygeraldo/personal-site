@@ -1,4 +1,4 @@
-export type IconId =
+export type IconIdType =
   | 'sun'
   | 'moon'
   | 'arrow-down'
@@ -14,7 +14,7 @@ export type IconId =
   | 'cross'
 
 interface Props {
-  id: IconId
+  id: IconIdType
 }
 
 export default function Icon({
