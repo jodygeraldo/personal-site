@@ -44,7 +44,6 @@ module.exports = {
         'max-320': { max: '320px' },
       },
       fontFamily: {
-        code: ['Fira Code', ...defaultTheme.fontFamily.mono],
         sans: ['Raleway', ...defaultTheme.fontFamily.sans],
       },
     },
