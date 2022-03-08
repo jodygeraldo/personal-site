@@ -67,8 +67,8 @@
   font-style: normal;
   font-weight: 400;
   src: local('Fira Code'),
-    url('/asset/fonts/fira-code-v17-latin-regular.woff2') format('woff2'),
-    url('/asset/fonts/fira-code-v17-latin-regular.woff') format('woff');
+    url('/assets/fonts/fira-code-v17-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/fira-code-v17-latin-regular.woff') format('woff');
   font-display: swap;
 }
 
@@ -77,8 +77,8 @@
   font-style: normal;
   font-weight: 400;
   src: local('Fira Code'),
-    url('/asset/fonts/raleway-v26-latin-regular.woff2') format('woff2'),
-    url('/asset/fonts/raleway-v26-latin-regular.woff') format('woff');
+    url('/assets/fonts/raleway-v26-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v26-latin-regular.woff') format('woff');
   font-display: swap;
 }
 
@@ -87,8 +87,8 @@
   font-style: normal;
   font-weight: 500;
   src: local('Fira Code'),
-    url('/asset/fonts/raleway-v26-latin-500.woff2') format('woff2'),
-    url('/asset/fonts/raleway-v26-latin-500.woff') format('woff');
+    url('/assets/fonts/raleway-v26-latin-500.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v26-latin-500.woff') format('woff');
   font-display: swap;
 }
 
@@ -97,8 +97,8 @@
   font-style: normal;
   font-weight: 600;
   src: local('Fira Code'),
-    url('/asset/fonts/raleway-v26-latin-600.woff2') format('woff2'),
-    url('/asset/fonts/raleway-v26-latin-600.woff') format('woff');
+    url('/assets/fonts/raleway-v26-latin-600.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v26-latin-600.woff') format('woff');
   font-display: swap;
 }
 
@@ -107,8 +107,8 @@
   font-style: normal;
   font-weight: 700;
   src: local('Fira Code'),
-    url('/asset/fonts/raleway-v26-latin-700.woff2') format('woff2'),
-    url('/asset/fonts/raleway-v26-latin-700.woff') format('woff');
+    url('/assets/fonts/raleway-v26-latin-700.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v26-latin-700.woff') format('woff');
   font-display: swap;
 }
 
@@ -117,7 +117,7 @@
   font-style: italic;
   font-weight: 700;
   src: local('Fira Code'),
-    url('/asset/fonts/raleway-v26-latin-700italic.woff2') format('woff2'),
-    url('/asset/fonts/raleway-v26-latin-700italic.woff') format('woff');
+    url('/assets/fonts/raleway-v26-latin-700italic.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v26-latin-700italic.woff') format('woff');
   font-display: swap;
 }
