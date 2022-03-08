@@ -1,4 +1,5 @@
 import {
+  json,
   Links,
   LinksFunction,
   LiveReload,
@@ -6,28 +7,50 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from 'remix'
-import type { MetaFunction } from 'remix'
+import type { MetaFunction, LoaderFunction } from 'remix'
 import tailwind from './tailwind.css'
+import clsx from 'clsx'
+import { useTheme } from './hooks/useTheme'
+import { getTheme } from './utils/theme.server'
 
 export const meta: MetaFunction = () => {
-  return { title: 'New Remix App' }
+  return { title: 'Jody Geraldo | Personal Site' }
 }
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: tailwind }]
 }
 
+interface loaderData {
+  theme: 'dark' | 'light'
+}
+export const loader: LoaderFunction = async ({ request }) => {
+  const theme = await getTheme(request)
+  return json<loaderData>({ theme })
+}
+
 export default function App() {
+  const { theme } = useLoaderData<loaderData>()
+
+  const optimisticTheme = useTheme(theme)
+
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={clsx(
+        optimisticTheme === 'dark' && 'dark-theme',
+        'h-full scroll-smooth',
+      )}
+    >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="h-full bg-gray-1">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
