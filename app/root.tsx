@@ -20,7 +20,30 @@ export const meta: MetaFunction = () => {
 }
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: tailwind }]
+  return [
+    { rel: 'stylesheet', href: tailwind },
+    {
+      rel: 'preload',
+      href: '/assets/fonts/raleway-v26-latin-500.woff2',
+      as: 'font',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      href: '/assets/fonts/raleway-v26-latin-700.woff2',
+      as: 'font',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      href: '/assets/fonts/raleway-v26-latin-700italic.woff2',
+      as: 'font',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
+  ]
 }
 
 interface loaderData {
