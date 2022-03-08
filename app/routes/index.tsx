@@ -1,6 +1,7 @@
 import { ActionFunction, json, LoaderFunction } from 'remix'
 import invariant from 'tiny-invariant'
 import Contact from '~/components/Contact/Contact'
+import Footer from '~/components/Footer/Footer'
 import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
@@ -54,6 +55,7 @@ export default function Index() {
       <Tool />
       <Project />
       <Contact />
+      <Footer />
     </>
   )
 }
