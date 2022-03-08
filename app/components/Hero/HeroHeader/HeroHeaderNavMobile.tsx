@@ -29,7 +29,7 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
               <div className="pt-3 pb-2">
                 <div className="flex items-center justify-between px-4">
                   <Link to="/">
-                    <h2 className="font-mono text-3xl font-medium tracking-tight text-primary-9">
+                    <h2 className="text-3xl font-medium tracking-tight text-primary-9">
                       Jody Geraldo
                     </h2>
                   </Link>
