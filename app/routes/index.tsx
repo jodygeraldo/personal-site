@@ -1,6 +1,7 @@
 import { ActionFunction, json, LoaderFunction } from 'remix'
 import invariant from 'tiny-invariant'
 import Hero from '~/components/Hero/Hero'
+import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 
 export enum ActionType {
@@ -45,5 +46,10 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function Index() {
-  return <Hero />
+  return (
+    <>
+      <Hero />
+      <Tool />
+    </>
+  )
 }
