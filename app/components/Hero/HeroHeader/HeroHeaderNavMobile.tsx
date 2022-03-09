@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
-import ThemeSwitcher from '~/components/ThemeSwitcher'
+// import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 interface Props {
   setClose: () => void
@@ -70,9 +70,9 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
                   </a>
                 </div>
               </div>
-              <div className="px-2 pt-4 pb-2">
+              {/* <div className="px-2 pt-4 pb-2">
                 <ThemeSwitcher isMobile={true} />
-              </div>
+              </div> */}
             </div>
           </Popover.Panel>
         </Transition.Child>

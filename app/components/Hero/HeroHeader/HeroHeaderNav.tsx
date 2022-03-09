@@ -1,6 +1,6 @@
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
-import ThemeSwitcher from '~/components/ThemeSwitcher'
+// import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 export default function HeroHeaderNav() {
   return (
@@ -33,7 +33,7 @@ export default function HeroHeaderNav() {
         />
         <span className="sr-only">Website source code on github</span>
       </a>
-      <ThemeSwitcher />
+      {/* <ThemeSwitcher /> */}
     </nav>
   )
 }

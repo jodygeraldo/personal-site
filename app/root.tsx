@@ -15,6 +15,7 @@ import type {
   LoaderFunction,
 } from 'remix'
 import tailwind from './tailwind.css'
+import darkTheme from './styles/dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
@@ -27,6 +28,11 @@ export const meta: MetaFunction = () => {
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: tailwind },
+    {
+      rel: 'stylesheet',
+      href: darkTheme,
+      media: '(prefers-color-scheme: dark)',
+    },
     {
       rel: 'preload',
       href: '/assets/fonts/raleway-v26-latin-500.woff2',
