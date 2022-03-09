@@ -24,8 +24,8 @@ export default function Section({
         'relative py-16 sm:py-24 lg:py-32',
       )}
     >
-      <div className="mx-auto max-w-md space-y-16 px-4 text-center sm:max-w-3xl sm:space-y-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div>
+      <div className="mx-auto max-w-md space-y-16 px-4 sm:max-w-3xl sm:space-y-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="text-center">
           <h2
             id={`section-${id}`}
             className="text-center text-3xl font-extrabold text-gray-12 sm:text-4xl lg:scroll-mt-32"
