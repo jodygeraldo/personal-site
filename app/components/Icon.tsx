@@ -2,7 +2,6 @@ export type IconIdType =
   | 'sun'
   | 'moon'
   | 'arrow-down'
-  | 'arrow-top-right'
   | 'envelope-closed'
   | 'github'
   | 'twitter'
@@ -12,6 +11,7 @@ export type IconIdType =
   | 'play'
   | 'hamburger-menu'
   | 'cross'
+  | 'rocket'
 
 interface Props {
   id: IconIdType
