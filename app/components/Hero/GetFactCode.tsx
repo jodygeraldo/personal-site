@@ -8,7 +8,7 @@ interface Props {
 export default function GetFactCode({ generatedText }: Props) {
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
-      <div className="rounded-lg bg-gray-3 p-3 shadow-md sm:p-6">
+      <div className="rounded-lg bg-gray-3 p-4 shadow-md sm:p-6">
         <div>
           <div>
             <span className="text-keyword">async function</span>
