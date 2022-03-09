@@ -1,4 +1,9 @@
-import { ActionFunction, json, LoaderFunction } from 'remix'
+import { json } from 'remix'
+import type {
+  ActionFunction,
+  LoaderFunction,
+  ShouldReloadFunction,
+} from 'remix'
 import invariant from 'tiny-invariant'
 import Contact from '~/components/Contact/Contact'
 import Footer from '~/components/Footer/Footer'
@@ -58,4 +63,8 @@ export default function Index() {
       <Footer />
     </>
   )
+}
+
+export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
+  return !!submission && submission.method === 'post'
 }

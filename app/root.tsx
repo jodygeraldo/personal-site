@@ -1,7 +1,6 @@
 import {
   json,
   Links,
-  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
@@ -9,11 +8,17 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from 'remix'
-import type { MetaFunction, LoaderFunction } from 'remix'
+import type {
+  MetaFunction,
+  LinksFunction,
+  ShouldReloadFunction,
+  LoaderFunction,
+} from 'remix'
 import tailwind from './tailwind.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
+import { ActionType } from './routes'
 
 export const meta: MetaFunction = () => {
   return { title: 'Jody Geraldo | Personal Site' }
@@ -80,5 +85,12 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  )
+}
+
+// only reload if the theme has changed
+export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
+  return (
+    !!submission && submission.formData.get('action') === ActionType.SET_THEME
   )
 }
