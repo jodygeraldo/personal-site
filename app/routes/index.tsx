@@ -11,6 +11,7 @@ import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
+import { sendMail, validateMailRequest } from '~/utils/mail.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -24,7 +25,11 @@ function isValidActionType(value: any): value is ActionType {
   )
 }
 
-export const action: ActionFunction = async ({ request }) => {
+interface ActionData {
+  statusMessage?: string
+  errors?: { field: string; message: string }[]
+}
+export const action: ActionFunction = async ({ request, context }) => {
   const formData = await request.formData()
 
   const actions = formData.get('action')
@@ -45,11 +50,54 @@ export const action: ActionFunction = async ({ request }) => {
         },
       })
     case ActionType.SUBMIT_MESSSAGE:
-      return null
+      const apiKey = context.ELASTIC_EMAIL_API_KEY
+      const name = formData.get('name')
+      const email = formData.get('email')
+      const message = formData.get('message')
+      invariant(typeof name === 'string', 'Invalid name type')
+      invariant(typeof email === 'string', 'Invalid email type')
+      invariant(typeof message === 'string', 'Invalid message type')
+
+      const mail = {
+        name,
+        email,
+        message,
+      }
+
+      const errors = validateMailRequest(mail)
+
+      if (errors.length > 0) {
+        return json<ActionData>(
+          { errors },
+          {
+            status: 400,
+          },
+        )
+      }
+
+      const response = await sendMail(apiKey, mail)
+      if (response.ok) {
+        return json<ActionData>(
+          { statusMessage: 'Message sent successfully' },
+          {
+            status: 200,
+          },
+        )
+      } else {
+        return json<ActionData>(
+          { statusMessage: "Couldn't send the message" },
+          {
+            status: response.status,
+          },
+        )
+      }
     default:
-      return json(`Can't process action with name: ${actions}`, {
-        status: 400,
-      })
+      return json<ActionData>(
+        { statusMessage: `Can't process action with name: ${actions}` },
+        {
+          status: 400,
+        },
+      )
   }
 }
 

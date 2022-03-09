@@ -71,6 +71,8 @@ export default function Contact() {
                   autoComplete="name"
                   className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
                   placeholder="Name"
+                  required={true}
+                  minLength={3}
                 />
               </div>
               <div>
@@ -84,6 +86,7 @@ export default function Contact() {
                   autoComplete="email"
                   className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
                   placeholder="Email"
+                  required={true}
                 />
               </div>
               <div>
@@ -96,6 +99,8 @@ export default function Contact() {
                   rows={4}
                   className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
                   placeholder="Message"
+                  required={true}
+                  minLength={20}
                 />
               </div>
               <div>
