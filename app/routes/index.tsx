@@ -10,6 +10,7 @@ import Footer from '~/components/Footer/Footer'
 import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
+import { getFact } from '~/utils/get-fact.server'
 import { commitSession, setTheme } from '~/utils/theme.server'
 
 export enum ActionType {
@@ -51,6 +52,18 @@ export const action: ActionFunction = async ({ request }) => {
         status: 400,
       })
   }
+}
+
+export const loader: LoaderFunction = async ({ request, context }) => {
+  const searchParams = new URL(request.url).searchParams
+  const ignore = searchParams.get('ignore') ?? ''
+
+  const getFactApiKey = context.GET_FACT_API_KEY
+  invariant(getFactApiKey, 'GET_FACT_API_KEY is not defined')
+
+  const fact = await getFact(getFactApiKey, ignore)
+
+  return json({ fact }, 200)
 }
 
 export default function Index() {
