@@ -66,5 +66,17 @@ export default function Index() {
 }
 
 export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
-  return !!submission && submission.method === 'post'
+  const isSubmitting = !!submission
+
+  const isContactSubmission =
+    isSubmitting &&
+    submission.method === 'POST' &&
+    submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+
+  const isGetFactSubmission =
+    isSubmitting &&
+    submission.method === 'GET' &&
+    typeof submission.formData.get('ignore') === 'string'
+
+  return isContactSubmission || isGetFactSubmission
 }
