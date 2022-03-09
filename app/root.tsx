@@ -15,7 +15,7 @@ import type {
   LoaderFunction,
 } from 'remix'
 import tailwind from './tailwind.css'
-import darkTheme from './styles/dark.css'
+import darkTheme from './dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'

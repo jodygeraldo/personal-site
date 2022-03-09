@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "postinstall": "remix setup cloudflare-pages",
-    "build:css": "tailwindcss -m -i ./app/styles/tailwind.css -o ./app/tailwind.css",
+    "build:css": "tailwindcss -m -i ./app/styles/dark.css -o ./app/dark.css && tailwindcss -m -i ./app/styles/tailwind.css -o ./app/tailwind.css",
     "build": "npm run build:css && cross-env NODE_ENV=production remix build",
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public --binding GET_FACT_API_KEY=\"10954fcb-56d6-45e7-ab4d-b44c8ede76a0",
