@@ -1,8 +1,22 @@
-import { Form } from 'remix'
+import { useEffect, useRef } from 'react'
+import { Form, useTransition } from 'remix'
 import { ActionType } from '~/routes'
 import Icon from '../Icon'
 
 export default function Contact() {
+  const { submission } = useTransition()
+
+  const ref = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (
+      submission?.method === 'POST' &&
+      submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+    ) {
+      ref.current?.reset()
+    }
+  }, [submission])
+
   return (
     <section aria-labelledby="section-contact" className="relative bg-gray-1">
       <div className="absolute inset-0">
@@ -56,6 +70,7 @@ export default function Contact() {
         <div className="bg-gray-1 py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
           <div className="mx-auto max-w-lg lg:max-w-none">
             <Form
+              ref={ref}
               method="post"
               replace={true}
               className="grid grid-cols-1 gap-y-6"
