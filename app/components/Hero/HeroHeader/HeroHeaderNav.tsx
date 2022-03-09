@@ -6,7 +6,7 @@ export default function HeroHeaderNav() {
   return (
     <nav
       aria-label="Global"
-      className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-4"
+      className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-6"
     >
       <Link
         className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
