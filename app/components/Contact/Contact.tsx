@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { Form, useTransition } from 'remix'
-import { ActionType } from '~/routes'
+import { Form, useActionData, useTransition } from 'remix'
+import { ActionData as IndexActionData, ActionType } from '~/routes'
 import Icon from '../Icon'
 
 export default function Contact() {
   const { submission } = useTransition()
+  const actionData = useActionData<IndexActionData>()
 
   const ref = useRef<HTMLFormElement>(null)
 
@@ -88,6 +89,7 @@ export default function Contact() {
                   placeholder="Name"
                   required={true}
                   minLength={3}
+                  defaultValue={actionData?.fields?.name}
                 />
               </div>
               <div>
@@ -102,6 +104,7 @@ export default function Contact() {
                   className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
                   placeholder="Email"
                   required={true}
+                  defaultValue={actionData?.fields?.email}
                 />
               </div>
               <div>
@@ -116,6 +119,7 @@ export default function Contact() {
                   placeholder="Message"
                   required={true}
                   minLength={20}
+                  defaultValue={actionData?.fields?.message}
                 />
               </div>
               <div>
@@ -123,6 +127,10 @@ export default function Contact() {
                   name="action"
                   value={ActionType.SUBMIT_MESSSAGE}
                   className="border-transparent inline-flex justify-center rounded-md border border-gray-7 bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-6 active:bg-gray-5"
+                  disabled={
+                    submission?.formData?.get('action') ===
+                    ActionType.SUBMIT_MESSSAGE
+                  }
                 >
                   Submit
                 </button>

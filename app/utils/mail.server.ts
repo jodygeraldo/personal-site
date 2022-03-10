@@ -1,29 +1,31 @@
+import { ActionData as IndexActionData } from '~/routes'
+
 function validateMailRequest(mail: {
   name: string
   email: string
   message: string
 }) {
-  const errors: { field: string; message: string }[] = []
+  const fieldErrors: IndexActionData['fieldErrors'] = {}
+  let formError: IndexActionData['statusMessage']
 
   if (!mail.name || mail.name.length < 3) {
-    errors.push({
-      field: 'name',
-      message: 'Name must be at least 3 characters long',
-    })
+    fieldErrors.name = 'Name is required and must be at least 3 characters'
   }
 
   if (!mail.email) {
-    errors.push({ field: 'email', message: 'Email is required' })
+    fieldErrors.email = 'Email is required'
   }
 
   if (!mail.message || mail.message.length < 20) {
-    errors.push({
-      field: 'message',
-      message: 'Message must be at least 20 characters long',
-    })
+    fieldErrors.message =
+      'Message is required and must be at least 20 characters'
   }
 
-  return errors
+  if (Object.values(fieldErrors).some(Boolean)) {
+    formError = 'There were errors with your submission'
+  }
+
+  return { fieldErrors, formError }
 }
 
 async function sendMail(
@@ -36,6 +38,10 @@ async function sendMail(
 ) {
   const elasticEmailApiUrl =
     'https://api.elasticemail.com/v4/emails/transactional'
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('X-ElasticEmail-ApiKey', apiKey)
 
   const body = {
     Recipients: {
@@ -60,10 +66,7 @@ async function sendMail(
 
   const res = await fetch(elasticEmailApiUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-ElasticEmail-ApiKey': apiKey,
-    },
+    headers,
     body: JSON.stringify(body),
   })
 

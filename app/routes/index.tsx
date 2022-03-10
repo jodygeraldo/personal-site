@@ -12,6 +12,7 @@ import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
+import NotificationToast from '~/components/NotificationToast'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -25,9 +26,20 @@ function isValidActionType(value: any): value is ActionType {
   )
 }
 
-interface ActionData {
+export interface ActionData {
+  type?: 'SUCCESS' | 'ERROR'
   statusMessage?: string
-  errors?: { field: string; message: string }[]
+  extendedMessage?: string
+  fieldErrors?: {
+    name?: string
+    email?: string
+    message?: string
+  }
+  fields?: {
+    name: string
+    email: string
+    message: string
+  }
 }
 export const action: ActionFunction = async ({ request, context }) => {
   const formData = await request.formData()
@@ -64,36 +76,56 @@ export const action: ActionFunction = async ({ request, context }) => {
         message,
       }
 
-      const errors = validateMailRequest(mail)
+      const { fieldErrors, formError } = validateMailRequest(mail)
 
-      if (errors.length > 0) {
+      if (formError) {
         return json<ActionData>(
-          { errors },
+          {
+            statusMessage: formError,
+            fieldErrors,
+            fields: mail,
+            type: 'ERROR',
+          },
           {
             status: 400,
           },
         )
       }
 
-      const response = await sendMail(apiKey, mail)
-      if (response.ok) {
-        return json<ActionData>(
-          { statusMessage: 'Message sent successfully' },
-          {
-            status: 200,
-          },
-        )
-      } else {
-        return json<ActionData>(
-          { statusMessage: "Couldn't send the message" },
-          {
-            status: response.status,
-          },
-        )
+      try {
+        const response = await sendMail(apiKey, mail)
+        if (response.ok) {
+          return json<ActionData>(
+            { statusMessage: 'Message sent successfully', type: 'SUCCESS' },
+            {
+              status: 200,
+            },
+          )
+        } else {
+          return json<ActionData>(
+            {
+              statusMessage: "Couldn't send the message",
+              extendedMessage:
+                'Please try again later or contact me through email',
+              type: 'ERROR',
+            },
+            {
+              status: response.status,
+            },
+          )
+        }
+      } catch (error) {
+        // Todo: setup error boundary
+        console.log(error)
       }
+      return null
     default:
+      console.log(12)
       return json<ActionData>(
-        { statusMessage: `Can't process action with name: ${actions}` },
+        {
+          statusMessage: `Can't process action with name: ${actions}`,
+          type: 'ERROR',
+        },
         {
           status: 400,
         },
@@ -110,6 +142,7 @@ export default function Index() {
         <Project />
         <Contact />
       </main>
+      <NotificationToast />
       <Footer />
     </>
   )

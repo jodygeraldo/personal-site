@@ -21,6 +21,9 @@ import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
 import { ActionType } from './routes'
 
+import * as Toast from '@radix-ui/react-toast'
+import { ReactNode } from 'react'
+
 export const meta: MetaFunction = () => {
   return { title: 'Jody Geraldo | Personal Site' }
 }
@@ -85,12 +88,24 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full bg-gray-1">
-        <Outlet />
+        <NotificationProvider>
+          <Outlet />
+        </NotificationProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  )
+}
+
+function NotificationProvider({ children }: { children: ReactNode }) {
+  return (
+    <Toast.Provider>
+      {children}
+
+      <Toast.Viewport className="fixed top-0 right-0 z-50 m-0 flex w-96 max-w-[100vw] list-none flex-col gap-10 p-6" />
+    </Toast.Provider>
   )
 }
 
