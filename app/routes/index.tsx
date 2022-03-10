@@ -105,9 +105,11 @@ export default function Index() {
   return (
     <>
       <Hero />
-      <Tool />
-      <Project />
-      <Contact />
+      <main>
+        <Tool />
+        <Project />
+        <Contact />
+      </main>
       <Footer />
     </>
   )
