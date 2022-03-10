@@ -29,10 +29,10 @@ export default function ProjectItem({
         src={`/assets/images/${imageUrl}`}
         alt={`${name} front page`}
       />
-      <div className="mt-4 lg:mt-0 lg:ml-8">
+      <div className="mt-4 lg:mt-0 lg:ml-8 lg:flex-1">
         <h3 className="text-xl font-medium text-primary-9">{name}</h3>
         <p className="mt-2 text-gray-11">{description}</p>
-        <div className="mt-4 flex items-center gap-4 text-sm text-gray-11">
+        <div className="my-4 flex items-center gap-4 text-sm text-gray-11">
           <span className="sr-only">Built with</span>
           <Icon id="rocket" className="h-6 w-6 shrink-0" aria-hidden={true} />
           <ul className="flex flex-wrap gap-4">
@@ -41,8 +41,8 @@ export default function ProjectItem({
             ))}
           </ul>
         </div>
-        <ul className="mt-8 space-y-4 text-gray-11">
-          <li className="flex items-center gap-4">
+        <div className="space-y-4 border-t border-gray-6 pt-4 text-gray-11">
+          <div className="flex items-center gap-4">
             <Icon
               id="external-link"
               className="h-6 w-6 shrink-0"
@@ -56,8 +56,8 @@ export default function ProjectItem({
             >
               {parsedDemoUrl}
             </a>
-          </li>
-          <li className="flex items-center gap-4">
+          </div>
+          <div className="flex items-center gap-4">
             <Icon id="github" className="h-6 w-6 shrink-0" aria-hidden={true} />
             <a
               className="hover:text-gray-12 hover:underline"
@@ -67,8 +67,8 @@ export default function ProjectItem({
             >
               Source code on github
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </li>
   )
