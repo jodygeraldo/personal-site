@@ -1,6 +1,7 @@
-import Icon, { IconId } from '../Icon'
+import Icon from '../Icon'
+import type { IconIdType } from '../Icon'
 
-const socials: { name: string; href: string; iconId: IconId }[] = [
+const socials: { name: string; href: string; iconId: IconIdType }[] = [
   {
     name: 'Discord',
     href: 'https://discordapp.com/users/321585722182205440',
