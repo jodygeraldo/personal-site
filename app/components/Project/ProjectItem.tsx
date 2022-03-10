@@ -23,7 +23,7 @@ export default function ProjectItem({
   }
 
   return (
-    <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 sm:p-6 lg:flex lg:max-w-7xl">
+    <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow sm:p-6 lg:flex lg:max-w-7xl">
       <img
         className="aspect-video rounded-t-lg shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
         src={`/assets/images/${imageUrl}`}
