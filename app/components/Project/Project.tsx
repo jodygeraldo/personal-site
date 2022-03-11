@@ -6,7 +6,7 @@ const projects = [
     name: 'Traveler Main',
     description:
       'Traveler Main is companion app for Genshin Impact where you can check daily things to do, and listing your items and character progression',
-    imageUrl: 'test.jpeg',
+    imageUrl: 'traveler-main.fly.dev.jpeg',
     sourceCodeUrl: 'https://github.com/jodygeraldo/traveler-main',
     demoUrl: 'https://traveler-main.fly.dev/',
     builtWith: ['React', 'Remix', 'TailwindCSS', 'ProsgreSQL', 'Fly.io'],
@@ -14,10 +14,10 @@ const projects = [
   {
     name: 'Get Fact API',
     description: 'Get a random or all fact from the database that you store',
-    imageUrl: 'test.jpeg',
+    imageUrl: 'get-fact.deno.dev.jpeg',
     sourceCodeUrl: 'https://github.com/jodygeraldo/get-fact',
     demoUrl: 'https://get-fact.deno.dev/',
-    builtWith: ['Deno', 'Oak', 'Deno Deploy'],
+    builtWith: ['Deno', 'Oak', 'Supabase', 'Deno Deploy'],
   },
 ]
 
