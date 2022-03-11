@@ -32,8 +32,8 @@ export default function Contact() {
             >
               Contact
             </h2>
-            <p className="mt-3 text-lg leading-6 text-primary-11">
-              Get in touch with me.
+            <p className="mt-3 text-xl text-primary-11">
+              Here where you can find me
             </p>
             <dl className="mt-8 text-base text-gray-11">
               <div>
