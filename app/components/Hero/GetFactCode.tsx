@@ -1,11 +1,27 @@
-import { Form } from 'remix'
+import { useEffect, useState } from 'react'
+import { useFetcher, useMatches } from 'remix'
 import Icon from '~/components/Icon'
 
-interface Props {
-  generatedText: string
-}
+export default function GetFactCode() {
+  const matches = useMatches().find((match) => match.id === 'routes/index')
 
-export default function GetFactCode({ generatedText }: Props) {
+  const initialFact =
+    matches?.data?.fact ?? 'Jody Geraldo loves UI/UX and accessibility'
+
+  const fetcher = useFetcher()
+
+  const [ignoreArray, setIgnoreArray] = useState<string[]>([initialFact])
+  useEffect(() => {
+    if (fetcher.data?.fact) {
+      if (fetcher.data?.isLastFact) {
+        setIgnoreArray([])
+      }
+      setIgnoreArray((prev) => [...prev, fetcher.data.fact])
+    }
+  }, [fetcher.data])
+
+  const fetchedFact = fetcher.data?.fact ?? initialFact
+
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
       <div className="rounded-lg bg-gray-3 p-4 shadow-md sm:p-6">
@@ -84,15 +100,16 @@ export default function GetFactCode({ generatedText }: Props) {
           >
             <div className="w-full border-t border-gray-7" />
           </div>
-          <Form
+          <fetcher.Form
             method="get"
             replace={true}
             className="relative flex justify-center"
           >
+            <input type="hidden" name="ignore" value={ignoreArray} />
             <button
               type="submit"
-              name="ignore"
-              value={generatedText}
+              name="require"
+              value="fact"
               className="inline-flex items-center rounded-full border border-gray-7 bg-gray-3 px-4 py-1.5 text-sm font-medium text-gray-12 shadow-sm hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2"
             >
               <Icon
@@ -102,13 +119,13 @@ export default function GetFactCode({ generatedText }: Props) {
               />
               <span>Generate</span>
             </button>
-          </Form>
+          </fetcher.Form>
         </div>
 
         {/* generated code */}
         <div className="flex items-center gap-4">
           <Icon id="paper-plane" className="h-5 w-5" aria-hidden="true" />
-          <span className="xl:text-base">{generatedText}</span>
+          <span className="xl:text-base">{fetchedFact}</span>
         </div>
       </div>
     </code>

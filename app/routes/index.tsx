@@ -13,6 +13,7 @@ import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import NotificationToast from '~/components/NotificationToast'
+import { getRandomFact } from '~/utils/get-fact.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -120,7 +121,6 @@ export const action: ActionFunction = async ({ request, context }) => {
       }
       return null
     default:
-      console.log(12)
       return json<ActionData>(
         {
           statusMessage: `Can't process action with name: ${actions}`,
@@ -131,6 +131,20 @@ export const action: ActionFunction = async ({ request, context }) => {
         },
       )
   }
+}
+
+export const loader: LoaderFunction = ({ request }) => {
+  const searchParams = new URL(request.url).searchParams
+
+  if (searchParams.get('require') === 'fact') {
+    const ignore = searchParams.get('ignore') ?? undefined
+    const { fact, isLastFact } = getRandomFact(ignore)
+
+    return json({ fact, isLastFact }, { status: 200 })
+  }
+  const { fact, isLastFact } = getRandomFact()
+
+  return json({ fact, isLastFact }, { status: 200 })
 }
 
 export default function Index() {
