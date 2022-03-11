@@ -22,8 +22,7 @@ export default function HeroHeaderNav() {
       </Link>
       <a
         className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
-        // this should link to website source code repository on github not to the account
-        href="https://github.com/jodygeraldo"
+        href="https://github.com/jodygeraldo/personal-site"
         target="_blank"
         rel="noreferrer noopener"
       >

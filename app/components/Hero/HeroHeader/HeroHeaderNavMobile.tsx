@@ -61,7 +61,7 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
                   </Link>
                   <a
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
-                    href="https://github.com/jodygeraldo"
+                    href="https://github.com/jodygeraldo/personal-site"
                     target="_blank"
                     rel="noreferrer noopener"
                     onClick={setClose}
