@@ -30,6 +30,7 @@
   --indigo9: hsl(226, 70%, 55.5%);
   --plum9: hsl(292, 45%, 51%);
   --red9: hsl(358, 75%, 59%);
+  --image-overlay-opacity: 0;
 }
 
 @tailwind components;

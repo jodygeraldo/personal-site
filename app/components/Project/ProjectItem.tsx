@@ -24,11 +24,15 @@ export default function ProjectItem({
 
   return (
     <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow sm:p-6 lg:flex lg:max-w-7xl">
-      <img
-        className="aspect-video rounded-t-lg shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
-        src={`/assets/images/${imageUrl}`}
-        alt={`${name} front page`}
-      />
+      <div className="relative">
+        <img
+          className="aspect-video rounded-t-lg shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
+          src={`/assets/images/${imageUrl}`}
+          alt={`${name} front page`}
+        />
+        {/* dark overlay for image so it doesn't burn your eyes */}
+        <div className="absolute inset-0 bg-gray-1 opacity-image-overlay" />
+      </div>
       <div className="mt-4 lg:mt-0 lg:ml-8 lg:flex-1">
         <h3 className="text-xl font-medium text-primary-9">{name}</h3>
         <p className="mt-2 text-gray-11">{description}</p>

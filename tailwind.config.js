@@ -46,6 +46,9 @@ module.exports = {
       fontFamily: {
         sans: ['Raleway', ...defaultTheme.fontFamily.sans],
       },
+      opacity: {
+        'image-overlay': 'var(--image-overlay-opacity)',
+      },
     },
   },
   plugins: [
