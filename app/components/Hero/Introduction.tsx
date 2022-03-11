@@ -1,12 +1,7 @@
-import { useState } from 'react'
 import { Link } from 'remix'
-import { getRandomVerb } from '~/models/verbs'
 import Icon from '~/components/Icon'
 
 export default function Introduction() {
-  // This is to prevent getRandomWork called after the first render
-  const [verb] = useState(getRandomVerb())
-
   return (
     <>
       <h2 className="text-3xl font-bold leading-8 tracking-tight text-primary-12 md:text-4xl">
@@ -14,8 +9,8 @@ export default function Introduction() {
         <br /> I am a web developer based in Indonesia.
       </h2>
       <p className="mt-2 text-2xl font-bold leading-6 text-primary-11 md:text-3xl">
-        I spent most of my time <span className="italic">{verb}</span> while
-        listening to music.
+        I spent most of my time <span className="italic">crushing bugs</span>
+        &nbsp;while listening to music.
       </p>
       <Link
         to="#section-tools"
