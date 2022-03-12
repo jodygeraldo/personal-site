@@ -1,62 +1,46 @@
 import * as Toast from '@radix-ui/react-toast'
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
-import { useActionData } from 'remix'
-import { ActionData as IndexActionData } from '~/routes'
-import Icon from './Icon'
+import Icon from '~/components/Icon'
 
 const variantStyles = {
   SUCCESS: 'border-string',
   ERROR: 'border-variable',
 }
 
-export default function NotificationToast() {
-  const actionData = useActionData<IndexActionData>()
-  const [open, setOpen] = useState(false)
-  const errorArray = Object.values(actionData?.fieldErrors || {})
+interface Props {
+  title: string
+  variant?: 'SUCCESS' | 'ERROR'
+  messages: string[] | string
+}
 
-  function handleStateChange(open: boolean) {
-    setOpen(open)
-  }
-
-  useEffect(() => {
-    if (actionData?.statusMessage) {
-      setOpen(true)
-    }
-  }, [actionData])
-
+export default function NotificationToast({ title, messages, variant }: Props) {
   return (
     <Toast.Root
-      duration={5000}
-      open={open}
-      onOpenChange={handleStateChange}
       className={clsx(
-        actionData?.type && variantStyles[actionData.type],
+        variant && variantStyles[variant],
         'flex rounded-lg border-l-8 bg-gray-3 p-4 shadow-lg ring-1 ring-gray-7 ring-opacity-5',
       )}
     >
       <div className="flex-1">
         <Toast.Title className="text-sm font-medium text-gray-12">
-          {actionData?.statusMessage}
+          {title}
         </Toast.Title>
-        {errorArray.length > 0 ? (
-          <Toast.Description className="mt-1 text-sm text-gray-11">
+        <Toast.Description className="mt-1 text-sm text-gray-11">
+          {Array.isArray(messages) ? (
             <ul>
-              {errorArray.map((error) => (
-                <li key={error}>
+              {messages.map((message) => (
+                <li key={message}>
                   <span className="mr-2" aria-hidden={true}>
                     &middot;
                   </span>
-                  <span>{error}</span>
+                  <span>{message}</span>
                 </li>
               ))}
             </ul>
-          </Toast.Description>
-        ) : actionData?.extendedMessage ? (
-          <Toast.Description className="mt-1 text-sm text-gray-11">
-            {actionData.extendedMessage}
-          </Toast.Description>
-        ) : null}
+          ) : (
+            <p>{messages}</p>
+          )}
+        </Toast.Description>
       </div>
       <Toast.Close className="flex-shrink-0 self-start rounded-md bg-gray-3 ring-offset-gray-6 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2">
         <span className="sr-only">Close</span>
