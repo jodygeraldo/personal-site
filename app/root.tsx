@@ -105,10 +105,9 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.log(error.message)
   return (
     <Document theme="dark" title="Whoops...">
-      <ErrorPage page={500} />
+      <ErrorPage page={500} message={error.message} />
     </Document>
   )
 }
