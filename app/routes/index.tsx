@@ -12,7 +12,6 @@ import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
-import NotificationToast from '~/components/NotificationToast'
 import { getRandomFact } from '~/utils/get-fact.server'
 
 export enum ActionType {
@@ -156,7 +155,6 @@ export default function Index() {
         <Project />
         <Contact />
       </main>
-      <NotificationToast />
       <Footer />
     </>
   )

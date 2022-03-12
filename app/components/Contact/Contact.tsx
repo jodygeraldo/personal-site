@@ -1,25 +1,39 @@
 import { useEffect, useRef } from 'react'
-import { Form, useActionData, useTransition } from 'remix'
-import { ActionData as IndexActionData, ActionType } from '~/routes'
-import Icon from '../Icon'
+import { useFetcher } from 'remix'
+import { ActionType } from '~/routes'
+import type { ActionData as IndexActionData } from '~/routes'
+import Icon from '~/components/Icon'
+import NotificationToast from '~/components/NotificationToast'
 
 export default function Contact() {
-  const { submission } = useTransition()
-  const actionData = useActionData<IndexActionData>()
+  const fetcher = useFetcher<IndexActionData>()
 
   const ref = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     if (
-      submission?.method === 'POST' &&
-      submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+      fetcher.submission &&
+      fetcher.submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
     ) {
       ref.current?.reset()
     }
-  }, [submission])
+  }, [fetcher.submission])
+
+  const messages = fetcher.data?.fieldErrors
+    ? Object.entries(fetcher.data.fieldErrors).map(([_, value]) => value)
+    : fetcher.data?.extendedMessage
+    ? fetcher.data.extendedMessage
+    : undefined
 
   return (
     <section aria-labelledby="section-contact" className="relative bg-gray-1">
+      {fetcher.data && fetcher.data.statusMessage && messages ? (
+        <NotificationToast
+          title={fetcher.data.statusMessage}
+          variant={fetcher.data.type}
+          messages={messages}
+        />
+      ) : null}
       <div className="absolute inset-0">
         <div className="absolute inset-y-0 left-0 w-1/2 bg-gray-2" />
       </div>
@@ -70,7 +84,7 @@ export default function Contact() {
         </div>
         <div className="bg-gray-1 py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
           <div className="mx-auto max-w-lg lg:max-w-none">
-            <Form
+            <fetcher.Form
               ref={ref}
               method="post"
               replace={true}
@@ -89,7 +103,7 @@ export default function Contact() {
                   placeholder="Name"
                   required={true}
                   minLength={3}
-                  defaultValue={actionData?.fields?.name}
+                  defaultValue={fetcher.data?.fields?.name}
                 />
               </div>
               <div>
@@ -104,7 +118,7 @@ export default function Contact() {
                   className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
                   placeholder="Email"
                   required={true}
-                  defaultValue={actionData?.fields?.email}
+                  defaultValue={fetcher.data?.fields?.email}
                 />
               </div>
               <div>
@@ -119,7 +133,7 @@ export default function Contact() {
                   placeholder="Message"
                   required={true}
                   minLength={20}
-                  defaultValue={actionData?.fields?.message}
+                  defaultValue={fetcher.data?.fields?.message}
                 />
               </div>
               <div>
@@ -127,15 +141,11 @@ export default function Contact() {
                   name="action"
                   value={ActionType.SUBMIT_MESSSAGE}
                   className="border-transparent inline-flex justify-center rounded-md border border-gray-7 bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-6 active:bg-gray-5"
-                  disabled={
-                    submission?.formData?.get('action') ===
-                    ActionType.SUBMIT_MESSSAGE
-                  }
                 >
                   Submit
                 </button>
               </div>
-            </Form>
+            </fetcher.Form>
           </div>
         </div>
       </div>
