@@ -1,8 +1,9 @@
 {
   "name": "jodygeraldo.com",
+  "author": "Jody Geraldo",
   "private": true,
   "description": "Personal portfolio site for Jody Geraldo",
-  "license": "",
+  "license": "MIT",
   "sideEffects": false,
   "scripts": {
     "postinstall": "remix setup cloudflare-pages",
