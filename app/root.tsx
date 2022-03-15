@@ -15,6 +15,7 @@ import type {
   ShouldReloadFunction,
   LoaderFunction,
 } from 'remix'
+import { useSetupTranslations } from 'remix-i18next'
 import tailwind from './tailwind.css'
 import darkTheme from './dark.css'
 import clsx from 'clsx'
@@ -25,6 +26,7 @@ import { ActionType } from './routes'
 import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
+import { i18n } from './utils/i18n.server'
 
 // export const meta: MetaFunction = () => {
 //   return { title: 'Jody Geraldo | Personal Site' }
@@ -63,15 +65,19 @@ export const links: LinksFunction = () => {
 }
 
 interface loaderData {
+  locale: string
   theme: 'dark' | 'light'
 }
 export const loader: LoaderFunction = async ({ request }) => {
+  const locale = await i18n.getLocale(request)
   const theme = await getTheme(request)
-  return json<loaderData>({ theme })
+
+  return json<loaderData>({ theme, locale })
 }
 
 export default function App() {
-  const { theme } = useLoaderData<loaderData>()
+  const { locale, theme } = useLoaderData<loaderData>()
+  useSetupTranslations(locale)
 
   const optimisticTheme = useTheme(theme)
 
