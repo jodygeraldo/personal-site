@@ -93,29 +93,29 @@ export const action: ActionFunction = async ({ request, context }) => {
       }
 
       try {
-        const response = await sendMail(apiKey, mail)
-        if (response.ok) {
+        const { message, type, extra } = await sendMail(apiKey, mail)
+        if (type === 'SUCCESS') {
           return json<ActionData>(
-            { statusMessage: 'Message sent successfully', type: 'SUCCESS' },
+            { statusMessage: message, type },
             {
               status: 200,
             },
           )
-        } else {
+        }
+
+        if (extra) {
           return json<ActionData>(
             {
-              statusMessage: "Couldn't send the message",
-              extendedMessage:
-                'Please try again later or contact me through email',
-              type: 'ERROR',
+              statusMessage: message,
+              extendedMessage: extra,
+              type,
             },
             {
-              status: response.status,
+              status: 400,
             },
           )
         }
       } catch (error) {
-        // Todo: setup error boundary
         console.log(error)
       }
       return null

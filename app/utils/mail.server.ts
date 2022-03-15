@@ -35,7 +35,12 @@ async function sendMail(
     email: string
     message: string
   },
-) {
+): Promise<{
+  message: string
+  extra?: string
+  type: 'SUCCESS' | 'ERROR'
+}> {
+  console.log('CALLED')
   const elasticEmailApiUrl =
     'https://api.elasticemail.com/v4/emails/transactional'
 
@@ -70,7 +75,18 @@ async function sendMail(
     body: JSON.stringify(body),
   })
 
-  return res
+  if (res.ok) {
+    return {
+      message: 'Message sent successfully',
+      type: 'SUCCESS',
+    }
+  } else {
+    return {
+      message: "Couldn't send the message",
+      extra: 'Please try again later or contact me through email',
+      type: 'ERROR',
+    }
+  }
 }
 
 export { sendMail, validateMailRequest }
