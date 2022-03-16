@@ -13,6 +13,7 @@ import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import { getRandomFact } from '~/utils/get-fact.server'
+import { getTranslations } from '~/utils/i18n.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -132,7 +133,16 @@ export const action: ActionFunction = async ({ request, context }) => {
   }
 }
 
-export const loader: LoaderFunction = ({ request }) => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const locale = getTranslations('id', [
+    'Intro Title 1',
+    'Intro Title 2',
+    'Intro Subtitle 1',
+    'Intro Subtitle 2',
+    'Intro Subtitle 3',
+    'Intro Cta',
+  ])
+
   const searchParams = new URL(request.url).searchParams
 
   if (searchParams.get('require') === 'fact') {
@@ -143,7 +153,7 @@ export const loader: LoaderFunction = ({ request }) => {
   }
   const { fact, isLastFact } = getRandomFact()
 
-  return json({ fact, isLastFact }, { status: 200 })
+  return json({ locale, fact, isLastFact }, { status: 200 })
 }
 
 export default function Index() {
