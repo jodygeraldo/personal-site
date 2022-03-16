@@ -1,8 +1,13 @@
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
+import type { Language, Translations } from '~/utils/i18n.server'
 // import ThemeSwitcher from '~/components/ThemeSwitcher'
 
-export default function HeroHeaderNav() {
+interface Props {
+  translation: Translations['heroHeader'][Language]
+}
+
+export default function HeroHeaderNav({ translation }: Props) {
   return (
     <nav
       aria-label="Global"
@@ -12,7 +17,7 @@ export default function HeroHeaderNav() {
         className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
         to="#section-contact"
       >
-        Contact
+        {translation['contact']}
       </Link>
       <Link
         className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
@@ -30,7 +35,7 @@ export default function HeroHeaderNav() {
           id="github"
           className="h-5 w-5 text-gray-11 group-hover:text-gray-12"
         />
-        <span className="sr-only">Website source code on github</span>
+        <span className="sr-only">{translation['source-code']}</span>
       </a>
       {/* <ThemeSwitcher /> */}
     </nav>

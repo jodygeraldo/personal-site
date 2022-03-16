@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { useFetcher, useMatches } from 'remix'
+import { useFetcher } from 'remix'
 import Icon from '~/components/Icon'
+import type { Language, Translations } from '~/utils/i18n.server'
 
-export default function GetFactCode() {
-  const matches = useMatches().find((match) => match.id === 'routes/index')
+interface Props {
+  translation: Translations['getFact'][Language]
+  fact: string
+}
 
-  const initialFact =
-    matches?.data?.fact ?? 'Jody Geraldo loves UI/UX and accessibility'
-
+export default function GetFactCode({ translation, fact }: Props) {
   const fetcher = useFetcher()
 
-  const [ignoreArray, setIgnoreArray] = useState<string[]>([initialFact])
+  const [ignoreArray, setIgnoreArray] = useState<string[]>([fact])
   useEffect(() => {
     if (fetcher.data?.fact) {
       if (fetcher.data?.isLastFact) {
@@ -20,7 +21,7 @@ export default function GetFactCode() {
     }
   }, [fetcher.data])
 
-  const fetchedFact = fetcher.data?.fact ?? initialFact
+  const fetchedFact = fetcher.data?.fact ?? fact
 
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
@@ -117,7 +118,7 @@ export default function GetFactCode() {
                 className="-ml-1.5 mr-1 h-5 w-5"
                 aria-hidden="true"
               />
-              <span>Generate</span>
+              <span>{translation.button}</span>
             </button>
           </fetcher.Form>
         </div>
