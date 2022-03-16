@@ -1,4 +1,4 @@
-import { json } from 'remix'
+import { json, useLoaderData } from 'remix'
 import type {
   ActionFunction,
   LoaderFunction,
@@ -13,7 +13,8 @@ import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import { getRandomFact } from '~/utils/get-fact.server'
-import { getTranslations } from '~/utils/i18n.server'
+import { getLanguage, getTranslations } from '~/utils/i18n.server'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -133,33 +134,48 @@ export const action: ActionFunction = async ({ request, context }) => {
   }
 }
 
+interface LoaderData {
+  translation: {
+    hero: {
+      heroHeader: Translations['heroHeader'][Language]
+      intro: Translations['intro'][Language]
+      getFact: Translations['getFact'][Language]
+    }
+  }
+  fact: string
+  isLastFact: boolean
+}
 export const loader: LoaderFunction = async ({ request }) => {
-  const locale = getTranslations('id', [
-    'Intro Title 1',
-    'Intro Title 2',
-    'Intro Subtitle 1',
-    'Intro Subtitle 2',
-    'Intro Subtitle 3',
-    'Intro Cta',
-  ])
+  const language = getLanguage(request)
+  // to test Indonesian
+  // const language = 'id'
+  const translation = {
+    hero: {
+      heroHeader: getTranslations(language, 'heroHeader'),
+      intro: getTranslations(language, 'intro'),
+      getFact: getTranslations(language, 'getFact'),
+    },
+  }
 
   const searchParams = new URL(request.url).searchParams
-
   if (searchParams.get('require') === 'fact') {
     const ignore = searchParams.get('ignore') ?? undefined
-    const { fact, isLastFact } = getRandomFact(ignore)
+    const { fact, isLastFact } = getRandomFact(language, ignore)
 
-    return json({ fact, isLastFact }, { status: 200 })
+    return json<LoaderData>({ translation, fact, isLastFact }, { status: 200 })
   }
-  const { fact, isLastFact } = getRandomFact()
 
-  return json({ locale, fact, isLastFact }, { status: 200 })
+  const { fact, isLastFact } = getRandomFact(language)
+
+  return json<LoaderData>({ translation, fact, isLastFact }, { status: 200 })
 }
 
 export default function Index() {
+  const { translation, fact } = useLoaderData<LoaderData>()
+
   return (
     <>
-      <Hero />
+      <Hero translation={translation.hero} fact={fact} />
       <main>
         <Tool />
         <Project />
