@@ -100,7 +100,7 @@ export function CatchBoundary() {
 
   return (
     <Document theme={caught.data?.theme} title="Whoops...">
-      <ErrorPage page={404} />
+      <ErrorPage page={404} translation={caught.data?.translation} />
     </Document>
   )
 }
