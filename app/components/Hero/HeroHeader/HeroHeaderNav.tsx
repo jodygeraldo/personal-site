@@ -11,36 +11,40 @@ interface Props {
 
 export default function HeroHeaderNav({ translation, language }: Props) {
   return (
-    <nav
-      aria-label="Global"
-      className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-6"
-    >
-      <Link
-        className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
-        to="#section-contact"
+    <>
+      <nav
+        aria-label="Global"
+        className="hidden lg:flex lg:items-center lg:gap-x-8"
       >
-        {translation['contact']}
-      </Link>
-      <Link
-        className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
-        to="#"
-      >
-        Resume
-      </Link>
-      <LanguageSwitcher translation={translation} language={language} />
-      <a
-        className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
-        href="https://github.com/jodygeraldo/personal-site"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        <Icon
-          id="github"
-          className="h-5 w-5 text-gray-11 group-hover:text-gray-12"
-        />
-        <span className="sr-only">{translation['source-code']}</span>
-      </a>
-      {/* <ThemeSwitcher /> */}
-    </nav>
+        <Link
+          className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
+          to="#section-contact"
+        >
+          {translation['contact']}
+        </Link>
+        <Link
+          className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
+          to="#"
+        >
+          Resume
+        </Link>
+      </nav>
+      <div className="hidden lg:flex lg:items-center lg:gap-x-6">
+        <a
+          className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
+          href="https://github.com/jodygeraldo/personal-site"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <Icon
+            id="github"
+            className="h-5 w-5 text-gray-11 group-hover:text-gray-12"
+          />
+          <span className="sr-only">{translation['source-code']}</span>
+        </a>
+        {/* <ThemeSwitcher /> */}
+        <LanguageSwitcher translation={translation} language={language} />
+      </div>
+    </>
   )
 }
