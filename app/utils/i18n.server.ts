@@ -109,4 +109,26 @@ const translations = {
       other: 'Lainnya',
     },
   },
+  project: {
+    en: {
+      title: 'Personal Project',
+      subtitle: 'Things that I made and experiment',
+      'name-1': 'Traveler Main',
+      'description-1':
+        'Traveler Main is companion app for Genshin Impact where you can check daily things to do, and listing your items and character progression',
+      'name-2': 'Get Fact API',
+      'description-2':
+        'Get a random or all fact from the database that you store',
+    },
+    id: {
+      title: 'Project Pribadi',
+      subtitle: 'Project yang saya buat dan experimen',
+      'name-1': 'Traveler Main',
+      'description-1':
+        'Traveler Main adalah aplikasi companion untuk Genshin Impact',
+      'name-2': 'Get Fact API',
+      'description-2':
+        'Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan',
+    },
+  },
 }
