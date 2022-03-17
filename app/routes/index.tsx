@@ -1,4 +1,4 @@
-import { json, useLoaderData } from 'remix'
+import { json, redirect, useLoaderData } from 'remix'
 import type {
   ActionFunction,
   LoaderFunction,
@@ -13,11 +13,17 @@ import Tool from '~/components/Tool/Tool'
 import { commitSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import { getRandomFact } from '~/utils/get-fact.server'
-import { getLanguage, getTranslations } from '~/utils/i18n.server'
+import {
+  commitLanguageSession,
+  getLanguage,
+  getTranslations,
+  setLanguage,
+} from '~/utils/i18n.server'
 import type { Language, Translations } from '~/utils/i18n.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
+  SET_LANGUAGE = 'SET_LANGUAGE',
   SUBMIT_MESSSAGE = 'SUBMIT_MESSSAGE',
 }
 
@@ -61,6 +67,20 @@ export const action: ActionFunction = async ({ request, context }) => {
         status: 204,
         headers: {
           'Set-Cookie': await commitSession(themeSession),
+        },
+      })
+    case ActionType.SET_LANGUAGE:
+      const language = formData.get('language')
+      invariant(typeof language === 'string', 'Invalid language type')
+      invariant(language === 'en' || language === 'id', 'Invalid language')
+
+      const languageSession = await setLanguage(request, language)
+
+      const redirectTo = request.headers.get('Referer') ?? '/'
+
+      return redirect(redirectTo, {
+        headers: {
+          'Set-Cookie': await commitLanguageSession(languageSession),
         },
       })
     case ActionType.SUBMIT_MESSSAGE:
@@ -145,13 +165,12 @@ interface LoaderData {
     project: Translations['project'][Language]
     contact: Translations['contact'][Language]
   }
+  language: Language
   fact: string
   isLastFact: boolean
 }
 export const loader: LoaderFunction = async ({ request }) => {
-  const language = getLanguage(request)
-  // to test Indonesian
-  // const language = 'id'
+  const language = await getLanguage(request)
   const translation = {
     hero: {
       heroHeader: getTranslations(language, 'heroHeader'),
@@ -168,20 +187,26 @@ export const loader: LoaderFunction = async ({ request }) => {
     const ignore = searchParams.get('ignore') ?? undefined
     const { fact, isLastFact } = getRandomFact(language, ignore)
 
-    return json<LoaderData>({ translation, fact, isLastFact }, { status: 200 })
+    return json<LoaderData>(
+      { translation, language, fact, isLastFact },
+      { status: 200 },
+    )
   }
 
   const { fact, isLastFact } = getRandomFact(language)
 
-  return json<LoaderData>({ translation, fact, isLastFact }, { status: 200 })
+  return json<LoaderData>(
+    { translation, language, fact, isLastFact },
+    { status: 200 },
+  )
 }
 
 export default function Index() {
-  const { translation, fact } = useLoaderData<LoaderData>()
+  const { translation, language, fact } = useLoaderData<LoaderData>()
 
   return (
     <>
-      <Hero translation={translation.hero} fact={fact} />
+      <Hero translation={translation.hero} language={language} fact={fact} />
       <main>
         <Tool translation={translation.tool} />
         <Project translation={translation.project} />
@@ -192,4 +217,9 @@ export default function Index() {
   )
 }
 
-export const unstable_shouldReload: ShouldReloadFunction = () => false
+export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
+  return (
+    !!submission &&
+    submission.formData.get('action') === ActionType.SET_LANGUAGE
+  )
+}

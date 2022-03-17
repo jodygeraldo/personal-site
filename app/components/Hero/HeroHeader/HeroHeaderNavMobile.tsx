@@ -2,15 +2,21 @@ import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
+import LanguageSwitcher from '~/components/LanguageSwitcher'
 import type { Language, Translations } from '~/utils/i18n.server'
-// import ThemeSwitcher from '~/components/ThemeSwitcher'
+import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
+  language: Language
   setClose: () => void
 }
 
-export default function HeroHeaderNavMobile({ translation, setClose }: Props) {
+export default function HeroHeaderNavMobile({
+  translation,
+  language,
+  setClose,
+}: Props) {
   return (
     <Transition.Root as={Fragment}>
       <div className="lg:hidden">
@@ -74,9 +80,14 @@ export default function HeroHeaderNavMobile({ translation, setClose }: Props) {
                   </a>
                 </div>
               </div>
-              {/* <div className="px-2 pt-4 pb-2">
+              <div className="space-y-1 px-2 pt-4 pb-2">
                 <ThemeSwitcher isMobile={true} />
-              </div> */}
+                <LanguageSwitcher
+                  translation={translation}
+                  language={language}
+                  isMobile={true}
+                />
+              </div>
             </div>
           </Popover.Panel>
         </Transition.Child>

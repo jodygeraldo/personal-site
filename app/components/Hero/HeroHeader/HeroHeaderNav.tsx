@@ -1,13 +1,15 @@
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
+import LanguageSwitcher from '~/components/LanguageSwitcher'
 import type { Language, Translations } from '~/utils/i18n.server'
 // import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
+  language: Language
 }
 
-export default function HeroHeaderNav({ translation }: Props) {
+export default function HeroHeaderNav({ translation, language }: Props) {
   return (
     <nav
       aria-label="Global"
@@ -25,6 +27,7 @@ export default function HeroHeaderNav({ translation }: Props) {
       >
         Resume
       </Link>
+      <LanguageSwitcher translation={translation} language={language} />
       <a
         className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
         href="https://github.com/jodygeraldo/personal-site"
