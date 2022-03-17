@@ -93,4 +93,20 @@ const translations = {
       button: 'Generate',
     },
   },
+  tool: {
+    en: {
+      title: 'Development Tools',
+      subtitle: 'Web development tools that push me productive',
+      'current-tools': 'Current Stack',
+      'familiar-tools': 'Familiar',
+      other: 'Other',
+    },
+    id: {
+      title: 'Development Tools',
+      subtitle: 'Tools development yang mendorong saya produktif',
+      'current-tools': 'Aktif digunakan',
+      'familiar-tools': 'Familiar',
+      other: 'Lainnya',
+    },
+  },
 }
