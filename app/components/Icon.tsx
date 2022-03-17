@@ -12,6 +12,8 @@ export type IconIdType =
   | 'hamburger-menu'
   | 'cross'
   | 'rocket'
+  | 'globe'
+  | 'chevron-down'
 
 interface Props {
   id: IconIdType
