@@ -1,8 +1,20 @@
+import { createCookieSessionStorage, Session } from 'remix'
+
+const { getSession, commitSession, destroySession } =
+  createCookieSessionStorage({
+    cookie: {
+      name: '__language',
+      httpOnly: true,
+      path: '/',
+      sameSite: 'lax',
+      secrets: ['SECRET'],
+      secure: process.env.NODE_ENV === 'production',
+    },
+  })
+
 export type Language = 'en' | 'id'
 
-// setup session later
-
-export function getLanguage(request: Request) {
+function extractAcceptLanguageHeader(request: Request) {
   let language: Language = 'en'
 
   const checkLanguage = /(.*?)(?:[;|,](?:q=.*?[,|;])?)/g
@@ -21,11 +33,27 @@ export function getLanguage(request: Request) {
   return language
 }
 
-export function isValidLanguage(language: unknown): language is Language {
-  return language === 'en' || language === 'id'
+async function getLanguage(request: Request): Promise<Language> {
+  const session = await getSession(request.headers.get('Cookie'))
+
+  const language: Language = session.has('language')
+    ? session.get('language')
+    : extractAcceptLanguageHeader(request)
+
+  return language
 }
 
-export function getTranslations<Namespace extends keyof Translations>(
+async function setLanguage(
+  request: Request,
+  setTo: Language,
+): Promise<Session> {
+  const session = await getSession(request.headers.get('Cookie'))
+  session.set('language', setTo)
+
+  return session
+}
+
+function getTranslations<Namespace extends keyof Translations>(
   lang: Language,
   namespace: Namespace,
 ) {
@@ -59,12 +87,22 @@ const translations = {
       'close-menu': 'Close main menu',
       contact: 'Contact',
       'source-code': 'Website source code on github',
+      translation: 'Change language',
+      'swtich-indonesia': 'Change to indonesian',
+      'swtich-english': 'Change to english',
+      english: 'English',
+      indonesia: 'Bahasa Indonesia',
     },
     id: {
       'open-menu': 'Buka menu utama',
       'close-menu': 'Tutup menu utama',
       contact: 'Kontak',
       'source-code': 'Source code website di github',
+      translation: 'Ganti bahasa',
+      'swtich-indonesia': 'Ganti ke bahasa indonesia',
+      'swtich-english': 'Ganti ke bahasa inggris',
+      english: 'English',
+      indonesia: 'Bahasa Indonesia',
     },
   },
   intro: {
@@ -147,4 +185,12 @@ const translations = {
       button: 'Kirim',
     },
   },
+}
+
+export {
+  getLanguage,
+  setLanguage,
+  commitSession as commitLanguageSession,
+  destroySession as destroyLanguageSession,
+  getTranslations,
 }
