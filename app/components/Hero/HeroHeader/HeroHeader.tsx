@@ -7,9 +7,10 @@ import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
+  language: Language
 }
 
-export default function HeroHeader({ translation }: Props) {
+export default function HeroHeader({ translation, language }: Props) {
   return (
     <Popover className="flex h-16 justify-between">
       {({ close }) => (
@@ -20,7 +21,7 @@ export default function HeroHeader({ translation }: Props) {
                 Jody Geraldo
               </h1>
             </Link>
-            <HeroHeaderNav translation={translation} />
+            <HeroHeaderNav translation={translation} language={language} />
           </div>
           <div className="flex items-center lg:hidden">
             {/* Mobile menu button */}
@@ -34,7 +35,11 @@ export default function HeroHeader({ translation }: Props) {
             </Popover.Button>
           </div>
 
-          <HeroHeaderNavMobile translation={translation} setClose={close} />
+          <HeroHeaderNavMobile
+            translation={translation}
+            setClose={close}
+            language={language}
+          />
         </>
       )}
     </Popover>
