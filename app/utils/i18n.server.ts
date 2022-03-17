@@ -131,4 +131,20 @@ const translations = {
         'Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan',
     },
   },
+  contact: {
+    en: {
+      title: 'Contact',
+      subtitle: 'Here where you can find me',
+      name: 'Name',
+      message: 'Message',
+      button: 'Send',
+    },
+    id: {
+      title: 'Kontak',
+      subtitle: 'Disini anda dapat menghubungi saya',
+      name: 'Nama',
+      message: 'Pesan',
+      button: 'Kirim',
+    },
+  },
 }

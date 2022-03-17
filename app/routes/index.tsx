@@ -143,6 +143,7 @@ interface LoaderData {
     }
     tool: Translations['tool'][Language]
     project: Translations['project'][Language]
+    contact: Translations['contact'][Language]
   }
   fact: string
   isLastFact: boolean
@@ -159,6 +160,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     },
     tool: getTranslations(language, 'tool'),
     project: getTranslations(language, 'project'),
+    contact: getTranslations(language, 'contact'),
   }
 
   const searchParams = new URL(request.url).searchParams
@@ -183,7 +185,7 @@ export default function Index() {
       <main>
         <Tool translation={translation.tool} />
         <Project translation={translation.project} />
-        <Contact />
+        <Contact translation={translation.contact} />
       </main>
       <Footer />
     </>
