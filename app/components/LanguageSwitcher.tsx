@@ -58,7 +58,7 @@ export default function LanguageSwitcher({
             disabled={language === 'en'}
             value="en"
             className={clsx(
-              'w-full cursor-pointer rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
+              'rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
               language === 'en' && 'bg-gray-5 text-gray-12',
             )}
           >
@@ -71,7 +71,7 @@ export default function LanguageSwitcher({
             disabled={language === 'id'}
             value="id"
             className={clsx(
-              'w-full cursor-pointer rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
+              'rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
               language === 'id' && 'bg-gray-5 text-gray-12',
             )}
           >
