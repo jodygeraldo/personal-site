@@ -23,10 +23,7 @@ function extractAcceptLanguageHeader(request: Request) {
     .get('Accept-Language')
     ?.match(checkLanguage)
 
-  if (
-    acceptLanguageHeader &&
-    (acceptLanguageHeader as string[])[0].includes('id')
-  ) {
+  if (acceptLanguageHeader && acceptLanguageHeader[0].includes('id')) {
     language = 'id'
   }
 
