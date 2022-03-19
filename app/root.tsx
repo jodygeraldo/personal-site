@@ -15,8 +15,8 @@ import type {
   ShouldReloadFunction,
   LoaderFunction,
 } from 'remix'
-import tailwind from './tailwind.css'
-import darkTheme from './dark.css'
+import tailwindStylesUrl from './styles/build/tailwind.css'
+import darkThemeStylesUrl from './styles/build/dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
@@ -32,10 +32,10 @@ import ErrorPage from '~/components/ErrorPage'
 
 export const links: LinksFunction = () => {
   return [
-    { rel: 'stylesheet', href: tailwind },
+    { rel: 'stylesheet', href: tailwindStylesUrl },
     {
       rel: 'stylesheet',
-      href: darkTheme,
+      href: darkThemeStylesUrl,
       media: '(prefers-color-scheme: dark)',
     },
     {
