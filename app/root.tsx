@@ -10,7 +10,7 @@ import {
   useLoaderData,
 } from 'remix'
 import type {
-  // MetaFunction,
+  MetaFunction,
   LinksFunction,
   ShouldReloadFunction,
   LoaderFunction,
@@ -26,9 +26,9 @@ import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 
-// export const meta: MetaFunction = () => {
-//   return { title: 'Jody Geraldo | Personal Site' }
-// }
+export const meta: MetaFunction = () => {
+  return { descrption: 'Get to know Jody Geraldo' }
+}
 
 export const links: LinksFunction = () => {
   return [
