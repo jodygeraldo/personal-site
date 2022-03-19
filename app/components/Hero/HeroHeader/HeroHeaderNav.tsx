@@ -31,7 +31,7 @@ export default function HeroHeaderNav({ translation, language }: Props) {
       </nav>
       <div className="hidden lg:flex lg:items-center lg:gap-x-6">
         <a
-          className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
+          className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1"
           href="https://github.com/jodygeraldo/personal-site"
           target="_blank"
           rel="noreferrer noopener"

@@ -145,7 +145,7 @@ export default function Contact({ translation }: Props) {
                 <button
                   name="action"
                   value={ActionType.SUBMIT_MESSSAGE}
-                  className="border-transparent inline-flex justify-center rounded-md border border-gray-7 bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-6 active:bg-gray-5"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5"
                 >
                   {translation.button}
                 </button>
