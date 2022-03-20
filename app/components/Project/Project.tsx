@@ -1,7 +1,8 @@
 import type { Language, Translations } from '~/utils/i18n.server'
 import Section from '../Section'
 import ProjectItem from './ProjectItem'
-
+import travelerMainImageUrl from '~/assets/images/traveler-main.fly.dev.jpeg'
+import getFactImageUrl from '~/assets/images/get-fact.deno.dev.jpeg'
 interface Props {
   translation: Translations['project'][Language]
 }
@@ -11,7 +12,7 @@ export default function Project({ translation }: Props) {
     {
       name: translation['name-1'],
       description: translation['description-1'],
-      imageUrl: 'traveler-main.fly.dev.jpeg',
+      imageUrl: travelerMainImageUrl,
       sourceCodeUrl: 'https://github.com/jodygeraldo/traveler-main',
       demoUrl: 'https://traveler-main.fly.dev/',
       builtWith: ['React', 'Remix', 'TailwindCSS', 'ProsgreSQL', 'Fly.io'],
@@ -19,7 +20,7 @@ export default function Project({ translation }: Props) {
     {
       name: translation['name-2'],
       description: translation['description-2'],
-      imageUrl: 'get-fact.deno.dev.jpeg',
+      imageUrl: getFactImageUrl,
       sourceCodeUrl: 'https://github.com/jodygeraldo/get-fact',
       demoUrl: 'https://get-fact.deno.dev/',
       builtWith: ['Deno', 'Oak', 'Supabase', 'Deno Deploy'],

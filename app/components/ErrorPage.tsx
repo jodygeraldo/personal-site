@@ -1,5 +1,7 @@
 import { Link } from 'remix'
 import type { Language, Translations } from '~/utils/i18n.server'
+import Error500ImageUrl from '~/assets/images/undraw_lost.svg'
+import Error404ImageUrl from '~/assets/images/undraw_page_not_found.svg'
 
 interface Props {
   page: 404 | 500
@@ -60,7 +62,7 @@ export default function ErrorPage({ translation, page, message }: Props) {
           height="571.14799"
           viewBox="0 0 860.13137 571.14799"
         >
-          <use href="/assets/images/undraw_page_not_found.svg#page-not-found" />
+          <use href={`${Error404ImageUrl}#page-not-found`} />
         </svg>
       ) : (
         <svg
@@ -69,7 +71,7 @@ export default function ErrorPage({ translation, page, message }: Props) {
           height="708.31655"
           viewBox="0 0 885.20079 708.31655"
         >
-          <use href="/assets/images/undraw_lost.svg#lost" />
+          <use href={`${Error500ImageUrl}#lost`} />
         </svg>
       )}
     </main>

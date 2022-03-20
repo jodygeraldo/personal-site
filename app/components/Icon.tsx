@@ -1,3 +1,5 @@
+import radixSvg from '~/assets/icons/radix.svg'
+
 export type IconIdType =
   | 'sun'
   | 'moon'
@@ -25,7 +27,7 @@ export default function Icon({
 }: Props & React.HTMLAttributes<SVGElement>) {
   return (
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" {...props}>
-      <use href={`/assets/icons/radix.svg#${id}`} />
+      <use href={`${radixSvg}#${id}`} />
     </svg>
   )
 }
