@@ -173,6 +173,7 @@ const translations = {
       name: 'Name',
       message: 'Message',
       button: 'Send',
+      buttonSubmitting: 'Sending...',
     },
     id: {
       title: 'Kontak',
@@ -180,6 +181,7 @@ const translations = {
       name: 'Nama',
       message: 'Pesan',
       button: 'Kirim',
+      buttonSubmitting: 'Mengirim...',
     },
   },
 }

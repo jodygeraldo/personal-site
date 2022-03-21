@@ -150,7 +150,9 @@ export default function Contact({ translation }: Props) {
                   className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
                   disabled={!isHydrated || fetcherSubmiting}
                 >
-                  {translation.button}
+                  {fetcherSubmiting
+                    ? translation.buttonSubmitting
+                    : translation.button}
                 </button>
               </div>
             </fetcher.Form>
