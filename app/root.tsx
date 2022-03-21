@@ -137,11 +137,13 @@ function Document({
       <body className="h-full bg-gray-1">
         {children}
         {/* Cloudflare Web Analytics */}
-        <script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "3519ed47081940f2b04fa12b014444ac"}'
-        ></script>
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "3519ed47081940f2b04fa12b014444ac"}'
+          ></script>
+        )}
         {/* End Cloudflare Web Analytics  */}
         <ScrollRestoration />
         <Scripts />
