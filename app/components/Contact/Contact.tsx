@@ -6,6 +6,7 @@ import Icon from '~/components/Icon'
 import NotificationToast from '~/components/NotificationToast'
 import type { Language, Translations } from '~/utils/i18n.server'
 import { useHydrated } from '~/hooks/useHydrated'
+import clsx from 'clsx'
 
 interface Props {
   translation: Translations['contact'][Language]
@@ -102,11 +103,16 @@ export default function Contact({ translation }: Props) {
                   {translation.name}
                 </label>
                 <input
-                  type="text"
-                  name="name"
                   id="name"
+                  name="name"
+                  type="text"
+                  aria-invalid={fetcher.data?.fieldErrors?.name ? true : false}
                   autoComplete="name"
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
+                  className={clsx(
+                    fetcher.data?.fieldErrors?.name &&
+                      'invalid:border-variable',
+                    'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+                  )}
                   placeholder="Name"
                   required={true}
                   minLength={3}
@@ -121,8 +127,13 @@ export default function Contact({ translation }: Props) {
                   id="email"
                   name="email"
                   type="email"
+                  aria-invalid={fetcher.data?.fieldErrors?.email ? true : false}
                   autoComplete="email"
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
+                  className={clsx(
+                    fetcher.data?.fieldErrors?.email &&
+                      'invalid:border-variable',
+                    'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+                  )}
                   placeholder="Email"
                   required={true}
                   defaultValue={fetcher.data?.fields?.email}
@@ -135,8 +146,15 @@ export default function Contact({ translation }: Props) {
                 <textarea
                   id="message"
                   name="message"
+                  aria-invalid={
+                    fetcher.data?.fieldErrors?.message ? true : false
+                  }
                   rows={4}
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
+                  className={clsx(
+                    fetcher.data?.fieldErrors?.message &&
+                      'invalid:border-variable',
+                    'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+                  )}
                   placeholder="Message"
                   required={true}
                   minLength={20}
