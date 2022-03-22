@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, Session } from 'remix'
+import { createCookieSessionStorage } from 'remix'
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage({
@@ -14,25 +14,32 @@ const { getSession, commitSession, destroySession } =
     },
   })
 
+export type NotificationType = 'SUCCESS' | 'ERROR' | 'INFO'
+
 export interface Notification {
-  type: 'SUCCESS' | 'ERROR'
+  type: NotificationType
   message: string
   extendedMessage?: string
 }
 
-async function getNotification(request: Request) {
+async function getFlashNotification(request: Request) {
   const session = await getSession(request.headers.get('Cookie'))
   const notification: Notification | undefined = session.get('notification')
-  return notification
+  return { notification, notificationSession: session }
 }
 
-async function setNotification(
+async function setFlashNotification(
   request: Request,
-  data: Notification,
-): Promise<Session> {
+  notification: Notification,
+) {
   const session = await getSession(request.headers.get('Cookie'))
-  session.set('notification', data)
+  session.flash('notification', notification)
   return session
 }
 
-export { getNotification, setNotification, commitSession, destroySession }
+export {
+  getFlashNotification,
+  setFlashNotification,
+  commitSession as commitNotificationSession,
+  destroySession as destroyNotificationSession,
+}

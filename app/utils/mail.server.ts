@@ -1,4 +1,5 @@
 import { ActionData as IndexActionData } from '~/routes'
+import { NotificationType } from './notification.server'
 
 function validateMailRequest(mail: {
   name: string
@@ -6,7 +7,7 @@ function validateMailRequest(mail: {
   message: string
 }) {
   const fieldErrors: IndexActionData['fieldErrors'] = {}
-  let formError: IndexActionData['statusMessage']
+  let formError: string | undefined
 
   if (!mail.name || mail.name.length < 3) {
     fieldErrors.name = 'Name is required and must be at least 3 characters'
@@ -38,7 +39,7 @@ async function sendMail(
 ): Promise<{
   message: string
   extra?: string
-  type: 'SUCCESS' | 'ERROR'
+  type: NotificationType
 }> {
   console.log('CALLED')
   const elasticEmailApiUrl =

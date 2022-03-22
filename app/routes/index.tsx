@@ -20,6 +20,10 @@ import {
   setLanguage,
 } from '~/utils/i18n.server'
 import type { Language, Translations } from '~/utils/i18n.server'
+import {
+  commitNotificationSession,
+  setFlashNotification,
+} from '~/utils/notification.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
@@ -35,9 +39,6 @@ function isValidActionType(value: any): value is ActionType {
 }
 
 export interface ActionData {
-  type?: 'SUCCESS' | 'ERROR'
-  statusMessage?: string
-  extendedMessage?: string
   fieldErrors?: {
     name?: string
     email?: string
@@ -101,56 +102,71 @@ export const action: ActionFunction = async ({ request, context }) => {
       const { fieldErrors, formError } = validateMailRequest(mail)
 
       if (formError) {
+        const notificationSession = await setFlashNotification(request, {
+          type: 'ERROR',
+          message: formError,
+        })
+
         return json<ActionData>(
           {
-            statusMessage: formError,
             fieldErrors,
             fields: mail,
-            type: 'ERROR',
           },
           {
             status: 400,
+            headers: {
+              'Set-Cookie': await commitNotificationSession(
+                notificationSession,
+              ),
+            },
           },
         )
       }
 
       try {
         const { message, type, extra } = await sendMail(apiKey, mail)
+        const notificationSession = await setFlashNotification(request, {
+          type,
+          message,
+          extendedMessage: extra,
+        })
         if (type === 'SUCCESS') {
-          return json<ActionData>(
-            { statusMessage: message, type },
-            {
-              status: 200,
+          return new Response(null, {
+            status: 200,
+            headers: {
+              'Set-Cookie': await commitNotificationSession(
+                notificationSession,
+              ),
             },
-          )
+          })
         }
 
-        if (extra) {
-          return json<ActionData>(
-            {
-              statusMessage: message,
-              extendedMessage: extra,
-              type,
+        if (type === 'ERROR' && extra) {
+          return new Response(null, {
+            status: 500,
+            headers: {
+              'Set-Cookie': await commitNotificationSession(
+                notificationSession,
+              ),
             },
-            {
-              status: 400,
-            },
-          )
+          })
         }
       } catch (error) {
         console.log(error)
       }
       return null
     default:
-      return json<ActionData>(
-        {
-          statusMessage: `Can't process action with name: ${actions}`,
-          type: 'ERROR',
+      const notificationSession = await setFlashNotification(request, {
+        type: 'ERROR',
+        message: `Can't process action with name: ${actions}`,
+      })
+
+      return new Response(null, {
+        status: 400,
+        headers: {
+          'Set-Cookie': await commitNotificationSession(notificationSession),
         },
-        {
-          status: 400,
-        },
-      )
+      })
   }
 }
 
