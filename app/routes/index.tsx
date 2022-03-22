@@ -10,7 +10,7 @@ import Footer from '~/components/Footer/Footer'
 import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
-import { commitSession, setTheme } from '~/utils/theme.server'
+import { commitThemeSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import { getRandomFact } from '~/utils/get-fact.server'
 import {
@@ -66,7 +66,7 @@ export const action: ActionFunction = async ({ request, context }) => {
       return new Response(null, {
         status: 204,
         headers: {
-          'Set-Cookie': await commitSession(themeSession),
+          'Set-Cookie': await commitThemeSession(themeSession),
         },
       })
     case ActionType.SET_LANGUAGE:
