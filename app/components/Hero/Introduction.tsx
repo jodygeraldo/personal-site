@@ -14,9 +14,7 @@ export default function Introduction({ translation }: Props) {
         <br /> {translation['title-2']}
       </h2>
       <p className="mt-2 text-2xl font-bold leading-6 text-primary-11 md:text-3xl">
-        {translation['subtitle-1']}{' '}
-        <span className="italic">{translation['subtitle-2']}</span>
-        &nbsp;{translation['subtitle-3']}
+        {translation['subtitle']}
       </p>
       <Link
         to="#section-tools"
