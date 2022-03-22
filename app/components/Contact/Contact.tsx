@@ -106,7 +106,12 @@ export default function Contact({ translation }: Props) {
                   id="name"
                   name="name"
                   type="text"
-                  aria-invalid={fetcher.data?.fieldErrors?.name ? true : false}
+                  aria-invalid={
+                    fetcher.data?.fieldErrors?.name ? true : undefined
+                  }
+                  aria-describedby={
+                    fetcher.data?.fieldErrors?.name && 'name-error'
+                  }
                   autoComplete="name"
                   className={clsx(
                     fetcher.data?.fieldErrors?.name &&
@@ -118,6 +123,11 @@ export default function Contact({ translation }: Props) {
                   minLength={3}
                   defaultValue={fetcher.data?.fields?.name}
                 />
+                {fetcher.data?.fieldErrors?.name ? (
+                  <p className="mt-2 text-sm text-variable" id="name-error">
+                    {fetcher.data.fieldErrors.name}
+                  </p>
+                ) : null}
               </div>
               <div>
                 <label htmlFor="email" className="sr-only">
@@ -127,7 +137,12 @@ export default function Contact({ translation }: Props) {
                   id="email"
                   name="email"
                   type="email"
-                  aria-invalid={fetcher.data?.fieldErrors?.email ? true : false}
+                  aria-invalid={
+                    fetcher.data?.fieldErrors?.email ? true : undefined
+                  }
+                  aria-describedby={
+                    fetcher.data?.fieldErrors?.email && 'email-error'
+                  }
                   autoComplete="email"
                   className={clsx(
                     fetcher.data?.fieldErrors?.email &&
@@ -138,6 +153,11 @@ export default function Contact({ translation }: Props) {
                   required={true}
                   defaultValue={fetcher.data?.fields?.email}
                 />
+                {fetcher.data?.fieldErrors?.email ? (
+                  <p className="mt-2 text-sm text-variable" id="email-error">
+                    {fetcher.data.fieldErrors.email}
+                  </p>
+                ) : null}
               </div>
               <div>
                 <label htmlFor="message" className="sr-only">
@@ -147,7 +167,10 @@ export default function Contact({ translation }: Props) {
                   id="message"
                   name="message"
                   aria-invalid={
-                    fetcher.data?.fieldErrors?.message ? true : false
+                    fetcher.data?.fieldErrors?.message ? true : undefined
+                  }
+                  aria-describedby={
+                    fetcher.data?.fieldErrors?.message && 'message-error'
                   }
                   rows={4}
                   className={clsx(
@@ -160,6 +183,11 @@ export default function Contact({ translation }: Props) {
                   minLength={20}
                   defaultValue={fetcher.data?.fields?.message}
                 />
+                {fetcher.data?.fieldErrors?.message ? (
+                  <p className="mt-2 text-sm text-variable" id="message-error">
+                    {fetcher.data.fieldErrors.message}
+                  </p>
+                ) : null}
               </div>
               <div>
                 <button
