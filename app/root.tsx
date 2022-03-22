@@ -20,6 +20,13 @@ import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 
+import {
+  commitNotificationSession,
+  getFlashNotification,
+  Notification,
+} from './utils/notification.server'
+import NotificationToast from '~/components/NotificationToast'
+
 export const meta: MetaFunction = () => {
   return { descrption: 'Get to know Jody Geraldo' }
 }
@@ -51,31 +58,50 @@ export const links: LinksFunction = () => {
 
 interface loaderData {
   theme: 'dark' | 'light'
+  notification?: Notification
 }
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getTheme(request)
+  const { notification, notificationSession } = await getFlashNotification(
+    request,
+  )
 
-  return json<loaderData>({ theme })
+  return json<loaderData>(
+    { theme, notification },
+    {
+      headers: {
+        'Set-Cookie': await commitNotificationSession(notificationSession),
+      },
+    },
+  )
 }
 
 export default function App() {
-  const { theme } = useLoaderData<loaderData>()
+  const { theme, notification } = useLoaderData<loaderData>()
 
   const optimisticTheme = useTheme(theme)
 
   return (
     <Document theme={optimisticTheme} title="Jody Geraldo | Personal Site">
-      <NotificationProvider>
+      <NotificationProvider notification={notification}>
         <Outlet />
       </NotificationProvider>
     </Document>
   )
 }
 
-function NotificationProvider({ children }: { children: ReactNode }) {
+function NotificationProvider({
+  children,
+  notification,
+}: {
+  children: ReactNode
+  notification?: Notification
+}) {
   return (
     <Toast.Provider>
       {children}
+
+      {notification ? <NotificationToast notification={notification} /> : null}
 
       <Toast.Viewport className="fixed top-0 right-0 z-50 m-0 flex w-96 max-w-[100vw] list-none flex-col gap-10 p-6" />
     </Toast.Provider>
