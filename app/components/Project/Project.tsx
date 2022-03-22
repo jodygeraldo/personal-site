@@ -1,8 +1,8 @@
 import type { Language, Translations } from '~/utils/i18n.server'
 import Section from '../Section'
 import ProjectItem from './ProjectItem'
-import travelerMainImageUrl from '~/assets/images/traveler-main.webp'
-import getFactImageUrl from '~/assets/images/get-fact.webp'
+import travelerMainImageUrl from '~/assets/images/traveler-main-640x360.webp'
+import getFactImageUrl from '~/assets/images/get-fact-640x360.webp'
 interface Props {
   translation: Translations['project'][Language]
 }
