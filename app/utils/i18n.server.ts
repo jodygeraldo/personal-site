@@ -106,17 +106,15 @@ const translations = {
     en: {
       'title-1': 'Hi, I am Jody Geraldo,',
       'title-2': 'I am a web developer based in Indonesia',
-      'subtitle-1': 'I spent most of my time',
-      'subtitle-2': 'crushing bugs',
-      'subtitle-3': 'while listening to music',
+      subtitle:
+        'I spent most of my time crushing bugs while listening to music',
       button: 'Get to know me',
     },
     id: {
       'title-1': 'Halo, saya Jody Geraldo,',
       'title-2': 'Saya adalah seorang developer web',
-      'subtitle-1': 'Sehari-hari menghabiskan waktu',
-      'subtitle-2': 'membersihkan bug',
-      'subtitle-3': 'sambil mendengarkan musik',
+      subtitle:
+        'Sehari-hari menghabiskan waktu membersihkan bug sambil mendengarkan musik',
       button: 'Kenal lebih jauh',
     },
   },
