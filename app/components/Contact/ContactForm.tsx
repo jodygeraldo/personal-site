@@ -5,7 +5,6 @@ import type { ActionData as IndexActionData } from '~/routes'
 import type { Language, Translations } from '~/utils/i18n.server'
 import { useHydrated } from '~/hooks/useHydrated'
 import clsx from 'clsx'
-import NotificationToast from '~/components/NotificationToast'
 
 interface Props {
   translation: Translations['contact'][Language]
@@ -27,111 +26,100 @@ export default function ContactForm({ translation }: Props) {
   }, [fetcher.submission, fetcherSubmiting])
 
   return (
-    <>
-      {fetcher.data && fetcher.data.statusMessage ? (
-        <NotificationToast
-          title={fetcher.data.statusMessage}
-          variant={fetcher.data.type}
-          extendedMessage={fetcher.data.extendedMessage}
+    <fetcher.Form
+      ref={ref}
+      method="post"
+      replace={true}
+      className="grid grid-cols-1 gap-y-6"
+    >
+      <div>
+        <label htmlFor="name" className="sr-only">
+          {translation.name}
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          aria-invalid={fetcher.data?.fieldErrors?.name ? true : undefined}
+          aria-describedby={fetcher.data?.fieldErrors?.name && 'name-error'}
+          autoComplete="name"
+          className={clsx(
+            fetcher.data?.fieldErrors?.name && 'invalid:border-variable',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+          )}
+          placeholder="Name"
+          required={true}
+          minLength={3}
+          defaultValue={fetcher.data?.fields?.name}
         />
-      ) : null}
-      <fetcher.Form
-        ref={ref}
-        method="post"
-        replace={true}
-        className="grid grid-cols-1 gap-y-6"
-      >
-        <div>
-          <label htmlFor="name" className="sr-only">
-            {translation.name}
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            aria-invalid={fetcher.data?.fieldErrors?.name ? true : undefined}
-            aria-describedby={fetcher.data?.fieldErrors?.name && 'name-error'}
-            autoComplete="name"
-            className={clsx(
-              fetcher.data?.fieldErrors?.name && 'invalid:border-variable',
-              'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
-            )}
-            placeholder="Name"
-            required={true}
-            minLength={3}
-            defaultValue={fetcher.data?.fields?.name}
-          />
-          {fetcher.data?.fieldErrors?.name ? (
-            <p className="mt-2 text-sm text-variable" id="name-error">
-              {fetcher.data.fieldErrors.name}
-            </p>
-          ) : null}
-        </div>
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            aria-invalid={fetcher.data?.fieldErrors?.email ? true : undefined}
-            aria-describedby={fetcher.data?.fieldErrors?.email && 'email-error'}
-            autoComplete="email"
-            className={clsx(
-              fetcher.data?.fieldErrors?.email && 'invalid:border-variable',
-              'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
-            )}
-            placeholder="Email"
-            required={true}
-            defaultValue={fetcher.data?.fields?.email}
-          />
-          {fetcher.data?.fieldErrors?.email ? (
-            <p className="mt-2 text-sm text-variable" id="email-error">
-              {fetcher.data.fieldErrors.email}
-            </p>
-          ) : null}
-        </div>
-        <div>
-          <label htmlFor="message" className="sr-only">
-            {translation.message}
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            aria-invalid={fetcher.data?.fieldErrors?.message ? true : undefined}
-            aria-describedby={
-              fetcher.data?.fieldErrors?.message && 'message-error'
-            }
-            rows={4}
-            className={clsx(
-              fetcher.data?.fieldErrors?.message && 'invalid:border-variable',
-              'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
-            )}
-            placeholder="Message"
-            required={true}
-            minLength={20}
-            defaultValue={fetcher.data?.fields?.message}
-          />
-          {fetcher.data?.fieldErrors?.message ? (
-            <p className="mt-2 text-sm text-variable" id="message-error">
-              {fetcher.data.fieldErrors.message}
-            </p>
-          ) : null}
-        </div>
-        <div>
-          <button
-            name="action"
-            value={ActionType.SUBMIT_MESSSAGE}
-            className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
-            disabled={!isHydrated || fetcherSubmiting}
-          >
-            {fetcherSubmiting
-              ? translation.buttonSubmitting
-              : translation.button}
-          </button>
-        </div>
-      </fetcher.Form>
-    </>
+        {fetcher.data?.fieldErrors?.name ? (
+          <p className="mt-2 text-sm text-variable" id="name-error">
+            {fetcher.data.fieldErrors.name}
+          </p>
+        ) : null}
+      </div>
+      <div>
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          aria-invalid={fetcher.data?.fieldErrors?.email ? true : undefined}
+          aria-describedby={fetcher.data?.fieldErrors?.email && 'email-error'}
+          autoComplete="email"
+          className={clsx(
+            fetcher.data?.fieldErrors?.email && 'invalid:border-variable',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+          )}
+          placeholder="Email"
+          required={true}
+          defaultValue={fetcher.data?.fields?.email}
+        />
+        {fetcher.data?.fieldErrors?.email ? (
+          <p className="mt-2 text-sm text-variable" id="email-error">
+            {fetcher.data.fieldErrors.email}
+          </p>
+        ) : null}
+      </div>
+      <div>
+        <label htmlFor="message" className="sr-only">
+          {translation.message}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          aria-invalid={fetcher.data?.fieldErrors?.message ? true : undefined}
+          aria-describedby={
+            fetcher.data?.fieldErrors?.message && 'message-error'
+          }
+          rows={4}
+          className={clsx(
+            fetcher.data?.fieldErrors?.message && 'invalid:border-variable',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+          )}
+          placeholder="Message"
+          required={true}
+          minLength={20}
+          defaultValue={fetcher.data?.fields?.message}
+        />
+        {fetcher.data?.fieldErrors?.message ? (
+          <p className="mt-2 text-sm text-variable" id="message-error">
+            {fetcher.data.fieldErrors.message}
+          </p>
+        ) : null}
+      </div>
+      <div>
+        <button
+          name="action"
+          value={ActionType.SUBMIT_MESSSAGE}
+          className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={!isHydrated || fetcherSubmiting}
+        >
+          {fetcherSubmiting ? translation.buttonSubmitting : translation.button}
+        </button>
+      </div>
+    </fetcher.Form>
   )
 }

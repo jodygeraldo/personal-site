@@ -1,39 +1,35 @@
 import * as Toast from '@radix-ui/react-toast'
 import clsx from 'clsx'
 import Icon from '~/components/Icon'
+import type { Notification } from '~/utils/notification.server'
 
-const variantStyles = {
+const variantStyles: Record<Notification['type'], string> = {
   SUCCESS: 'border-string',
   ERROR: 'border-variable',
-}
-
-interface Props {
-  title: string
-  variant?: 'SUCCESS' | 'ERROR'
-  extendedMessage?: string[] | string
+  INFO: 'border-intruction',
 }
 
 export default function NotificationToast({
-  title,
-  extendedMessage,
-  variant,
-}: Props) {
+  notification,
+}: {
+  notification: Notification
+}) {
   return (
     <Toast.Root
       className={clsx(
-        variant && variantStyles[variant],
+        notification.type && variantStyles[notification.type],
         'flex rounded-lg border-l-8 bg-gray-3 p-4 shadow-lg ring-1 ring-gray-7 ring-opacity-5',
       )}
     >
       <div className="flex-1">
         <Toast.Title className="text-sm font-medium text-gray-12">
-          {title}
+          {notification.message}
         </Toast.Title>
-        {extendedMessage ? (
+        {notification.extendedMessage ? (
           <Toast.Description className="mt-1 text-sm text-gray-11">
-            {Array.isArray(extendedMessage) ? (
+            {Array.isArray(notification.extendedMessage) ? (
               <ul>
-                {extendedMessage.map((message) => (
+                {notification.extendedMessage.map((message) => (
                   <li key={message}>
                     <span className="mr-2" aria-hidden={true}>
                       &middot;
@@ -43,7 +39,7 @@ export default function NotificationToast({
                 ))}
               </ul>
             ) : (
-              <p>{extendedMessage}</p>
+              <p>{notification.extendedMessage}</p>
             )}
           </Toast.Description>
         ) : null}

@@ -29,4 +29,9 @@ async function setTheme(request: Request, setTo: Theme): Promise<Session> {
   return session
 }
 
-export { getTheme, setTheme, commitSession, destroySession }
+export {
+  getTheme,
+  setTheme,
+  commitSession as commitThemeSession,
+  destroySession as destroyThemeSession,
+}
