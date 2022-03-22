@@ -9,18 +9,12 @@ import {
   useCatch,
   useLoaderData,
 } from 'remix'
-import type {
-  MetaFunction,
-  LinksFunction,
-  ShouldReloadFunction,
-  LoaderFunction,
-} from 'remix'
+import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix'
 import tailwindStylesUrl from './styles/build/tailwind.css'
 import darkThemeStylesUrl from './styles/build/dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
-import { ActionType } from './routes'
 
 import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
@@ -143,12 +137,5 @@ function Document({
         <LiveReload />
       </body>
     </html>
-  )
-}
-
-// only reload if the theme has changed
-export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
-  return (
-    !!submission && submission.formData.get('action') === ActionType.SET_THEME
   )
 }
