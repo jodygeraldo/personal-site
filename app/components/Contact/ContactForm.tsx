@@ -44,8 +44,10 @@ export default function ContactForm({ translation }: Props) {
           aria-describedby={fetcher.data?.fieldErrors?.name && 'name-error'}
           autoComplete="name"
           className={clsx(
-            fetcher.data?.fieldErrors?.name && 'invalid:border-variable',
-            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+            fetcher.data?.fieldErrors?.email
+              ? 'invalid:border-variable'
+              : 'focus:border-gray-7',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
           placeholder="Name"
           required={true}
@@ -70,8 +72,10 @@ export default function ContactForm({ translation }: Props) {
           aria-describedby={fetcher.data?.fieldErrors?.email && 'email-error'}
           autoComplete="email"
           className={clsx(
-            fetcher.data?.fieldErrors?.email && 'invalid:border-variable',
-            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+            fetcher.data?.fieldErrors?.email
+              ? 'invalid:border-variable'
+              : 'focus:border-gray-7',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
           placeholder="Email"
           required={true}
@@ -96,8 +100,10 @@ export default function ContactForm({ translation }: Props) {
           }
           rows={4}
           className={clsx(
-            fetcher.data?.fieldErrors?.message && 'invalid:border-variable',
-            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7',
+            fetcher.data?.fieldErrors?.email
+              ? 'invalid:border-variable'
+              : 'focus:border-gray-7',
+            'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
           placeholder="Message"
           required={true}
