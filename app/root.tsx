@@ -27,7 +27,7 @@ import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 
 export const meta: MetaFunction = () => {
-  return { descrption: 'Get to know Jody Geraldo' }
+  return { description: 'Get to know Jody Geraldo' }
 }
 
 export const links: LinksFunction = () => {
