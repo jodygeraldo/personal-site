@@ -1,11 +1,15 @@
 import { Link } from 'remix'
+import type { Language, Translations } from '~/utils/i18n.server'
+import Error500ImageUrl from '~/assets/images/undraw_lost.svg'
+import Error404ImageUrl from '~/assets/images/undraw_page_not_found.svg'
 
 interface Props {
   page: 404 | 500
   message?: string
+  translation?: Translations['error'][Language]
 }
 
-export default function ErrorPage({ page, message }: Props) {
+export default function ErrorPage({ translation, page, message }: Props) {
   return (
     <main className="mx-auto flex min-h-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex w-full flex-grow flex-col">
@@ -21,13 +25,23 @@ export default function ErrorPage({ page, message }: Props) {
             {page === 404 ? '404 error' : '500 error'}
           </p>
           <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-12 sm:text-5xl">
-            {page === 404 ? 'Page not found' : 'Internal server error'}
+            {page === 404
+              ? translation
+                ? translation['title-404']
+                : 'Page not found'
+              : translation
+              ? translation['title-500']
+              : 'Internal server error'}
           </h1>
           <p className="mt-2 text-base text-gray-11">
             {message
               ? message
               : page === 404
-              ? 'Sorry, we couldn’t find the page you’re looking for.'
+              ? translation
+                ? translation['message-404']
+                : 'Sorry, we couldn’t find the page you’re looking for.'
+              : translation
+              ? translation['message-500']
               : 'Sorry, something went wrong.'}
           </p>
           <div className="mt-6">
@@ -35,7 +49,8 @@ export default function ErrorPage({ page, message }: Props) {
               to="/"
               className="text-base font-medium text-primary-9 hover:text-primary-10"
             >
-              Go back home<span aria-hidden="true"> &rarr;</span>
+              {translation ? translation['button'] : 'Back to home'}
+              <span aria-hidden="true"> &rarr;</span>
             </Link>
           </div>
         </div>
@@ -47,7 +62,7 @@ export default function ErrorPage({ page, message }: Props) {
           height="571.14799"
           viewBox="0 0 860.13137 571.14799"
         >
-          <use href="/assets/images/undraw_page_not_found.svg#page-not-found" />
+          <use href={`${Error404ImageUrl}#page-not-found`} />
         </svg>
       ) : (
         <svg
@@ -56,7 +71,7 @@ export default function ErrorPage({ page, message }: Props) {
           height="708.31655"
           viewBox="0 0 885.20079 708.31655"
         >
-          <use href="/assets/images/undraw_lost.svg#lost" />
+          <use href={`${Error500ImageUrl}#lost`} />
         </svg>
       )}
     </main>

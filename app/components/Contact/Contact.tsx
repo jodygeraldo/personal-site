@@ -4,20 +4,27 @@ import { ActionType } from '~/routes'
 import type { ActionData as IndexActionData } from '~/routes'
 import Icon from '~/components/Icon'
 import NotificationToast from '~/components/NotificationToast'
+import type { Language, Translations } from '~/utils/i18n.server'
+import { useHydrated } from '~/hooks/useHydrated'
 
-export default function Contact() {
+interface Props {
+  translation: Translations['contact'][Language]
+}
+
+export default function Contact({ translation }: Props) {
+  const isHydrated = useHydrated()
   const fetcher = useFetcher<IndexActionData>()
 
   const ref = useRef<HTMLFormElement>(null)
 
+  const fetcherSubmiting =
+    fetcher.submission?.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+
   useEffect(() => {
-    if (
-      fetcher.submission &&
-      fetcher.submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
-    ) {
+    if (fetcher.submission && fetcherSubmiting) {
       ref.current?.reset()
     }
-  }, [fetcher.submission])
+  }, [fetcher.submission, fetcherSubmiting])
 
   const messages = fetcher.data?.fieldErrors
     ? Object.entries(fetcher.data.fieldErrors).map(([_, value]) => value)
@@ -44,10 +51,10 @@ export default function Contact() {
               id="section-contact"
               className="text-3xl font-extrabold tracking-tight text-gray-12 sm:text-4xl"
             >
-              Contact
+              {translation.title}
             </h2>
             <p className="mt-3 text-xl text-primary-11">
-              Here where you can find me
+              {translation.subtitle}
             </p>
             <dl className="mt-8 text-base text-gray-11">
               <div>
@@ -92,7 +99,7 @@ export default function Contact() {
             >
               <div>
                 <label htmlFor="name" className="sr-only">
-                  Name
+                  {translation.name}
                 </label>
                 <input
                   type="text"
@@ -123,7 +130,7 @@ export default function Contact() {
               </div>
               <div>
                 <label htmlFor="message" className="sr-only">
-                  Message
+                  {translation.message}
                 </label>
                 <textarea
                   id="message"
@@ -140,9 +147,12 @@ export default function Contact() {
                 <button
                   name="action"
                   value={ActionType.SUBMIT_MESSSAGE}
-                  className="border-transparent inline-flex justify-center rounded-md border border-gray-7 bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-6 active:bg-gray-5"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={!isHydrated || fetcherSubmiting}
                 >
-                  Submit
+                  {fetcherSubmiting
+                    ? translation.buttonSubmitting
+                    : translation.button}
                 </button>
               </div>
             </fetcher.Form>

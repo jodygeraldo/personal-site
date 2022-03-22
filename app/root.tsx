@@ -10,13 +10,13 @@ import {
   useLoaderData,
 } from 'remix'
 import type {
-  // MetaFunction,
+  MetaFunction,
   LinksFunction,
   ShouldReloadFunction,
   LoaderFunction,
 } from 'remix'
-import tailwind from './tailwind.css'
-import darkTheme from './dark.css'
+import tailwindStylesUrl from './styles/build/tailwind.css'
+import darkThemeStylesUrl from './styles/build/dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
@@ -26,16 +26,16 @@ import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 
-// export const meta: MetaFunction = () => {
-//   return { title: 'Jody Geraldo | Personal Site' }
-// }
+export const meta: MetaFunction = () => {
+  return { descrption: 'Get to know Jody Geraldo' }
+}
 
 export const links: LinksFunction = () => {
   return [
-    { rel: 'stylesheet', href: tailwind },
+    { rel: 'stylesheet', href: tailwindStylesUrl },
     {
       rel: 'stylesheet',
-      href: darkTheme,
+      href: darkThemeStylesUrl,
       media: '(prefers-color-scheme: dark)',
     },
     {
@@ -67,6 +67,7 @@ interface loaderData {
 }
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getTheme(request)
+
   return json<loaderData>({ theme })
 }
 
@@ -99,7 +100,7 @@ export function CatchBoundary() {
 
   return (
     <Document theme={caught.data?.theme} title="Whoops...">
-      <ErrorPage page={404} />
+      <ErrorPage page={404} translation={caught.data?.translation} />
     </Document>
   )
 }
@@ -135,6 +136,15 @@ function Document({
       </head>
       <body className="h-full bg-gray-1">
         {children}
+        {/* Cloudflare Web Analytics */}
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "3519ed47081940f2b04fa12b014444ac"}'
+          ></script>
+        )}
+        {/* End Cloudflare Web Analytics  */}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

@@ -27,7 +27,7 @@ export default function ProjectItem({
       <div className="relative">
         <img
           className="aspect-video rounded-t-lg shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
-          src={`/assets/images/${imageUrl}`}
+          src={imageUrl}
           alt={`${name} front page`}
         />
         {/* dark overlay for image so it doesn't burn your eyes */}

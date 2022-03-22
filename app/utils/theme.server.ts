@@ -4,8 +4,6 @@ const { getSession, commitSession, destroySession } =
   createCookieSessionStorage({
     cookie: {
       name: '__theme',
-      domain:
-        process.env.NODE_ENV === 'production' ? 'jodygeraldo.com' : undefined,
       httpOnly: true,
       path: '/',
       sameSite: 'lax',
