@@ -10,10 +10,14 @@ const variantStyles = {
 interface Props {
   title: string
   variant?: 'SUCCESS' | 'ERROR'
-  messages: string[] | string
+  extendedMessage?: string[] | string
 }
 
-export default function NotificationToast({ title, messages, variant }: Props) {
+export default function NotificationToast({
+  title,
+  extendedMessage,
+  variant,
+}: Props) {
   return (
     <Toast.Root
       className={clsx(
@@ -25,22 +29,24 @@ export default function NotificationToast({ title, messages, variant }: Props) {
         <Toast.Title className="text-sm font-medium text-gray-12">
           {title}
         </Toast.Title>
-        <Toast.Description className="mt-1 text-sm text-gray-11">
-          {Array.isArray(messages) ? (
-            <ul>
-              {messages.map((message) => (
-                <li key={message}>
-                  <span className="mr-2" aria-hidden={true}>
-                    &middot;
-                  </span>
-                  <span>{message}</span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>{messages}</p>
-          )}
-        </Toast.Description>
+        {extendedMessage ? (
+          <Toast.Description className="mt-1 text-sm text-gray-11">
+            {Array.isArray(extendedMessage) ? (
+              <ul>
+                {extendedMessage.map((message) => (
+                  <li key={message}>
+                    <span className="mr-2" aria-hidden={true}>
+                      &middot;
+                    </span>
+                    <span>{message}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>{extendedMessage}</p>
+            )}
+          </Toast.Description>
+        ) : null}
       </div>
       <Toast.Close className="flex-shrink-0 self-start rounded-md bg-gray-3 ring-offset-gray-6 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2">
         <span className="sr-only">Close</span>

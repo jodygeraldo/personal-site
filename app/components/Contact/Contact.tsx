@@ -27,19 +27,13 @@ export default function Contact({ translation }: Props) {
     }
   }, [fetcher.submission, fetcherSubmiting])
 
-  const messages = fetcher.data?.fieldErrors
-    ? Object.entries(fetcher.data.fieldErrors).map(([_, value]) => value)
-    : fetcher.data?.extendedMessage
-    ? fetcher.data.extendedMessage
-    : undefined
-
   return (
     <section aria-labelledby="section-contact" className="relative bg-gray-1">
-      {fetcher.data && fetcher.data.statusMessage && messages ? (
+      {fetcher.data && fetcher.data.statusMessage ? (
         <NotificationToast
           title={fetcher.data.statusMessage}
           variant={fetcher.data.type}
-          messages={messages}
+          extendedMessage={fetcher.data.extendedMessage}
         />
       ) : null}
       <div className="absolute inset-0">
