@@ -124,13 +124,12 @@ export const action: ActionFunction = async ({ request, context }) => {
       }
 
       try {
-        const { message, type, extra } = await sendMail(apiKey, mail)
-        const notificationSession = await setFlashNotification(request, {
-          type,
-          message,
-          extendedMessage: extra,
-        })
-        if (type === 'SUCCESS') {
+        const response = await sendMail(apiKey, mail)
+        const notificationSession = await setFlashNotification(
+          request,
+          response,
+        )
+        if (response.type === 'SUCCESS') {
           return new Response(null, {
             status: 200,
             headers: {
@@ -139,11 +138,9 @@ export const action: ActionFunction = async ({ request, context }) => {
               ),
             },
           })
-        }
-
-        if (type === 'ERROR' && extra) {
+        } else {
           return new Response(null, {
-            status: 500,
+            status: 400,
             headers: {
               'Set-Cookie': await commitNotificationSession(
                 notificationSession,

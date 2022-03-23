@@ -1,5 +1,6 @@
+import { blacklistedWords } from '~/models/blacklist-words'
 import { ActionData as IndexActionData } from '~/routes'
-import { NotificationType } from './notification.server'
+import { Notification } from './notification.server'
 
 function validateMailRequest(mail: {
   name: string
@@ -29,6 +30,17 @@ function validateMailRequest(mail: {
   return { fieldErrors, formError }
 }
 
+function checkBadWords(words: string) {
+  let isBad = false
+  blacklistedWords.forEach((word) => {
+    if (words.toLowerCase().includes(word)) {
+      isBad = true
+    }
+  })
+
+  return isBad
+}
+
 async function sendMail(
   apiKey: string,
   mail: {
@@ -36,12 +48,18 @@ async function sendMail(
     email: string
     message: string
   },
-): Promise<{
-  message: string
-  extra?: string
-  type: NotificationType
-}> {
-  console.log('CALLED')
+): Promise<Notification> {
+  const isBad = checkBadWords(mail.message)
+
+  if (isBad) {
+    return {
+      message: 'The message you sent, contains blacklisted words',
+      extendedMessage:
+        'If you believe this is a mistake, please contact me through other means',
+      type: 'ERROR',
+    }
+  }
+
   const elasticEmailApiUrl =
     'https://api.elasticemail.com/v4/emails/transactional'
 
@@ -84,7 +102,8 @@ async function sendMail(
   } else {
     return {
       message: "Couldn't send the message",
-      extra: 'Please try again later or contact me through email',
+      extendedMessage:
+        'Please try again later or contact me through other means',
       type: 'ERROR',
     }
   }
