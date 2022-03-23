@@ -42,6 +42,7 @@ module.exports = {
           10: 'var(--sand10)',
           11: 'var(--sand11)',
           12: 'var(--sand12)',
+          'neutral-3': 'var(--neutral3)',
         },
         plum: 'var(--plum9)',
         indigo: 'var(--indigo9)',

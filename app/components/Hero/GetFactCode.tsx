@@ -25,7 +25,7 @@ export default function GetFactCode({ translation, fact }: Props) {
 
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
-      <div className="rounded-lg bg-gray-3 p-4 shadow-md sm:p-6">
+      <div className="rounded-lg bg-gray-neutral-3 p-4 shadow-md sm:p-6">
         <div>
           <div>
             <span className="text-plum">async function</span>
