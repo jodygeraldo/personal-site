@@ -139,14 +139,17 @@ export const action: ActionFunction = async ({ request, context }) => {
             },
           })
         } else {
-          return new Response(null, {
-            status: 400,
-            headers: {
-              'Set-Cookie': await commitNotificationSession(
-                notificationSession,
-              ),
+          return json<ActionData>(
+            { fields: mail },
+            {
+              status: 400,
+              headers: {
+                'Set-Cookie': await commitNotificationSession(
+                  notificationSession,
+                ),
+              },
             },
-          })
+          )
         }
       } catch (error) {
         console.log(error)
