@@ -28,13 +28,13 @@ export default function GetFactCode({ translation, fact }: Props) {
       <div className="rounded-lg bg-gray-3 p-4 shadow-md sm:p-6">
         <div>
           <div>
-            <span className="text-keyword">async function</span>
-            <span className="text-method"> getFact</span>() {'{'}
+            <span className="text-plum">async function</span>
+            <span className="text-indigo"> getFact</span>() {'{'}
           </div>
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const</span>
-            <span className="text-variable"> url</span> = &lsquo;
-            <span className="text-string">
+            <span className="text-plum">const</span>
+            <span className="text-red"> url</span> = &lsquo;
+            <span className="text-grass">
               <a
                 href="https://get-fact.deno.dev"
                 target="_blank"
@@ -47,29 +47,29 @@ export default function GetFactCode({ translation, fact }: Props) {
             &rsquo;
           </div>
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const </span>
-            <span className="text-variable">apiKey </span> =
+            <span className="text-plum">const </span>
+            <span className="text-red">apiKey </span> =
             <span className="text-gray-12"> process.env.</span>
-            <span className="text-variable">GET_FACT_API_KEY</span>
+            <span className="text-red">GET_FACT_API_KEY</span>
           </div>
           <br />
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const </span>
-            <span className="text-variable">res </span> ={' '}
-            <span className="text-intruction">await </span>
-            <span className="text-method">fetch</span>(
+            <span className="text-plum">const </span>
+            <span className="text-red">res </span> ={' '}
+            <span className="text-cyan">await </span>
+            <span className="text-indigo">fetch</span>(
           </div>
           <div className="ml-4 sm:ml-8">
-            <span className="text-intruction">`</span>
-            <span className="text-string">
-              <span className="text-intruction">${'{'}</span>
+            <span className="text-cyan">`</span>
+            <span className="text-grass">
+              <span className="text-cyan">${'{'}</span>
               <span className="text-gray-12">url</span>
-              <span className="text-intruction">{'}'}</span>
+              <span className="text-cyan">{'}'}</span>
               /api/v1/fact?api_key=
-              <span className="text-intruction">${'{'}</span>
+              <span className="text-cyan">${'{'}</span>
               <span className="text-gray-12">apiKey</span>
-              <span className="text-intruction">{'}'}</span>
-              <span className="text-intruction">`</span>
+              <span className="text-cyan">{'}'}</span>
+              <span className="text-cyan">`</span>
             </span>
           </div>
           <div className="ml-2 sm:ml-4">
@@ -77,19 +77,19 @@ export default function GetFactCode({ translation, fact }: Props) {
             <br />
             <br />
             <div>
-              <span className="text-keyword">const </span>
+              <span className="text-plum">const </span>
               {'{ '}
-              <span className="text-variable">fact</span>
+              <span className="text-red">fact</span>
               {' }'} = res.
-              <span className="text-method">json</span>().data
+              <span className="text-indigo">json</span>().data
             </div>
-            <span className="text-intruction">return </span>fact
+            <span className="text-cyan">return </span>fact
           </div>
           <div>{'}'}</div>
           <br />
           <div>
-            <span className="text-intruction">await </span>
-            <span className="text-method">getFact</span>()
+            <span className="text-cyan">await </span>
+            <span className="text-indigo">getFact</span>()
           </div>
         </div>
 

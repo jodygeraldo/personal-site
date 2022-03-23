@@ -45,7 +45,7 @@ export default function ContactForm({ translation }: Props) {
           autoComplete="name"
           className={clsx(
             fetcher.data?.fieldErrors?.email
-              ? 'invalid:border-variable'
+              ? 'invalid:border-red'
               : 'focus:border-gray-7',
             'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
@@ -55,7 +55,7 @@ export default function ContactForm({ translation }: Props) {
           defaultValue={fetcher.data?.fields?.name}
         />
         {fetcher.data?.fieldErrors?.name ? (
-          <p className="mt-2 text-sm text-variable" id="name-error">
+          <p className="mt-2 text-sm text-red" id="name-error">
             {fetcher.data.fieldErrors.name}
           </p>
         ) : null}
@@ -73,7 +73,7 @@ export default function ContactForm({ translation }: Props) {
           autoComplete="email"
           className={clsx(
             fetcher.data?.fieldErrors?.email
-              ? 'invalid:border-variable'
+              ? 'invalid:border-red'
               : 'focus:border-gray-7',
             'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
@@ -82,7 +82,7 @@ export default function ContactForm({ translation }: Props) {
           defaultValue={fetcher.data?.fields?.email}
         />
         {fetcher.data?.fieldErrors?.email ? (
-          <p className="mt-2 text-sm text-variable" id="email-error">
+          <p className="mt-2 text-sm text-red" id="email-error">
             {fetcher.data.fieldErrors.email}
           </p>
         ) : null}
@@ -101,7 +101,7 @@ export default function ContactForm({ translation }: Props) {
           rows={4}
           className={clsx(
             fetcher.data?.fieldErrors?.email
-              ? 'invalid:border-variable'
+              ? 'invalid:border-red'
               : 'focus:border-gray-7',
             'block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:ring-gray-7 focus:valid:border-gray-7',
           )}
@@ -111,7 +111,7 @@ export default function ContactForm({ translation }: Props) {
           defaultValue={fetcher.data?.fields?.message}
         />
         {fetcher.data?.fieldErrors?.message ? (
-          <p className="mt-2 text-sm text-variable" id="message-error">
+          <p className="mt-2 text-sm text-red" id="message-error">
             {fetcher.data.fieldErrors.message}
           </p>
         ) : null}

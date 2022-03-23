@@ -4,9 +4,9 @@ import Icon from '~/components/Icon'
 import type { Notification } from '~/utils/notification.server'
 
 const variantStyles: Record<Notification['type'], string> = {
-  SUCCESS: 'border-string',
-  ERROR: 'border-variable',
-  INFO: 'border-intruction',
+  SUCCESS: 'border-grass',
+  ERROR: 'border-red',
+  INFO: 'border-cyan',
 }
 
 export default function NotificationToast({
