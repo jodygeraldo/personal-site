@@ -5,23 +5,28 @@ import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
   translation: Translations['getFact'][Language]
-  fact: string
 }
 
-export default function GetFactCode({ translation, fact }: Props) {
-  const fetcher = useFetcher()
+export default function GetFactCode({ translation }: Props) {
+  const fetcher = useFetcher<{ fact: string; isLastFact: boolean }>()
 
-  const [ignoreArray, setIgnoreArray] = useState<string[]>([fact])
+  const [ignoreArray, setIgnoreArray] = useState<string[]>(['empty'])
   useEffect(() => {
     if (fetcher.data?.fact) {
       if (fetcher.data?.isLastFact) {
-        setIgnoreArray([])
+        setIgnoreArray(['empty'])
       }
-      setIgnoreArray((prev) => [...prev, fetcher.data.fact])
+
+      const newFact = fetcher.data?.fact
+      setIgnoreArray((prev) => [...prev, newFact])
     }
   }, [fetcher.data])
 
-  const fetchedFact = fetcher.data?.fact ?? fact
+  function handleSubmit() {
+    fetcher.load(`/api/get-fact?ignore=${ignoreArray}`)
+  }
+
+  const fetchedFact = fetcher.data?.fact ?? '...'
 
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
@@ -101,16 +106,10 @@ export default function GetFactCode({ translation, fact }: Props) {
           >
             <div className="w-full border-t border-gray-7" />
           </div>
-          <fetcher.Form
-            method="get"
-            replace={true}
-            className="relative flex justify-center"
-          >
-            <input type="hidden" name="ignore" value={ignoreArray} />
+          <form className="relative flex justify-center">
             <button
-              type="submit"
-              name="require"
-              value="fact"
+              type="button"
+              onClick={handleSubmit}
               className="inline-flex items-center rounded-full border border-gray-7 bg-gray-3 px-4 py-1.5 text-sm font-medium text-gray-12 shadow-sm hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-3"
             >
               <Icon
@@ -120,7 +119,7 @@ export default function GetFactCode({ translation, fact }: Props) {
               />
               <span>{translation.button}</span>
             </button>
-          </fetcher.Form>
+          </form>
         </div>
 
         {/* generated code */}

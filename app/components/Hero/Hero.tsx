@@ -10,10 +10,9 @@ interface Props {
     getFact: Translations['getFact'][Language]
   }
   language: Language
-  fact: string
 }
 
-export default function Hero({ translation, language, fact }: Props) {
+export default function Hero({ translation, language }: Props) {
   return (
     <header className="mx-auto grid min-h-screen max-w-7xl grid-rows-6 items-center px-4 sm:px-6 lg:px-8">
       <HeroHeader translation={translation.heroHeader} language={language} />
@@ -23,7 +22,7 @@ export default function Hero({ translation, language, fact }: Props) {
           <Introduction translation={translation.intro} />
         </div>
         <div className="text-gray-12 lg:max-w-md">
-          <GetFactCode translation={translation.getFact} fact={fact} />
+          <GetFactCode translation={translation.getFact} />
         </div>
       </div>
     </header>

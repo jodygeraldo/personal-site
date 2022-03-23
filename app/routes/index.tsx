@@ -12,7 +12,6 @@ import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import { commitThemeSession, setTheme } from '~/utils/theme.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
-import { getRandomFact } from '~/utils/get-fact.server'
 import {
   commitLanguageSession,
   getLanguage,
@@ -182,8 +181,6 @@ interface LoaderData {
     contact: Translations['contact'][Language]
   }
   language: Language
-  fact: string
-  isLastFact: boolean
 }
 export const loader: LoaderFunction = async ({ request }) => {
   const language = await getLanguage(request)
@@ -198,31 +195,15 @@ export const loader: LoaderFunction = async ({ request }) => {
     contact: getTranslations(language, 'contact'),
   }
 
-  const searchParams = new URL(request.url).searchParams
-  if (searchParams.get('require') === 'fact') {
-    const ignore = searchParams.get('ignore') ?? undefined
-    const { fact, isLastFact } = getRandomFact(language, ignore)
-
-    return json<LoaderData>(
-      { translation, language, fact, isLastFact },
-      { status: 200 },
-    )
-  }
-
-  const { fact, isLastFact } = getRandomFact(language)
-
-  return json<LoaderData>(
-    { translation, language, fact, isLastFact },
-    { status: 200 },
-  )
+  return json<LoaderData>({ translation, language }, { status: 200 })
 }
 
 export default function Index() {
-  const { translation, language, fact } = useLoaderData<LoaderData>()
+  const { translation, language } = useLoaderData<LoaderData>()
 
   return (
     <>
-      <Hero translation={translation.hero} language={language} fact={fact} />
+      <Hero translation={translation.hero} language={language} />
       <main>
         <Tool translation={translation.tool} />
         <Project translation={translation.project} />
