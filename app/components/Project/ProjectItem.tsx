@@ -31,6 +31,7 @@ export default function ProjectItem({
           width="640"
           height="360"
           alt={`${name} front page`}
+          loading="lazy"
         />
         {/* dark overlay for image so it doesn't burn your eyes */}
         <div className="absolute inset-0 bg-gray-1 opacity-image-overlay" />
