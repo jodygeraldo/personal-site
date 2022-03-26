@@ -13,16 +13,16 @@
     "build:css": "npm run generate:css:dark -- --minify && npm run generate:css -- --minify",
     "build:remix": "cross-env NODE_ENV=production remix build",
     "build": "run-s build:*",
-    "pre:dev": "rimraf ./public/build && npm run build:css && cross-env NODE_ENV=development remix build",
-    "dev:css": "npm run generate:css:dark -- --watch && npm run generate:css -- --watch",
+    "pre:dev": "rimraf ./public/build && pnpm build:css && cross-env NODE_ENV=development remix build",
+    "dev:css": "pnpm generate:css:dark -- --watch && pnpm generate:css -- --watch",
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
-    "dev": "npm run pre:dev && run-p dev:*",
-    "start": "cross-env NODE_ENV=production npm run dev:wrangler",
+    "dev": "pnpm pre:dev && run-p dev:*",
+    "start": "cross-env NODE_ENV=production pnpm dev:wrangler",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx ./app",
     "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix --ext js,jsx,ts,tsx ./app/",
     "fmt": "prettier --check --write ./app/**/*.{js,jsx,ts,tsx}",
-    "validate": "npm run lint && npm run fmt"
+    "validate": "run-s lint fmt"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
