@@ -108,14 +108,12 @@ const translations = {
       'title-2': 'I am a web developer based in Indonesia',
       subtitle:
         'I spent most of my time crushing bugs while listening to music',
-      button: 'Get to know me',
     },
     id: {
       'title-1': 'Halo, saya Jody Geraldo,',
       'title-2': 'Saya adalah seorang developer web',
       subtitle:
         'Sehari-hari menghabiskan waktu membersihkan bug sambil mendengarkan musik',
-      button: 'Kenal lebih jauh',
     },
   },
   getFact: {
