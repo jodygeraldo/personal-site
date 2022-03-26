@@ -152,6 +152,9 @@ const translations = {
       'name-2': 'Get Fact API',
       'description-2':
         'Get a random or all fact from the database that you store',
+      'name-3': 'UI Design Daily with Tailwind',
+      'description-3':
+        'Collection of UIDesignDaily component built with Tailwind CSS, powered by SvelteKit and deployed on Cloudflare pages.',
     },
     id: {
       title: 'Project Pribadi',
@@ -162,6 +165,9 @@ const translations = {
       'name-2': 'Get Fact API',
       'description-2':
         'Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan',
+      'name-3': 'UI Design Daily with Tailwind',
+      'description-3':
+        'Kumpulan komponen dari UIDesignDaily yang dibuat dengan Tailwind CSS, SvelteKit dan dideploy ke Cloudflare pages.',
     },
   },
   contact: {

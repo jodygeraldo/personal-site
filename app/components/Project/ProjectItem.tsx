@@ -6,7 +6,7 @@ interface Props {
   imageUrl: string
   sourceCodeUrl: string
   demoUrl: string
-  builtWith: string[]
+  tags: string[]
 }
 
 export default function ProjectItem({
@@ -15,7 +15,7 @@ export default function ProjectItem({
   imageUrl,
   sourceCodeUrl,
   demoUrl,
-  builtWith,
+  tags,
 }: Props) {
   const parsedDemoUrl = demoUrl.slice(0, -1).replace(/^https?:\/\//, '')
   if (parsedDemoUrl.endsWith('/')) {
@@ -43,8 +43,8 @@ export default function ProjectItem({
           <span className="sr-only">Built with</span>
           <Icon id="rocket" className="h-6 w-6 shrink-0" aria-hidden={true} />
           <ul className="flex flex-wrap gap-4">
-            {builtWith.map((item) => (
-              <li key={item}>{item}</li>
+            {tags.map((tag) => (
+              <li key={tag}>{tag}</li>
             ))}
           </ul>
         </div>
