@@ -1,4 +1,4 @@
-.dark-theme {
+:root {
   --amber1: hsl(36, 100%, 6.1%);
   --amber2: hsl(35, 100%, 7.6%);
   --amber3: hsl(32, 100%, 10.2%);
