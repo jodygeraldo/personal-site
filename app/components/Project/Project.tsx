@@ -4,6 +4,7 @@ import ProjectItem from './ProjectItem'
 import travelerMainImageUrl from '~/assets/images/traveler-main-640x360.webp'
 import getFactImageUrl from '~/assets/images/get-fact-640x360.webp'
 import uiDesignDailyTailwindImageUrl from '~/assets/images/ui-design-daily-tailwind-640x360.webp'
+import forTomorrowYouImageUrl from '~/assets/images/for-tomorrow-you-640x360.webp'
 interface Props {
   translation: Translations['project'][Language]
 }
@@ -11,28 +12,36 @@ interface Props {
 export default function Project({ translation }: Props) {
   const projects = [
     {
-      name: translation['name-1'],
+      name: 'UI Design Daily with Tailwind',
       description: translation['description-1'],
+      imageUrl: uiDesignDailyTailwindImageUrl,
+      sourceCodeUrl: 'https://github.com/jodygeraldo/ui-design-daily-tailwind',
+      demoUrl: 'https://ui-design-daily-tailwind.pages.dev/',
+      tags: ['Design', 'UIDesignDaily.com', 'Tailwind CSS', 'Cloudflare Pages'],
+    },
+    {
+      name: 'For Tomorrow You',
+      description: translation['description-2'],
+      imageUrl: forTomorrowYouImageUrl,
+      sourceCodeUrl: 'https://github.com/jodygeraldo/for-tomorrow-you',
+      demoUrl: 'https://for-tomorrow-you.vercel.app',
+      tags: ['React', 'Remix', 'Tailwind CSS', 'Supabase', 'Vercel'],
+    },
+    {
+      name: 'Traveler Main',
+      description: translation['description-3'],
       imageUrl: travelerMainImageUrl,
       sourceCodeUrl: 'https://github.com/jodygeraldo/traveler-main',
       demoUrl: 'https://traveler-main.fly.dev/',
       tags: ['React', 'Remix', 'Tailwind CSS', 'ProsgreSQL', 'Fly.io'],
     },
     {
-      name: translation['name-2'],
-      description: translation['description-2'],
+      name: 'Get Fact API',
+      description: translation['description-4'],
       imageUrl: getFactImageUrl,
       sourceCodeUrl: 'https://github.com/jodygeraldo/get-fact',
       demoUrl: 'https://get-fact.deno.dev/',
       tags: ['Deno', 'Oak', 'Supabase', 'Deno Deploy'],
-    },
-    {
-      name: translation['name-3'],
-      description: translation['description-3'],
-      imageUrl: uiDesignDailyTailwindImageUrl,
-      sourceCodeUrl: 'https://github.com/jodygeraldo/ui-design-daily-tailwind',
-      demoUrl: 'https://ui-design-daily-tailwind.pages.dev/',
-      tags: ['Design', 'UIDesignDaily.com', 'Tailwind CSS', 'Cloudflare Pages'],
     },
   ]
 

@@ -152,28 +152,25 @@ const translations = {
     en: {
       title: 'Personal Project',
       subtitle: 'Things that I made and experiment',
-      'name-1': 'Traveler Main',
       'description-1':
-        'Traveler Main is companion app for Genshin Impact where you can check daily things to do, and listing your items and character progression',
-      'name-2': 'Get Fact API',
-      'description-2':
-        'Get a random or all fact from the database that you store',
-      'name-3': 'UI Design Daily with Tailwind',
+        'Collection of UIDesignDaily component built with Tailwind CSS, powered by SvelteKit and deployed on Cloudflare pages',
+      'description-2': 'Just another note app with cool stuff from Supabase',
       'description-3':
-        'Collection of UIDesignDaily component built with Tailwind CSS, powered by SvelteKit and deployed on Cloudflare pages.',
+        'Traveler Main is companion app for Genshin Impact where you can check daily things to do, and listing your items and character progression',
+      'description-4':
+        'Get a random or all fact from the database that you store',
     },
     id: {
       title: 'Project Pribadi',
       subtitle: 'Project yang saya buat dan experimen',
-      'name-1': 'Traveler Main',
       'description-1':
-        'Traveler Main adalah aplikasi companion untuk Genshin Impact',
-      'name-2': 'Get Fact API',
+        'Kumpulan komponen dari UIDesignDaily yang dibuat dengan Tailwind CSS, SvelteKit dan dideploy ke Cloudflare pages',
       'description-2':
-        'Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan',
-      'name-3': 'UI Design Daily with Tailwind',
+        'Hanya sebuah aplikasi note lain dengan hal-hal yang menarik dari Supabase',
       'description-3':
-        'Kumpulan komponen dari UIDesignDaily yang dibuat dengan Tailwind CSS, SvelteKit dan dideploy ke Cloudflare pages.',
+        'Traveler Main adalah aplikasi companion untuk Genshin Impact',
+      'description-4':
+        'Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan',
     },
   },
   contact: {
