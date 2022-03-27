@@ -1,8 +1,12 @@
-import { Form } from 'remix'
-import { ActionType } from '~/routes'
-import Icon from '../Icon'
+import Icon from '~/components/Icon'
+import type { Language, Translations } from '~/utils/i18n.server'
+import ContactForm from './ContactForm'
 
-export default function Contact() {
+interface Props {
+  translation: Translations['contact'][Language]
+}
+
+export default function Contact({ translation }: Props) {
   return (
     <section aria-labelledby="section-contact" className="relative bg-gray-1">
       <div className="absolute inset-0">
@@ -15,10 +19,10 @@ export default function Contact() {
               id="section-contact"
               className="text-3xl font-extrabold tracking-tight text-gray-12 sm:text-4xl"
             >
-              Contact
+              {translation.title}
             </h2>
-            <p className="mt-3 text-lg leading-6 text-primary-11">
-              Get in touch with me.
+            <p className="mt-3 text-xl text-primary-11">
+              {translation.subtitle}
             </p>
             <dl className="mt-8 text-base text-gray-11">
               <div>
@@ -55,59 +59,7 @@ export default function Contact() {
         </div>
         <div className="bg-gray-1 py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
           <div className="mx-auto max-w-lg lg:max-w-none">
-            <Form
-              method="post"
-              replace={true}
-              className="grid grid-cols-1 gap-y-6"
-            >
-              <div>
-                <label htmlFor="name" className="sr-only">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="name"
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
-                  placeholder="Name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
-                  placeholder="Email"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="sr-only">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  className="block w-full rounded-md border-gray-6 bg-gray-3 py-3 px-4 text-gray-12 placeholder-gray-9 shadow-sm focus:border-gray-7 focus:ring-gray-7"
-                  placeholder="Message"
-                />
-              </div>
-              <div>
-                <button
-                  name="action"
-                  value={ActionType.SUBMIT_MESSSAGE}
-                  className="border-transparent inline-flex justify-center rounded-md border bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-6 active:bg-gray-5"
-                >
-                  Submit
-                </button>
-              </div>
-            </Form>
+            <ContactForm translation={translation} />
           </div>
         </div>
       </div>

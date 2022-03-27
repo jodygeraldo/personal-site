@@ -2,13 +2,21 @@ import { Popover, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
+import LanguageSwitcher from '~/components/LanguageSwitcher'
+import type { Language, Translations } from '~/utils/i18n.server'
 // import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 interface Props {
+  translation: Translations['heroHeader'][Language]
+  language: Language
   setClose: () => void
 }
 
-export default function HeroHeaderNavMobile({ setClose }: Props) {
+export default function HeroHeaderNavMobile({
+  translation,
+  language,
+  setClose,
+}: Props) {
   return (
     <Transition.Root as={Fragment}>
       <div className="lg:hidden">
@@ -35,7 +43,9 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
                   </Link>
                   <div className="-mr-2">
                     <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-11 hover:bg-gray-3 hover:text-gray-12 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-7">
-                      <span className="sr-only">Close menu</span>
+                      <span className="sr-only">
+                        {translation['close-menu']}
+                      </span>
                       <Icon
                         id="cross"
                         className="block h-6 w-6 text-gray-11 group-hover:text-gray-12"
@@ -50,7 +60,7 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
                     to="#section-contact"
                     onClick={setClose}
                   >
-                    Contact
+                    {translation['contact']}
                   </Link>
                   <Link
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
@@ -61,18 +71,23 @@ export default function HeroHeaderNavMobile({ setClose }: Props) {
                   </Link>
                   <a
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
-                    href="https://github.com/jodygeraldo"
+                    href="https://github.com/jodygeraldo/personal-site"
                     target="_blank"
                     rel="noreferrer noopener"
                     onClick={setClose}
                   >
-                    Website source code on github
+                    {translation['source-code']}
                   </a>
                 </div>
               </div>
-              {/* <div className="px-2 pt-4 pb-2">
-                <ThemeSwitcher isMobile={true} />
-              </div> */}
+              <div className="space-y-1 px-2 pt-4 pb-2">
+                {/* <ThemeSwitcher isMobile={true} /> */}
+                <LanguageSwitcher
+                  translation={translation}
+                  language={language}
+                  isMobile={true}
+                />
+              </div>
             </div>
           </Popover.Panel>
         </Transition.Child>

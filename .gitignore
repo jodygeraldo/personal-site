@@ -4,5 +4,4 @@ node_modules
 /functions/\[\[path\]\].js
 /public/build
 
-/app/tailwind.css
-/app/dark.css
+/app/styles/build

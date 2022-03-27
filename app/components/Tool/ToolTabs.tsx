@@ -26,7 +26,7 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
           <Tabs.Trigger
             key={id}
             value={id}
-            className="flex-1 items-start border-b border-gray-7 py-3 px-5 text-2xl text-gray-11 hover:border-gray-8 hover:text-gray-12 state-active:border-primary-12 state-active:text-gray-12"
+            className="flex-1 items-start border-b border-gray-7 py-3 px-5 text-xl font-semibold text-gray-11 hover:border-gray-8 hover:text-gray-12 state-active:border-primary-12 state-active:text-gray-12"
           >
             {name}
           </Tabs.Trigger>
@@ -42,13 +42,10 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {category.map(({ name, content }) => (
               <li key={name} className="col-span-1 text-left">
-                <h3 className="text-xl font-semibold text-primary-9">{name}</h3>
+                <h3 className="text-xl font-medium text-primary-9">{name}</h3>
                 <ul className="mt-4 space-y-2">
                   {content.map((item) => (
-                    <li
-                      className="font-semibold text-gray-11 md:text-lg"
-                      key={item}
-                    >
+                    <li className="text-gray-11" key={item}>
                       {item}
                     </li>
                   ))}

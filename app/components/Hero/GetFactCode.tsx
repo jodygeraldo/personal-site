@@ -1,23 +1,45 @@
-import { Form } from 'remix'
+import { useEffect, useState } from 'react'
+import { useFetcher } from 'remix'
 import Icon from '~/components/Icon'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
-  generatedText: string
+  translation: Translations['getFact'][Language]
 }
 
-export default function GetFactCode({ generatedText }: Props) {
+export default function GetFactCode({ translation }: Props) {
+  const fetcher = useFetcher<{ fact: string; isLastFact: boolean }>()
+
+  const [ignoreArray, setIgnoreArray] = useState<string[]>(['empty'])
+  useEffect(() => {
+    if (fetcher.data?.fact) {
+      if (fetcher.data?.isLastFact) {
+        setIgnoreArray(['empty'])
+      }
+
+      const newFact = fetcher.data?.fact
+      setIgnoreArray((prev) => [...prev, newFact])
+    }
+  }, [fetcher.data])
+
+  function handleSubmit() {
+    fetcher.load(`/api/get-fact?ignore=${ignoreArray}`)
+  }
+
+  const fetchedFact = fetcher.data?.fact ?? '...'
+
   return (
     <code className="break-all text-sm 2xl:text-base max-320:text-xs">
-      <div className="rounded-lg bg-gray-3 p-3 shadow-md sm:p-6">
+      <div className="rounded-lg bg-gray-neutral-3 p-4 shadow-md sm:p-6">
         <div>
           <div>
-            <span className="text-keyword">async function</span>
-            <span className="text-method"> getFact</span>() {'{'}
+            <span className="text-plum">async function</span>
+            <span className="text-indigo"> getFact</span>() {'{'}
           </div>
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const</span>
-            <span className="text-variable"> url</span> = &lsquo;
-            <span className="text-string">
+            <span className="text-plum">const</span>
+            <span className="text-red"> url</span> = &lsquo;
+            <span className="text-grass">
               <a
                 href="https://get-fact.deno.dev"
                 target="_blank"
@@ -30,29 +52,29 @@ export default function GetFactCode({ generatedText }: Props) {
             &rsquo;
           </div>
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const </span>
-            <span className="text-variable">apiKey </span> =
+            <span className="text-plum">const </span>
+            <span className="text-red">apiKey </span> =
             <span className="text-gray-12"> process.env.</span>
-            <span className="text-variable">GET_FACT_API_KEY</span>
+            <span className="text-red">GET_FACT_API_KEY</span>
           </div>
           <br />
           <div className="ml-2 sm:ml-4">
-            <span className="text-keyword">const </span>
-            <span className="text-variable">res </span> ={' '}
-            <span className="text-intruction">await </span>
-            <span className="text-method">fetch</span>(
+            <span className="text-plum">const </span>
+            <span className="text-red">res </span> ={' '}
+            <span className="text-cyan">await </span>
+            <span className="text-indigo">fetch</span>(
           </div>
           <div className="ml-4 sm:ml-8">
-            <span className="text-intruction">`</span>
-            <span className="text-string">
-              <span className="text-intruction">${'{'}</span>
+            <span className="text-cyan">`</span>
+            <span className="text-grass">
+              <span className="text-cyan">${'{'}</span>
               <span className="text-gray-12">url</span>
-              <span className="text-intruction">{'}'}</span>
+              <span className="text-cyan">{'}'}</span>
               /api/v1/fact?api_key=
-              <span className="text-intruction">${'{'}</span>
+              <span className="text-cyan">${'{'}</span>
               <span className="text-gray-12">apiKey</span>
-              <span className="text-intruction">{'}'}</span>
-              <span className="text-intruction">`</span>
+              <span className="text-cyan">{'}'}</span>
+              <span className="text-cyan">`</span>
             </span>
           </div>
           <div className="ml-2 sm:ml-4">
@@ -60,19 +82,19 @@ export default function GetFactCode({ generatedText }: Props) {
             <br />
             <br />
             <div>
-              <span className="text-keyword">const </span>
+              <span className="text-plum">const </span>
               {'{ '}
-              <span className="text-variable">fact</span>
+              <span className="text-red">fact</span>
               {' }'} = res.
-              <span className="text-method">json</span>().data
+              <span className="text-indigo">json</span>().data
             </div>
-            <span className="text-intruction">return </span>fact
+            <span className="text-cyan">return </span>fact
           </div>
           <div>{'}'}</div>
           <br />
           <div>
-            <span className="text-intruction">await </span>
-            <span className="text-method">getFact</span>()
+            <span className="text-cyan">await </span>
+            <span className="text-indigo">getFact</span>()
           </div>
         </div>
 
@@ -84,31 +106,26 @@ export default function GetFactCode({ generatedText }: Props) {
           >
             <div className="w-full border-t border-gray-7" />
           </div>
-          <Form
-            method="get"
-            replace={true}
-            className="relative flex justify-center"
-          >
+          <form className="relative flex justify-center">
             <button
-              type="submit"
-              name="ignore"
-              value={generatedText}
-              className="inline-flex items-center rounded-full border border-gray-7 bg-gray-3 px-4 py-1.5 text-sm font-medium text-gray-12 shadow-sm hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2"
+              type="button"
+              onClick={handleSubmit}
+              className="inline-flex items-center rounded-full border border-gray-7 bg-gray-3 px-4 py-1.5 text-sm font-medium text-gray-12 shadow-sm hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-3"
             >
               <Icon
                 id="play"
                 className="-ml-1.5 mr-1 h-5 w-5"
                 aria-hidden="true"
               />
-              <span>Generate</span>
+              <span>{translation.button}</span>
             </button>
-          </Form>
+          </form>
         </div>
 
         {/* generated code */}
         <div className="flex items-center gap-4">
           <Icon id="paper-plane" className="h-5 w-5" aria-hidden="true" />
-          <span className="xl:text-base">{generatedText}</span>
+          <span className="xl:text-base">{fetchedFact}</span>
         </div>
       </div>
     </code>

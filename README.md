@@ -1,22 +1,24 @@
-# Welcome to Remix!
+# Jody Geraldo Portfolio Site
 
-- [Remix Docs](https://remix.run/docs)
+This is source code behind [jodygeraldo.com](https://jodygeraldo.com).
 
-## Development
+## Tools
 
-You will be utilizing Wrangler for local development to emulate the Cloudflare runtime. This is already wired up in your package.json as the `dev` script:
+Tools to build this site:
 
-```sh
-# start the remix dev server and wrangler
-$ npm run dev
-```
+### Library and Framework
 
-Open up [http://127.0.0.1:8788](http://127.0.0.1:8788) and you should be ready to go!
+- [React](https://reactjs.org/)
+- [Remix](https://remix.run/)
 
-## Deployment
+### Styling
 
-Cloudflare Pages are currently only deployable through their Git provider integrations.
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tailwind UI](https://tailwindui.com/)
+- [Radix Primitive](https://www.radix-ui.com/docs/primitives/overview/getting-started)
+- [Radix Icons](https://icons.modulz.app/)
+- [Radix Colors](https://www.radix-ui.com/colors)
 
-If you don't already have an account, then [create a Cloudflare account here](https://dash.cloudflare.com/sign-up/pages) and after verifying your email address with Cloudflare, go to your dashboard and follow the [Cloudflare Pages deployment guide](https://developers.cloudflare.com/pages/framework-guides/deploy-anything).
+### Deployed to
 
-Configure the "Build command" should be set to `npm run build`, and the "Build output directory" should be set to `public`.
+- [Cloudflare Pages](https://pages.cloudflare.com/)

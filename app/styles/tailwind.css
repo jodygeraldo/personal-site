@@ -30,6 +30,8 @@
   --indigo9: hsl(226, 70%, 55.5%);
   --plum9: hsl(292, 45%, 51%);
   --red9: hsl(358, 75%, 59%);
+  --neutral3: hsl(0, 0%, 95.1%);
+  --image-overlay-opacity: 0;
 }
 
 @tailwind components;
@@ -72,15 +74,5 @@
   src: local('Raleway'),
     url('/assets/fonts/raleway-v26-latin-700.woff2') format('woff2'),
     url('/assets/fonts/raleway-v26-latin-700.woff') format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Raleway'),
-    url('/assets/fonts/raleway-v26-latin-700italic.woff2') format('woff2'),
-    url('/assets/fonts/raleway-v26-latin-700italic.woff') format('woff');
   font-display: swap;
 }

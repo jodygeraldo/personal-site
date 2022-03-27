@@ -1,4 +1,4 @@
-import { json } from 'remix'
+import { json, redirect, useLoaderData } from 'remix'
 import type {
   ActionFunction,
   LoaderFunction,
@@ -10,11 +10,23 @@ import Footer from '~/components/Footer/Footer'
 import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
-import { getFact } from '~/utils/get-fact.server'
-import { commitSession, setTheme } from '~/utils/theme.server'
+import { commitThemeSession, setTheme } from '~/utils/theme.server'
+import { sendMail, validateMailRequest } from '~/utils/mail.server'
+import {
+  commitLanguageSession,
+  getLanguage,
+  getTranslations,
+  setLanguage,
+} from '~/utils/i18n.server'
+import type { Language, Translations } from '~/utils/i18n.server'
+import {
+  commitNotificationSession,
+  setFlashNotification,
+} from '~/utils/notification.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',
+  SET_LANGUAGE = 'SET_LANGUAGE',
   SUBMIT_MESSSAGE = 'SUBMIT_MESSSAGE',
 }
 
@@ -25,7 +37,19 @@ function isValidActionType(value: any): value is ActionType {
   )
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export interface ActionData {
+  fieldErrors?: {
+    name?: string
+    email?: string
+    message?: string
+  }
+  fields?: {
+    name: string
+    email: string
+    message: string
+  }
+}
+export const action: ActionFunction = async ({ request, context }) => {
   const formData = await request.formData()
 
   const actions = formData.get('action')
@@ -42,54 +66,157 @@ export const action: ActionFunction = async ({ request }) => {
       return new Response(null, {
         status: 204,
         headers: {
-          'Set-Cookie': await commitSession(themeSession),
+          'Set-Cookie': await commitThemeSession(themeSession),
+        },
+      })
+    case ActionType.SET_LANGUAGE:
+      const language = formData.get('language')
+      invariant(typeof language === 'string', 'Invalid language type')
+      invariant(language === 'en' || language === 'id', 'Invalid language')
+
+      const languageSession = await setLanguage(request, language)
+
+      const redirectTo = request.headers.get('Referer') ?? '/'
+
+      return redirect(redirectTo, {
+        headers: {
+          'Set-Cookie': await commitLanguageSession(languageSession),
         },
       })
     case ActionType.SUBMIT_MESSSAGE:
+      const apiKey = context.ELASTIC_EMAIL_API_KEY
+      const name = formData.get('name')
+      const email = formData.get('email')
+      const message = formData.get('message')
+      invariant(typeof name === 'string', 'Invalid name type')
+      invariant(typeof email === 'string', 'Invalid email type')
+      invariant(typeof message === 'string', 'Invalid message type')
+
+      const mail = {
+        name,
+        email,
+        message,
+      }
+
+      const { fieldErrors, formError } = validateMailRequest(mail)
+
+      if (formError) {
+        const notificationSession = await setFlashNotification(request, {
+          type: 'ERROR',
+          message: formError,
+        })
+
+        return json<ActionData>(
+          {
+            fieldErrors,
+            fields: mail,
+          },
+          {
+            status: 400,
+            headers: {
+              'Set-Cookie': await commitNotificationSession(
+                notificationSession,
+              ),
+            },
+          },
+        )
+      }
+
+      try {
+        const response = await sendMail(apiKey, mail)
+        const notificationSession = await setFlashNotification(
+          request,
+          response,
+        )
+        if (response.type === 'SUCCESS') {
+          return new Response(null, {
+            status: 200,
+            headers: {
+              'Set-Cookie': await commitNotificationSession(
+                notificationSession,
+              ),
+            },
+          })
+        } else {
+          return json<ActionData>(
+            { fields: mail },
+            {
+              status: 400,
+              headers: {
+                'Set-Cookie': await commitNotificationSession(
+                  notificationSession,
+                ),
+              },
+            },
+          )
+        }
+      } catch (error) {
+        console.log(error)
+      }
       return null
     default:
-      return json(`Can't process action with name: ${actions}`, {
+      const notificationSession = await setFlashNotification(request, {
+        type: 'ERROR',
+        message: `Can't process action with name: ${actions}`,
+      })
+
+      return new Response(null, {
         status: 400,
+        headers: {
+          'Set-Cookie': await commitNotificationSession(notificationSession),
+        },
       })
   }
 }
 
-export const loader: LoaderFunction = async ({ request, context }) => {
-  const searchParams = new URL(request.url).searchParams
-  const ignore = searchParams.get('ignore') ?? ''
+interface LoaderData {
+  translation: {
+    hero: {
+      heroHeader: Translations['heroHeader'][Language]
+      intro: Translations['intro'][Language]
+      getFact: Translations['getFact'][Language]
+    }
+    tool: Translations['tool'][Language]
+    project: Translations['project'][Language]
+    contact: Translations['contact'][Language]
+  }
+  language: Language
+}
+export const loader: LoaderFunction = async ({ request }) => {
+  const language = await getLanguage(request)
+  const translation = {
+    hero: {
+      heroHeader: getTranslations(language, 'heroHeader'),
+      intro: getTranslations(language, 'intro'),
+      getFact: getTranslations(language, 'getFact'),
+    },
+    tool: getTranslations(language, 'tool'),
+    project: getTranslations(language, 'project'),
+    contact: getTranslations(language, 'contact'),
+  }
 
-  const getFactApiKey = context.GET_FACT_API_KEY
-  invariant(getFactApiKey, 'GET_FACT_API_KEY is not defined')
-
-  const fact = await getFact(getFactApiKey, ignore)
-
-  return json({ fact }, 200)
+  return json<LoaderData>({ translation, language }, { status: 200 })
 }
 
 export default function Index() {
+  const { translation, language } = useLoaderData<LoaderData>()
+
   return (
     <>
-      <Hero />
-      <Tool />
-      <Project />
-      <Contact />
+      <Hero translation={translation.hero} language={language} />
+      <main>
+        <Tool translation={translation.tool} />
+        <Project translation={translation.project} />
+        <Contact translation={translation.contact} />
+      </main>
       <Footer />
     </>
   )
 }
 
 export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
-  const isSubmitting = !!submission
-
-  const isContactSubmission =
-    isSubmitting &&
-    submission.method === 'POST' &&
-    submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
-
-  const isGetFactSubmission =
-    isSubmitting &&
-    submission.method === 'GET' &&
-    typeof submission.formData.get('ignore') === 'string'
-
-  return isContactSubmission || isGetFactSubmission
+  return (
+    !!submission &&
+    submission.formData.get('action') === ActionType.SET_LANGUAGE
+  )
 }
