@@ -45,14 +45,14 @@ export default function ThemeSwitcher({ translation }: Props) {
         <Select.Icon className="ml-4" />
       </Select.Trigger>
 
-      <Select.Content className="rounded-md bg-gray-3 shadow-lg shadow-gray-1">
+      <Select.Content className="m-2 rounded-md bg-gray-3 p-2 shadow-lg shadow-gray-1">
         <Select.Viewport className="p-2">
           <Select.Item
-            disabled={!optimisticTheme}
+            disabled={optimisticTheme === 'system'}
             value={'system'}
             className={clsx(
               'select-none rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
-              !optimisticTheme
+              optimisticTheme === 'system'
                 ? 'cursor-not-allowed bg-gray-5 text-gray-12'
                 : 'cursor-pointer',
             )}

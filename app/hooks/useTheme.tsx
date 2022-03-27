@@ -2,10 +2,10 @@ import { useTransition } from 'remix'
 
 function checkTheme(theme?: string) {
   if (theme === 'dark' || theme === 'light') return theme
-  return undefined
+  return 'system'
 }
 
-export function useTheme(theme?: string) {
+export function useTheme(theme: string = 'system') {
   const transition = useTransition()
 
   const themeFormData = transition.submission?.formData.get('theme')
