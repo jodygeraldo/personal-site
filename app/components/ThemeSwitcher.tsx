@@ -36,11 +36,11 @@ export default function ThemeSwitcher({ translation }: Props) {
         aria-label={translation.mode}
       >
         <Select.Value>
-          {optimisticTheme
-            ? optimisticTheme === 'dark'
-              ? translation.dark
-              : translation.light
-            : translation.system}
+          {optimisticTheme === 'system'
+            ? translation.system
+            : optimisticTheme === 'dark'
+            ? translation.dark
+            : translation.light}
         </Select.Value>
         <Select.Icon className="ml-4" />
       </Select.Trigger>
