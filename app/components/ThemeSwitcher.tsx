@@ -1,54 +1,96 @@
 import clsx from 'clsx'
-import { Form, useMatches } from 'remix'
+import { Form, useMatches, useSubmit } from 'remix'
 import { useTheme } from '~/hooks/useTheme'
 import { ActionType } from '~/routes'
-import Icon from './Icon'
+import * as Select from '@radix-ui/react-select'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
-  isMobile?: boolean
+  translation: Translations['heroHeader'][Language]
 }
 
-export default function ThemeSwitcher({ isMobile }: Props) {
+export default function ThemeSwitcher({ translation }: Props) {
+  const submit = useSubmit()
   const { theme } = useMatches()[0].data
 
   const optimisticTheme = useTheme(theme)
 
+  function handleSubmit(theme: string) {
+    submit(
+      {
+        action: ActionType.SET_THEME,
+        theme,
+      },
+      { method: 'post', action: '?index', replace: true },
+    )
+  }
+
   return (
-    <Form method="post" replace={true}>
-      <button
-        className={clsx(
-          isMobile
-            ? 'w-full rounded-md py-2 px-3 text-left text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12'
-            : 'group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8',
-        )}
-        name="action"
-        value={ActionType.SET_THEME}
+    <Select.Root
+      name="language"
+      value={optimisticTheme}
+      onValueChange={handleSubmit}
+    >
+      <Select.Trigger
+        className="flex items-center text-lg font-medium text-gray-11 hover:text-gray-12"
+        aria-label={translation.mode}
       >
-        <input
-          type="hidden"
-          name="theme"
-          value={optimisticTheme === 'dark' ? 'light' : 'dark'}
-        />
-        {isMobile ? (
-          optimisticTheme === 'dark' ? (
-            'Switch to light theme'
-          ) : (
-            'Switch to dark theme'
-          )
-        ) : (
-          <>
-            <span className="sr-only">
-              {optimisticTheme === 'dark'
-                ? 'Switch to light theme'
-                : 'Switch to dark theme'}
-            </span>
-            <Icon
-              id={optimisticTheme === 'dark' ? 'moon' : 'sun'}
-              className="h-5 w-5 text-gray-11 group-hover:text-gray-12"
-            />
-          </>
-        )}
-      </button>
-    </Form>
+        <Select.Value>
+          {optimisticTheme
+            ? optimisticTheme === 'dark'
+              ? translation.dark
+              : translation.light
+            : translation.system}
+        </Select.Value>
+        <Select.Icon className="ml-4" />
+      </Select.Trigger>
+
+      <Select.Content className="rounded-md bg-gray-3 shadow-lg shadow-gray-1">
+        <Select.Viewport className="p-2">
+          <Select.Item
+            disabled={!optimisticTheme}
+            value={'system'}
+            className={clsx(
+              'select-none rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
+              !optimisticTheme
+                ? 'cursor-not-allowed bg-gray-5 text-gray-12'
+                : 'cursor-pointer',
+            )}
+          >
+            <Select.ItemText>{translation.system}</Select.ItemText>
+          </Select.Item>
+
+          <Select.Separator className="mx-1 my-2 h-px bg-gray-6" />
+
+          <Select.Item
+            disabled={optimisticTheme === 'light'}
+            value="light"
+            className={clsx(
+              'select-none rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
+              optimisticTheme === 'light'
+                ? 'cursor-not-allowed bg-gray-5 text-gray-12'
+                : 'cursor-pointer',
+            )}
+          >
+            <Select.ItemText>{translation.light}</Select.ItemText>
+          </Select.Item>
+
+          <Select.Separator className="mx-1 my-2 h-px bg-gray-6" />
+
+          <Select.Item
+            disabled={optimisticTheme === 'dark'}
+            value="dark"
+            className={clsx(
+              'select-none rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
+              optimisticTheme === 'dark'
+                ? 'cursor-not-allowed bg-gray-5 text-gray-12'
+                : 'cursor-pointer',
+            )}
+          >
+            <Select.ItemText>{translation.dark}</Select.ItemText>
+          </Select.Item>
+        </Select.Viewport>
+      </Select.Content>
+    </Select.Root>
   )
 }

@@ -59,9 +59,15 @@ export const action: ActionFunction = async ({ request, context }) => {
     case ActionType.SET_THEME:
       const setTo = formData.get('theme')
       invariant(typeof setTo === 'string', 'Invalid theme type')
-      invariant(setTo === 'dark' || setTo === 'light', 'Invalid theme')
+      invariant(
+        setTo === 'dark' || setTo === 'light' || setTo === 'system',
+        'Invalid theme',
+      )
 
-      const themeSession = await setTheme(request, setTo)
+      const themeSession = await setTheme(
+        request,
+        setTo === 'system' ? undefined : setTo,
+      )
 
       return new Response(null, {
         status: 204,
