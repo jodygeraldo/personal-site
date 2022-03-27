@@ -56,7 +56,6 @@ interface loaderData {
 }
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getTheme(request)
-  console.log(theme)
   const { notification, notificationSession } = await getFlashNotification(
     request,
   )
