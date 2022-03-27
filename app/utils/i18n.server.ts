@@ -89,6 +89,10 @@ const translations = {
       'switch-english': 'Change to English',
       english: 'English',
       indonesia: 'Bahasa Indonesia',
+      mode: 'Change display theme',
+      dark: 'Dark mode',
+      light: 'Light mode',
+      system: 'System preference',
     },
     id: {
       'open-menu': 'Buka menu utama',
@@ -100,6 +104,10 @@ const translations = {
       'switch-english': 'Ganti ke Bahasa Inggris',
       english: 'English',
       indonesia: 'Bahasa Indonesia',
+      mode: 'Ganti tema tampilan',
+      dark: 'Mode gelap',
+      light: 'Mode cahaya',
+      system: 'Preferensi sistem',
     },
   },
   intro: {
