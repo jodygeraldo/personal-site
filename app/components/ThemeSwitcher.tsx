@@ -45,7 +45,7 @@ export default function ThemeSwitcher({ translation }: Props) {
         <Select.Icon className="ml-4" />
       </Select.Trigger>
 
-      <Select.Content className="m-2 rounded-md bg-gray-3 p-2 shadow-lg shadow-gray-1">
+      <Select.Content className="m-2 rounded-md border border-gray-6 bg-gray-3 p-2 shadow-lg shadow-gray-1">
         <Select.Viewport>
           <Select.Item
             disabled={optimisticTheme === 'system'}

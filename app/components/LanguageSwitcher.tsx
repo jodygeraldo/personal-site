@@ -52,14 +52,16 @@ export default function LanguageSwitcher({
         <Select.Icon className="ml-4" />
       </Select.Trigger>
 
-      <Select.Content className="w-52 divide-y divide-gray-7 overflow-hidden rounded-md bg-gray-3 shadow-lg shadow-gray-1 ring-1 ring-gray-7 ring-opacity-5 focus:outline-none">
-        <Select.Viewport className="p-2">
+      <Select.Content className="m-2 rounded-md border border-gray-6 bg-gray-3 p-2 shadow-lg shadow-gray-1">
+        <Select.Viewport>
           <Select.Item
             disabled={language === 'en'}
             value="en"
             className={clsx(
               'rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
-              language === 'en' && 'bg-gray-5 text-gray-12',
+              language === 'en'
+                ? 'cursor-not-allowed bg-gray-5 text-gray-12'
+                : 'cursor-pointer',
             )}
           >
             <Select.ItemText>{translation.english}</Select.ItemText>
@@ -72,7 +74,9 @@ export default function LanguageSwitcher({
             value="id"
             className={clsx(
               'rounded-lg p-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none active:bg-gray-5',
-              language === 'id' && 'bg-gray-5 text-gray-12',
+              language === 'id'
+                ? 'cursor-not-allowed bg-gray-5 text-gray-12'
+                : 'cursor-pointer',
             )}
           >
             <Select.ItemText>{translation.indonesia}</Select.ItemText>
