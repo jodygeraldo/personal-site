@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Form, useMatches, useSubmit } from 'remix'
+import { useMatches, useSubmit } from 'remix'
 import { useTheme } from '~/hooks/useTheme'
 import { ActionType } from '~/routes'
 import * as Select from '@radix-ui/react-select'
@@ -46,7 +46,7 @@ export default function ThemeSwitcher({ translation }: Props) {
       </Select.Trigger>
 
       <Select.Content className="m-2 rounded-md bg-gray-3 p-2 shadow-lg shadow-gray-1">
-        <Select.Viewport className="p-2">
+        <Select.Viewport>
           <Select.Item
             disabled={optimisticTheme === 'system'}
             value={'system'}
