@@ -74,7 +74,6 @@ export default function App() {
   const { theme, notification } = useLoaderData<loaderData>()
 
   const optimisticTheme = useTheme(theme)
-  console.log('optimisticTheme' + optimisticTheme)
 
   return (
     <Document theme={optimisticTheme} title="Jody Geraldo | Personal Site">
