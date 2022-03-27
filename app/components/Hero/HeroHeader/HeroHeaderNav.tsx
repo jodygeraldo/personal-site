@@ -42,7 +42,7 @@ export default function HeroHeaderNav({ translation, language }: Props) {
           />
           <span className="sr-only">{translation['source-code']}</span>
         </a>
-        <ThemeSwitcher />
+        <ThemeSwitcher translation={translation} />
         <LanguageSwitcher translation={translation} language={language} />
       </div>
     </>
