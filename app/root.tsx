@@ -11,7 +11,6 @@ import {
 } from 'remix'
 import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix'
 import tailwindStylesUrl from './styles/build/tailwind.css'
-import darkThemeStylesUrl from './styles/build/dark.css'
 import clsx from 'clsx'
 import { useTheme } from './hooks/useTheme'
 import { getTheme } from './utils/theme.server'
@@ -35,11 +34,6 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: tailwindStylesUrl },
     {
-      rel: 'stylesheet',
-      href: darkThemeStylesUrl,
-      media: '(prefers-color-scheme: dark)',
-    },
-    {
       rel: 'preload',
       href: '/assets/fonts/raleway-v26-latin-500.woff2',
       as: 'font',
@@ -57,11 +51,12 @@ export const links: LinksFunction = () => {
 }
 
 interface loaderData {
-  theme: 'dark' | 'light'
+  theme?: 'dark' | 'light'
   notification?: Notification
 }
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getTheme(request)
+  console.log(theme)
   const { notification, notificationSession } = await getFlashNotification(
     request,
   )
@@ -80,6 +75,7 @@ export default function App() {
   const { theme, notification } = useLoaderData<loaderData>()
 
   const optimisticTheme = useTheme(theme)
+  console.log('optimisticTheme' + optimisticTheme)
 
   return (
     <Document theme={optimisticTheme} title="Jody Geraldo | Personal Site">
@@ -128,7 +124,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 function Document({
   children,
-  theme = 'dark',
+  theme,
   title,
 }: {
   children: ReactNode
@@ -138,7 +134,11 @@ function Document({
   return (
     <html
       lang="en"
-      className={clsx(theme === 'dark' && 'dark-theme', 'h-full scroll-smooth')}
+      className={clsx(
+        theme === 'dark' && 'dark',
+        theme === 'light' && 'light',
+        'h-full scroll-smooth',
+      )}
     >
       <head>
         <meta charSet="utf-8" />

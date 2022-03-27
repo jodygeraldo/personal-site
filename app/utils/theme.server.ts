@@ -10,9 +10,23 @@ const { getSession, commitSession, destroySession } =
       secrets: ['SECRET'],
       secure: process.env.NODE_ENV === 'production',
     },
-    setTheme: (theme: Theme) => session.set('theme', theme),
-    commit: () => themeStorage.commitSession(session),
-  }
+  })
+
+type Theme = 'dark' | 'light' | undefined
+
+async function getTheme(request: Request): Promise<Theme> {
+  const session = await getSession(request.headers.get('Cookie'))
+
+  const theme: Theme = session.get('theme')
+
+  return theme
+}
+
+async function setTheme(request: Request, setTo: Theme): Promise<Session> {
+  const session = await getSession(request.headers.get('Cookie'))
+  session.set('theme', setTo)
+
+  return session
 }
 
 export {

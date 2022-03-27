@@ -2,7 +2,7 @@ import { Link } from 'remix'
 import Icon from '~/components/Icon'
 import LanguageSwitcher from '~/components/LanguageSwitcher'
 import type { Language, Translations } from '~/utils/i18n.server'
-// import ThemeSwitcher from '~/components/ThemeSwitcher'
+import ThemeSwitcher from '~/components/ThemeSwitcher'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
@@ -42,7 +42,7 @@ export default function HeroHeaderNav({ translation, language }: Props) {
           />
           <span className="sr-only">{translation['source-code']}</span>
         </a>
-        {/* <ThemeSwitcher /> */}
+        <ThemeSwitcher />
         <LanguageSwitcher translation={translation} language={language} />
       </div>
     </>
