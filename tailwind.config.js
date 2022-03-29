@@ -56,6 +56,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant('state-active', '&[data-state="active"]')
       addVariant('state-open', '&[data-state="open"]')
+      addVariant('data-disabled', '&[data-disabled]')
     }),
     require('@tailwindcss/forms'),
   ],
