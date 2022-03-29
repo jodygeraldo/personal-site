@@ -79,11 +79,10 @@ export default function HeroHeaderNavMobile({
                   </a>
                 </div>
               </div>
-              <div className="space-y-1 px-2 pt-4 pb-2">
+              <div className="space-y-1 p-2">
                 <LanguageSwitcher
                   translation={translation}
                   language={language}
-                  isMobile={true}
                 />
               </div>
             </div>
