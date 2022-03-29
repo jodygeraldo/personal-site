@@ -126,7 +126,7 @@ function Document({
   title,
 }: {
   children: ReactNode
-  theme?: 'dark' | 'light'
+  theme?: 'dark' | 'light' | 'system'
   title?: string
 }) {
   return (
