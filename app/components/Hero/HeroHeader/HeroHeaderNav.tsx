@@ -1,8 +1,7 @@
 import { Link } from 'remix'
 import Icon from '~/components/Icon'
-import LanguageSwitcher from '~/components/LanguageSwitcher'
 import type { Language, Translations } from '~/utils/i18n.server'
-import ThemeSwitcher from '~/components/ThemeSwitcher'
+import DropdownMenu from '~/components/DropdownMenu'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
@@ -30,6 +29,7 @@ export default function HeroHeaderNav({ translation, language }: Props) {
         </Link>
       </nav>
       <div className="hidden lg:flex lg:items-center lg:gap-x-6">
+        <DropdownMenu translation={translation} language={language} />
         <a
           className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1"
           href="https://github.com/jodygeraldo/personal-site"
@@ -42,8 +42,6 @@ export default function HeroHeaderNav({ translation, language }: Props) {
           />
           <span className="sr-only">{translation['source-code']}</span>
         </a>
-        <ThemeSwitcher translation={translation} />
-        <LanguageSwitcher translation={translation} language={language} />
       </div>
     </>
   )
