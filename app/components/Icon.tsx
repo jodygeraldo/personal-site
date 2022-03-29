@@ -16,6 +16,7 @@ export type IconIdType =
   | 'rocket'
   | 'globe'
   | 'chevron-down'
+  | 'chevron-right'
 
 interface Props {
   id: IconIdType
