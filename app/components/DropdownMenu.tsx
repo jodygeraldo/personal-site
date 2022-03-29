@@ -47,15 +47,10 @@ export default function DropdownMenu({ translation, language }: Props) {
         className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1"
         aria-label={translation.setting}
       >
-        <svg
+        <Icon
+          id="gear"
           className="flex h-5 w-5 items-center justify-center text-gray-11 group-hover:text-gray-12"
-          width="15"
-          height="15"
-          viewBox="0 0 15 15"
-          fill="none"
-        >
-          <use href="/assets/icons/gear.svg#gear" />
-        </svg>
+        />
       </Trigger>
 
       <Content className="w-56 rounded-md bg-gray-3 p-2 shadow shadow-gray-2">
