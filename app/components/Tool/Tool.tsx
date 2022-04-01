@@ -23,7 +23,7 @@ export default function Tool({ translation }: Props) {
         },
         {
           name: translation.other,
-          content: ['Typescript', 'Git & Github', 'Prettier', 'Eslint'],
+          content: ['TypeScript', 'Git & GitHub', 'Prettier', 'ESLint'],
         },
       ],
     },
