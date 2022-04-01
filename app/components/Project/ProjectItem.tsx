@@ -45,6 +45,8 @@ export default function ProjectItem({
           <img
             className="aspect-video rounded-t-lg border-2 border-gray-6 shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
             src={imageUrl.default}
+            width="640"
+            height="360"
             alt={`${name} front page`}
             loading="lazy"
           />
