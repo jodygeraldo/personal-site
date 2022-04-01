@@ -80,7 +80,7 @@ export default function Project({ translation }: Props) {
         ],
       },
       sourceCodeUrl: 'https://github.com/jodygeraldo/for-tomorrow-you',
-      demoUrl: 'https://for-tomorrow-you.vercel.app',
+      demoUrl: 'https://for-tomorrow-you.vercel.app/',
       tags: ['React', 'Remix', 'Tailwind CSS', 'Supabase', 'Vercel'],
     },
     {
