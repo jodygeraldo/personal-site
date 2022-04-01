@@ -25,10 +25,8 @@ export default function ProjectItem({
   demoUrl,
   tags,
 }: ProjectItemProps) {
-  const parsedDemoUrl = demoUrl.slice(0, -1).replace(/^https?:\/\//, '')
-  if (parsedDemoUrl.endsWith('/')) {
-    parsedDemoUrl.slice(0, -1)
-  }
+  // remove https:// and trailing slash
+  const demoUrlHostname = demoUrl.replace('https://', '').slice(0, -1)
 
   return (
     <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow shadow-gray-6 sm:p-6 lg:flex lg:max-w-7xl">
@@ -82,7 +80,7 @@ export default function ProjectItem({
               target="_blank"
               rel="noopener noreferrer"
             >
-              {parsedDemoUrl}
+              {demoUrlHostname}
             </a>
           </div>
           <div className="flex items-center gap-4">
