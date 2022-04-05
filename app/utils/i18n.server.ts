@@ -126,14 +126,7 @@ const translations = {
         'Sehari-hari menghabiskan waktu membersihkan bug sambil mendengarkan musik',
     },
   },
-  getFact: {
-    en: {
-      button: 'Generate',
-    },
-    id: {
-      button: 'Generate',
-    },
-  },
+  getFact: { en: { button: 'Generate' }, id: { button: 'Generate' } },
   tool: {
     en: {
       title: 'Development Tools',

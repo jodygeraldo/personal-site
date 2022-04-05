@@ -3,11 +3,7 @@ type AcceptedImageOutput = 'png' | 'webp'
 function generateSources(
   originalUrl: string,
   output: AcceptedImageOutput[],
-  set: Array<{
-    width: number
-    height: number
-    media: string
-  }>,
+  set: Array<{ width: number; height: number; media: string }>,
 ) {
   let url = `//images.weserv.nl/?url=https://jodygeraldo.com${originalUrl}`
   const sources: Array<{
@@ -52,11 +48,7 @@ function generateFallbackImage(
 ) {
   const fallback = `//images.weserv.nl/?url=https://jodygeraldo.com${originalUrl}&w=${width}&h=${height}&af`
 
-  return {
-    url: fallback,
-    width: width,
-    height: height,
-  }
+  return { url: fallback, width: width, height: height }
 }
 
 function generatePictureSource(
@@ -64,19 +56,12 @@ function generatePictureSource(
   width: number,
   height: number,
   output: AcceptedImageOutput[],
-  set: Array<{
-    width: number
-    height: number
-    media: string
-  }>,
+  set: Array<{ width: number; height: number; media: string }>,
 ) {
   const fallback = generateFallbackImage(originalUrl, width, height)
   const sources = generateSources(originalUrl, output, set)
 
-  return {
-    fallback,
-    sources,
-  }
+  return { fallback, sources }
 }
 
 export { generatePictureSource }

@@ -43,11 +43,7 @@ function checkBadWords(words: string) {
 
 async function sendMail(
   apiKey: string,
-  mail: {
-    name: string
-    email: string
-    message: string
-  },
+  mail: { name: string; email: string; message: string },
 ): Promise<Notification> {
   const isBad = checkBadWords(mail.message)
 
@@ -68,9 +64,7 @@ async function sendMail(
   headers.append('X-ElasticEmail-ApiKey', apiKey)
 
   const body = {
-    Recipients: {
-      To: ['Jody Geraldo <jody.geraldo.jg@gmail.com>'],
-    },
+    Recipients: { To: ['Jody Geraldo <jody.geraldo.jg@gmail.com>'] },
     Content: {
       Body: [
         {
@@ -95,10 +89,7 @@ async function sendMail(
   })
 
   if (res.ok) {
-    return {
-      message: 'Message sent successfully',
-      type: 'SUCCESS',
-    }
+    return { message: 'Message sent successfully', type: 'SUCCESS' }
   } else {
     return {
       message: "Couldn't send the message",
