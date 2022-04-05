@@ -25,8 +25,8 @@ export default function ProjectItem({
   demoUrl,
   tags,
 }: ProjectItemProps) {
-  // remove https:// and trailing slash
-  const demoUrlHostname = demoUrl.replace('https://', '').slice(0, -1)
+  const url = new URL(demoUrl)
+  const demoUrlHostname = url.hostname
 
   return (
     <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow shadow-gray-6 sm:p-6 lg:flex lg:max-w-7xl">
