@@ -1,15 +1,11 @@
 import Icon from '~/components/Icon'
+import { generatePictureSource } from '~/utils/image'
 
 export interface ProjectItemProps {
   name: string
   description: string
-  imageUrl: {
-    default: string
-    sources: {
-      url: string
-      media?: string
-      type: 'png' | 'webp' | 'avif'
-    }[]
+  image: {
+    url: string
     dark?: boolean
   }
   sourceCodeUrl: string
@@ -20,7 +16,7 @@ export interface ProjectItemProps {
 export default function ProjectItem({
   name,
   description,
-  imageUrl,
+  image,
   sourceCodeUrl,
   demoUrl,
   tags,
@@ -28,30 +24,48 @@ export default function ProjectItem({
   const url = new URL(demoUrl)
   const demoUrlHostname = url.hostname
 
+  const { fallback, sources } = generatePictureSource(
+    image.url,
+    512,
+    288,
+    ['png', 'webp'],
+    [
+      { width: 384, height: 216, media: '(max-width: 639px)' },
+      {
+        width: 464,
+        height: 261,
+        media: '(min-width: 640px) and (max-width: 1023px)',
+      },
+      { width: 512, height: 288, media: '(min-width: 1024px)' },
+    ],
+  )
+
   return (
     <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow shadow-gray-6 sm:p-6 lg:flex lg:max-w-7xl">
       <div className="relative">
         <picture>
-          {imageUrl.sources.map((source) => (
+          {sources.map((source) => (
             <source
               key={source.url}
               srcSet={source.url}
-              type={`image/${source.type}`}
+              type={source.type}
               media={source.media}
+              width={source.width}
+              height={source.height}
             />
           ))}
           <img
             className="aspect-video rounded-t-lg border-2 border-gray-6 shadow-md lg:max-w-lg lg:rounded-bl-lg lg:rounded-tr-none"
-            src={imageUrl.default}
-            width="640"
-            height="360"
+            src={fallback.url}
+            width={fallback.width}
+            height={fallback.height}
             alt={`${name} front page`}
             loading="lazy"
           />
         </picture>
 
         {/* dark overlay for light image so it doesn't burn your eyes */}
-        {imageUrl.dark ? null : (
+        {image.dark ? null : (
           <div className="absolute inset-0 bg-gray-1 opacity-image-overlay" />
         )}
       </div>
