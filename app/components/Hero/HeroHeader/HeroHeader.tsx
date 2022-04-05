@@ -1,9 +1,9 @@
 import { Popover } from '@headlessui/react'
+import { Link } from '@remix-run/react'
 import Icon from '~/components/Icon'
-import HeroHeaderNav from './HeroHeaderNav'
-import { Link } from 'remix'
-import HeroHeaderNavMobile from './HeroHeaderNavMobile'
 import type { Language, Translations } from '~/utils/i18n.server'
+import HeroHeaderNav from './HeroHeaderNav'
+import HeroHeaderNavMobile from './HeroHeaderNavMobile'
 
 interface Props {
   translation: Translations['heroHeader'][Language]

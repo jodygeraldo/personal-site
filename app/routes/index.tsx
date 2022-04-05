@@ -1,28 +1,26 @@
-import { json, redirect, useLoaderData } from 'remix'
-import type {
-  ActionFunction,
-  LoaderFunction,
-  ShouldReloadFunction,
-} from 'remix'
+import type { ActionFunction, LoaderFunction } from '@remix-run/cloudflare'
+import { json, redirect } from '@remix-run/cloudflare'
+import type { ShouldReloadFunction } from '@remix-run/react'
+import { useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
 import Contact from '~/components/Contact/Contact'
 import Footer from '~/components/Footer/Footer'
 import Hero from '~/components/Hero/Hero'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
-import { commitThemeSession, setTheme } from '~/utils/theme.server'
-import { sendMail, validateMailRequest } from '~/utils/mail.server'
+import type { Language, Translations } from '~/utils/i18n.server'
 import {
   commitLanguageSession,
   getLanguage,
   getTranslations,
   setLanguage,
 } from '~/utils/i18n.server'
-import type { Language, Translations } from '~/utils/i18n.server'
+import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import {
   commitNotificationSession,
   setFlashNotification,
 } from '~/utils/notification.server'
+import { commitThemeSession, setTheme } from '~/utils/theme.server'
 
 export enum ActionType {
   SET_THEME = 'SET_THEME',

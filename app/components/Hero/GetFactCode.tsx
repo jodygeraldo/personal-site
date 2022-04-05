@@ -1,5 +1,5 @@
+import { useFetcher } from '@remix-run/react'
 import { useEffect, useState } from 'react'
-import { useFetcher } from 'remix'
 import Icon from '~/components/Icon'
 import type { Language, Translations } from '~/utils/i18n.server'
 

@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, Session } from 'remix'
+import { createCookieSessionStorage, Session } from '@remix-run/cloudflare'
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage({

@@ -1,7 +1,7 @@
-import { Link } from 'remix'
-import type { Language, Translations } from '~/utils/i18n.server'
+import { Link } from '@remix-run/react'
 import Error500ImageUrl from '~/assets/images/undraw_lost.svg'
 import Error404ImageUrl from '~/assets/images/undraw_page_not_found.svg'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
   page: 404 | 500

@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react'
+import { Link } from '@remix-run/react'
 import { Fragment } from 'react'
-import { Link } from 'remix'
 import Icon from '~/components/Icon'
 import LanguageSwitcher from '~/components/LanguageSwitcher'
 import type { Language, Translations } from '~/utils/i18n.server'

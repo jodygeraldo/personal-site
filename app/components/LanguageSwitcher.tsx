@@ -1,6 +1,6 @@
-import type { Language, Translations } from '~/utils/i18n.server'
-import { useSubmit } from 'remix'
+import { useSubmit } from '@remix-run/react'
 import { ActionType } from '~/routes'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
   translation: Translations['heroHeader'][Language]

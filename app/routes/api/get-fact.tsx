@@ -1,5 +1,5 @@
-import { json } from 'remix'
-import type { LoaderFunction } from 'remix'
+import type { LoaderFunction } from '@remix-run/cloudflare'
+import { json } from '@remix-run/cloudflare'
 import { getRandomFact } from '~/utils/get-fact.server'
 import { getLanguage } from '~/utils/i18n.server'
 

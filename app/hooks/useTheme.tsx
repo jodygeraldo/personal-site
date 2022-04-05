@@ -1,4 +1,4 @@
-import { useTransition } from 'remix'
+import { useTransition } from '@remix-run/react'
 
 function checkTheme(theme?: string) {
   if (theme === 'dark' || theme === 'light') return theme

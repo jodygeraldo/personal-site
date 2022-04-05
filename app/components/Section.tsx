@@ -1,12 +1,11 @@
 import clsx from 'clsx'
-import { ReactNode } from 'react'
 
 interface Props {
   id: string
   title: string
   description?: string
   scaleUpColor?: boolean
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export default function Section({

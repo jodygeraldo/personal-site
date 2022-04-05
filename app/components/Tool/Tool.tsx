@@ -1,6 +1,6 @@
 import Section from '~/components/Section'
 import type { Language, Translations } from '~/utils/i18n.server'
-import ToolTabs, { TabTriggerType, TabContentType } from './ToolTabs'
+import ToolTabs, { TabContentType, TabTriggerType } from './ToolTabs'
 
 interface Props {
   translation: Translations['tool'][Language]
