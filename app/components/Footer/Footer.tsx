@@ -1,5 +1,5 @@
-import Icon from '../Icon'
-import type { IconIdType } from '../Icon'
+import type { IconIdType } from '~/components/Icon'
+import Icon from '~/components/Icon'
 
 const socials: { name: string; href: string; iconId: IconIdType }[] = [
   {

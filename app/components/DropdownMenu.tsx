@@ -1,16 +1,16 @@
 import {
+  Arrow,
+  Content,
+  Item,
   Root,
   Trigger,
-  Content,
   TriggerItem,
-  Item,
-  Arrow,
 } from '@radix-ui/react-dropdown-menu'
-import { useMatches, useSubmit } from 'remix'
+import { useMatches, useSubmit } from '@remix-run/react'
+import Icon from '~/components/Icon'
 import { useTheme } from '~/hooks/useTheme'
 import { ActionType } from '~/routes'
 import type { Language, Translations } from '~/utils/i18n.server'
-import Icon from './Icon'
 
 interface Props {
   translation: Translations['heroHeader'][Language]

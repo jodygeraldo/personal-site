@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react'
-import { useFetcher } from 'remix'
-import { ActionType } from '~/routes'
-import type { ActionData as IndexActionData } from '~/routes'
-import type { Language, Translations } from '~/utils/i18n.server'
-import { useHydrated } from '~/hooks/useHydrated'
+import { useFetcher } from '@remix-run/react'
 import clsx from 'clsx'
+import { useEffect, useRef } from 'react'
+import { useHydrated } from '~/hooks/useHydrated'
+import type { ActionData as IndexActionData } from '~/routes'
+import { ActionType } from '~/routes'
+import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
   translation: Translations['contact'][Language]

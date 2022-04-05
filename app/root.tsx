@@ -1,5 +1,11 @@
+import * as Toast from '@radix-ui/react-toast'
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/cloudflare'
+import { json } from '@remix-run/cloudflare'
 import {
-  json,
   Links,
   LiveReload,
   Meta,
@@ -8,23 +14,19 @@ import {
   ScrollRestoration,
   useCatch,
   useLoaderData,
-} from 'remix'
-import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix'
-import tailwindStylesUrl from './styles/build/tailwind.css'
+} from '@remix-run/react'
 import clsx from 'clsx'
-import { useTheme } from './hooks/useTheme'
-import { getTheme } from './utils/theme.server'
-
-import * as Toast from '@radix-ui/react-toast'
 import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
-
+import NotificationToast from '~/components/NotificationToast'
+import { useTheme } from './hooks/useTheme'
+import tailwindStylesUrl from './styles/build/tailwind.css'
 import {
   commitNotificationSession,
   getFlashNotification,
   Notification,
 } from './utils/notification.server'
-import NotificationToast from '~/components/NotificationToast'
+import { getTheme } from './utils/theme.server'
 
 export const meta: MetaFunction = () => {
   return { description: 'Get to know Jody Geraldo' }

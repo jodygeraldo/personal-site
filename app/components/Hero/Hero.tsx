@@ -1,4 +1,4 @@
-import type { Translations, Language } from '~/utils/i18n.server'
+import type { Language, Translations } from '~/utils/i18n.server'
 import GetFactCode from './GetFactCode'
 import HeroHeader from './HeroHeader/HeroHeader'
 import Introduction from './Introduction'

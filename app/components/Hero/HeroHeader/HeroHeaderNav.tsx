@@ -1,7 +1,7 @@
-import { Link } from 'remix'
+import { Link } from '@remix-run/react'
+import DropdownMenu from '~/components/DropdownMenu'
 import Icon from '~/components/Icon'
 import type { Language, Translations } from '~/utils/i18n.server'
-import DropdownMenu from '~/components/DropdownMenu'
 
 interface Props {
   translation: Translations['heroHeader'][Language]
