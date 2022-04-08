@@ -1,7 +1,7 @@
 node_modules
 
 /.cache
-/functions/\[\[path\]\].js
+/functions
 /public/build
 
 /app/styles/build
