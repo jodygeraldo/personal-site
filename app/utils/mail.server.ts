@@ -1,6 +1,6 @@
 import { blacklistedWords } from '~/models/blacklist-words'
-import { ActionData as IndexActionData } from '~/routes'
-import { Notification } from './notification.server'
+import type { ActionData as IndexActionData } from '~/routes'
+import type { Notification } from './notification.server'
 
 function validateMailRequest(mail: {
   name: string

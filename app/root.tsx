@@ -16,15 +16,14 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 import clsx from 'clsx'
-import { ReactNode } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 import NotificationToast from '~/components/NotificationToast'
 import { useTheme } from './hooks/useTheme'
 import tailwindStylesUrl from './styles/build/tailwind.css'
+import type { Notification } from './utils/notification.server'
 import {
   commitNotificationSession,
   getFlashNotification,
-  Notification,
 } from './utils/notification.server'
 import { getTheme } from './utils/theme.server'
 
@@ -90,7 +89,7 @@ function NotificationProvider({
   children,
   notification,
 }: {
-  children: ReactNode
+  children: React.ReactNode
   notification?: Notification
 }) {
   return (
@@ -127,7 +126,7 @@ function Document({
   theme,
   title,
 }: {
-  children: ReactNode
+  children: React.ReactNode
   theme?: 'dark' | 'light' | 'system'
   title?: string
 }) {

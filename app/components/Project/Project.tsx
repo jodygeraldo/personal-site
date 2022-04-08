@@ -1,6 +1,7 @@
+import Section from '~/components/Section'
 import type { Language, Translations } from '~/utils/i18n.server'
-import Section from '../Section'
-import ProjectItem, { ProjectItemProps } from './ProjectItem'
+import type { ProjectItemProps } from './ProjectItem'
+import ProjectItem from './ProjectItem'
 interface Props {
   translation: Translations['project'][Language]
 }
