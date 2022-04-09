@@ -1,17 +1,6 @@
 import Icon from '~/components/Icon'
+import type { ProjectItem as ProjectItemProps } from '~/models/projects'
 import { generatePictureSource } from '~/utils/image'
-
-export interface ProjectItemProps {
-  name: string
-  description: string
-  image: {
-    url: string
-    dark?: boolean
-  }
-  sourceCodeUrl: string
-  demoUrl: string
-  tags: string[]
-}
 
 export default function ProjectItem({
   name,
