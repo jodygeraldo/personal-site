@@ -12,7 +12,6 @@ const infos: {
     icon: 'envelope-closed',
     value: 'jody.geraldo.jg@gmail.com',
   },
-  { id: 'phone', value: '+62 812 7318 6021' },
   { id: 'location', value: 'Bangka Belitung, ID' },
   {
     id: 'website',
