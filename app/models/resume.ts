@@ -7,7 +7,11 @@ const infos: {
   value: string
   link?: string
 }[] = [
-  { id: 'email', icon: 'envelope-closed', value: 'jody.geraldo.jg@gmail.com' },
+  {
+    id: 'email',
+    icon: 'envelope-closed',
+    value: 'jody.geraldo.jg@gmail.com',
+  },
   { id: 'phone', value: '+62 812 7318 6021' },
   { id: 'location', value: 'Bangka Belitung, ID' },
   {
@@ -24,55 +28,109 @@ const infos: {
   },
 ]
 
-const projects = [
-  {
-    name: 'Portfolio Website',
-    current: true,
-    deployedTo: 'Cloudflare Pages',
-    link: 'https://jodygeraldo.com/',
-    list: [
-      'Designed the overall website',
-      'Implement i18n for English and Bahasa Indonesia',
-      'Implement light theme and dark theme',
-      'Utilized Elastic Email to implement contact form',
-    ],
-  },
-  {
-    name: 'UI Design Daily with Tailwind CSS',
-    current: true,
-    deployedTo: 'Cloudflare Pages',
-    link: 'https://ui-design-daily-tailwind.pages.dev/',
-    list: [
-      'Implement pagination',
-      'Translate uidesigndaily.com component(figma design) to HTML and Tailwind CSS',
-    ],
-  },
-  {
-    name: 'Notes app',
-    current: false,
-    deployedTo: 'Vercel',
-    link: 'https://for-tomorrow-you.vercel.app/',
-    list: [
-      'Utilized Supabase auth to implement authentication system with email magic link and persisted in session cookie',
-      'Utilized Supabase database to implement CRUD',
-    ],
-  },
-  {
-    name: 'Game companion',
-    current: false,
-    deployedTo: 'Fly.io',
-    link: 'https://traveler-main.fly.dev/',
-    list: [
-      'Built authentication system with email and password persisted in session cookie',
-      'Implement read and update data on PostgreSQL database through Prisma',
-    ],
-  },
-]
+const projects: {
+  [key in Language]: {
+    name: string
+    current: boolean
+    deployedTo: string
+    link: string
+    list: string[]
+  }[]
+} = {
+  en: [
+    {
+      name: 'Portfolio Website',
+      current: true,
+      deployedTo: 'Cloudflare Pages',
+      link: 'https://jodygeraldo.com/',
+      list: [
+        'Designed the overall website',
+        'Implement i18n for English and Bahasa Indonesia',
+        'Implement light theme and dark theme',
+        'Utilized Elastic Email to implement contact form',
+      ],
+    },
+    {
+      name: 'UI Design Daily with Tailwind CSS',
+      current: true,
+      deployedTo: 'Cloudflare Pages',
+      link: 'https://ui-design-daily-tailwind.pages.dev/',
+      list: [
+        'Implement pagination',
+        'Translate uidesigndaily.com component(figma design) to HTML with Tailwind CSS',
+      ],
+    },
+    {
+      name: 'Notes app',
+      current: false,
+      deployedTo: 'Vercel',
+      link: 'https://for-tomorrow-you.vercel.app/',
+      list: [
+        'Utilized Supabase auth to implement authentication system with email magic link and persisted in session cookie',
+        'Utilized Supabase database to implement CRUD',
+      ],
+    },
+    {
+      name: 'Game companion',
+      current: false,
+      deployedTo: 'Fly.io',
+      link: 'https://traveler-main.fly.dev/',
+      list: [
+        'Built authentication system with email and password persisted in session cookie',
+        'Implement read and update data on PostgreSQL database through Prisma',
+      ],
+    },
+  ],
+  id: [
+    {
+      name: 'Website Portfolio',
+      current: true,
+      deployedTo: 'Cloudflare Pages',
+      link: 'https://jodygeraldo.com/',
+      list: [
+        'Desain keseluruhan website',
+        'Mengimplementasikan i18n(lokalisasi) untuk bahasa Inggris dan bahasa Indonesia',
+        'mengimplementasikan tema cerah dan gelap',
+        'Menggunakan Elastic Email untuk mengimplementasikan form kontak',
+      ],
+    },
+    {
+      name: 'UI Design Daily with Tailwind CSS',
+      current: true,
+      deployedTo: 'Cloudflare Pages',
+      link: 'https://ui-design-daily-tailwind.pages.dev/',
+      list: [
+        'mengimplementasikan pagination',
+        'mengimplementasikan komponen uidesigndaily.com(desain figma) menjadi HTML dengan Tailwind CSS',
+      ],
+    },
+    {
+      name: 'Notes app',
+      current: false,
+      deployedTo: 'Vercel',
+      link: 'https://for-tomorrow-you.vercel.app/',
+      list: [
+        'Menggunakan Supabase auth untuk mengimplementasikan sistem otentikasi dengan email magic link dan disimpan di session cookie',
+        'Menggunakan Supabase database untuk mengimplementasikan CRUD',
+      ],
+    },
+    {
+      name: 'Game companion',
+      current: false,
+      deployedTo: 'Fly.io',
+      link: 'https://traveler-main.fly.dev/',
+      list: [
+        'Membangun sistem otentikasi dengan email dan password disimpan di session cookie',
+        'Mengimplementasikan read dan update pada database PostgreSQL melalui Prisma',
+      ],
+    },
+  ],
+}
 
 function getResumeData(language: Language) {
   return {
     infos,
-    projects,
+    projects: projects[language],
   }
 }
 

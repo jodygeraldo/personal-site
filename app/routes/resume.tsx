@@ -162,7 +162,8 @@ export default function ResumePage() {
                       </ul>
 
                       <p className="mt-2 text-sm text-gray-11">
-                        Deployed to {project.deployedTo}{' '}
+                        {language === 'en' ? 'Deployed to' : 'Publish di'}{' '}
+                        {project.deployedTo}{' '}
                         <a
                           href={project.link}
                           target="_blank"
@@ -187,11 +188,24 @@ export default function ResumePage() {
 
                 <div className="mt-4">
                   <h4 className="text-lg font-bold text-gray-12">
-                    Universal University -{' '}
-                    <span className="text-gray-11">B.S., Computer Science</span>
+                    {language === 'en'
+                      ? 'Universal University'
+                      : 'Universitas Universal'}{' '}
+                    <span className="text-gray-11">
+                      {'- '}
+                      {language === 'en'
+                        ? 'B.S., Computer Science'
+                        : 'S1 Teknik Informatika'}
+                    </span>
                   </h4>
                   <div className="item-start flex justify-between text-gray-9">
-                    <p>September 2018 (Completed 115 of total 145 credits)</p>
+                    <p>
+                      September 2018 (
+                      {language === 'en'
+                        ? 'Completed 115 of total 145 credits'
+                        : 'Menyelesaikan 115 dari 145 SKS'}
+                      )
+                    </p>
                     <p>Batam, ID</p>
                   </div>
                 </div>
