@@ -72,6 +72,8 @@ export default function ResumePage() {
                   >
                     {info.link ? (
                       <a
+                        target="_blank"
+                        rel="noopener noreferrer"
                         href={info.link}
                         className="order-2 text-sm underline underline-offset-1 hover:text-gray-9"
                       >
@@ -158,6 +160,18 @@ export default function ResumePage() {
                           </li>
                         ))}
                       </ul>
+
+                      <p className="mt-2 text-sm text-gray-11">
+                        Deployed to {project.deployedTo}{' '}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-1 hover:text-gray-9"
+                        >
+                          ({new URL(project.link).hostname})
+                        </a>
+                      </p>
                     </div>
                   ))}
                 </div>
