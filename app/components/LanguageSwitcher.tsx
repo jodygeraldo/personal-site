@@ -1,4 +1,4 @@
-import { useSubmit } from '@remix-run/react'
+import { useFetcher } from '@remix-run/react'
 import { ActionType } from '~/routes'
 import type { Language, Translations } from '~/utils/i18n.server'
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function LanguageSwitcher({ translation, language }: Props) {
-  const submit = useSubmit()
+  const { submit } = useFetcher()
 
   function handleSubmit(language: string) {
     submit(
@@ -16,7 +16,7 @@ export default function LanguageSwitcher({ translation, language }: Props) {
         action: ActionType.SET_LANGUAGE,
         language,
       },
-      { method: 'post', action: '?index', replace: true },
+      { method: 'post', action: '/?index', replace: true },
     )
   }
 
