@@ -34,7 +34,7 @@ export default function ResumePage() {
 
       <main className="pb-16">
         <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="mt-16 flex justify-between">
+          <div className="mt-16 justify-between sm:flex">
             <Link
               to="/"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5"
@@ -46,7 +46,7 @@ export default function ResumePage() {
             <a
               download
               href="/assets/jody-geraldo-resume-id.pdf"
-              className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5"
+              className="mt-4 inline-flex w-full justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 sm:mt-0 sm:w-auto"
             >
               Download PDF
               <span className="text-sm text-primary-11">&nbsp;(ID)</span>
@@ -54,17 +54,17 @@ export default function ResumePage() {
           </div>
 
           <div className="mt-8 rounded bg-gray-3 px-8 py-12 font-resume">
-            <div className="flex justify-between">
+            <div className="justify-between sm:flex">
               <div>
-                <h2 className="text-5xl font-bold text-gray-12">
+                <h2 className="text-3xl font-bold text-gray-12 md:text-4xl lg:text-5xl">
                   Jody Geraldo
                 </h2>
-                <p className="mt-2 text-2xl font-bold text-gray-12">
+                <p className="mt-2 text-xl font-bold text-gray-12 sm:text-2xl">
                   Software Enginner
                 </p>
               </div>
 
-              <div className="flex flex-col items-end space-y-2">
+              <div className="mt-4 flex flex-col space-y-2 sm:mt-0 sm:items-end">
                 {infos.map((info) => (
                   <div
                     key={info.id}
@@ -73,18 +73,18 @@ export default function ResumePage() {
                     {info.link ? (
                       <a
                         href={info.link}
-                        className="text-sm underline underline-offset-1 hover:text-gray-9"
+                        className="order-2 text-sm underline underline-offset-1 hover:text-gray-9"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-sm">{info.value}</p>
+                      <p className="order-2 text-sm">{info.value}</p>
                     )}
 
                     {info.id === 'phone' ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -100,7 +100,7 @@ export default function ResumePage() {
                     {info.id === 'location' ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -119,7 +119,7 @@ export default function ResumePage() {
                       </svg>
                     ) : null}
                     {info.icon ? (
-                      <Icon id={info.icon} className="h-5 w-5" />
+                      <Icon id={info.icon} className="h-5 w-5 shrink-0" />
                     ) : null}
                   </div>
                 ))}
@@ -129,7 +129,7 @@ export default function ResumePage() {
               <section aria-labelledby="section-project">
                 <h3
                   id="section-project"
-                  className="text-xl font-bold text-primary-9"
+                  className="text-lg font-bold text-primary-9 sm:text-xl"
                 >
                   Projects
                 </h3>
@@ -137,12 +137,14 @@ export default function ResumePage() {
                 <div className="mt-4 space-y-4">
                   {projects.map((project) => (
                     <div key={project.name}>
-                      <div className="flex items-center justify-between">
+                      <div className="items-center justify-between sm:flex">
                         <h4 className="text-lg font-bold text-gray-12">
                           {project.name}
                         </h4>
                         {project.current ? (
-                          <p className="text-sm text-gray-11">- current</p>
+                          <p className="mt-1 text-sm text-gray-11 sm:mt-0">
+                            current
+                          </p>
                         ) : null}
                       </div>
 
@@ -150,7 +152,7 @@ export default function ResumePage() {
                         {project.list.map((item, idx) => (
                           <li
                             key={idx}
-                            className="ml-12 list-disc text-gray-11"
+                            className="ml-8 list-disc text-gray-11 sm:ml-12"
                           >
                             {item}
                           </li>
@@ -164,7 +166,7 @@ export default function ResumePage() {
               <section aria-labelledby="section-education">
                 <h3
                   id="section-education"
-                  className="text-xl font-bold text-primary-9"
+                  className="text-lg font-bold text-primary-9 sm:text-xl"
                 >
                   Education
                 </h3>
@@ -184,7 +186,7 @@ export default function ResumePage() {
               <section aria-labelledby="section-education">
                 <h3
                   id="section-education"
-                  className="text-xl font-bold text-primary-9"
+                  className="text-lg font-bold text-primary-9 sm:text-xl"
                 >
                   Skills
                 </h3>
