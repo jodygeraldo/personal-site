@@ -4,6 +4,7 @@ export type IconIdType =
   | 'sun'
   | 'moon'
   | 'arrow-down'
+  | 'arrow-left'
   | 'envelope-closed'
   | 'github'
   | 'twitter'
