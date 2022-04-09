@@ -148,14 +148,14 @@ export default function ResumePage() {
                         ))}
                       </ul>
 
-                      <p className="mt-2 text-sm text-gray-11">
+                      <p className="mt-2 text-gray-9">
                         {language === 'en' ? 'Deployed to' : 'Publish di'}{' '}
                         {project.deployedTo}{' '}
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="underline underline-offset-1 hover:text-gray-9"
+                          className="underline underline-offset-1 hover:text-gray-11"
                         >
                           ({new URL(project.link).hostname})
                         </a>
