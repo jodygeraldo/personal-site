@@ -12,7 +12,7 @@ interface Props {
 
 export default function HeroHeader({ translation, language }: Props) {
   return (
-    <Popover className="flex h-16 justify-between">
+    <Popover className="flex h-16 justify-between py-16">
       {({ close }) => (
         <>
           <div className="flex w-full items-center justify-between px-2 lg:px-0">
