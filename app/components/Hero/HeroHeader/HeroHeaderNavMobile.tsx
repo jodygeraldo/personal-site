@@ -56,14 +56,14 @@ export default function HeroHeaderNavMobile({
                 <div className="mt-3 space-y-1 px-2">
                   <Link
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
-                    to="#section-contact"
+                    to="/#section-contact"
                     onClick={setClose}
                   >
                     {translation['contact']}
                   </Link>
                   <Link
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
-                    to="#"
+                    to="/resume"
                     onClick={setClose}
                   >
                     Resume
