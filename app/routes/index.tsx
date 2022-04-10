@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from '@remix-run/cloudflare'
-import { json, redirect } from '@remix-run/cloudflare'
+import { json } from '@remix-run/cloudflare'
 import type { ShouldReloadFunction } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
@@ -80,9 +80,8 @@ export const action: ActionFunction = async ({ request, context }) => {
 
       const languageSession = await setLanguage(request, language)
 
-      const redirectTo = request.headers.get('Referer') ?? '/'
-
-      return redirect(redirectTo, {
+      return new Response(null, {
+        status: 204,
         headers: {
           'Set-Cookie': await commitLanguageSession(languageSession),
         },
@@ -219,8 +218,12 @@ export default function Index() {
 }
 
 export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
-  return (
+  if (
     !!submission &&
-    submission.formData.get('action') === ActionType.SET_LANGUAGE
-  )
+    submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+  ) {
+    return false
+  }
+
+  return true
 }
