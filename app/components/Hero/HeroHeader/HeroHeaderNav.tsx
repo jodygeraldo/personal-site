@@ -17,13 +17,13 @@ export default function HeroHeaderNav({ translation, language }: Props) {
       >
         <Link
           className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
-          to="#section-contact"
+          to="/#section-contact"
         >
           {translation['contact']}
         </Link>
         <Link
           className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
-          to="#"
+          to="/resume"
         >
           Resume
         </Link>

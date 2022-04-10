@@ -6,7 +6,7 @@ import {
   Trigger,
   TriggerItem,
 } from '@radix-ui/react-dropdown-menu'
-import { useMatches, useSubmit } from '@remix-run/react'
+import { useFetcher, useMatches } from '@remix-run/react'
 import Icon from '~/components/Icon'
 import { useTheme } from '~/hooks/useTheme'
 import { ActionType } from '~/routes'
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function DropdownMenu({ translation, language }: Props) {
-  const submit = useSubmit()
+  const { submit } = useFetcher()
   const { theme } = useMatches()[0].data
 
   const optimisticTheme = useTheme(theme)
@@ -28,7 +28,7 @@ export default function DropdownMenu({ translation, language }: Props) {
   ) {
     submit(
       { action: ActionType.SET_THEME, theme: e.currentTarget.value },
-      { method: 'post', replace: true, action: '?index' },
+      { method: 'post', replace: true, action: '/?index' },
     )
   }
 
@@ -37,7 +37,7 @@ export default function DropdownMenu({ translation, language }: Props) {
   ) {
     submit(
       { action: ActionType.SET_LANGUAGE, language: e.currentTarget.value },
-      { method: 'post', replace: true, action: '?index' },
+      { method: 'post', replace: true, action: '/?index' },
     )
   }
 
