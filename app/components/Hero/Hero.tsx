@@ -14,10 +14,10 @@ interface Props {
 
 export default function Hero({ translation, language }: Props) {
   return (
-    <header className="mx-auto min-h-screen max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+    <header className="mx-auto max-w-7xl items-center px-4 sm:px-6 lg:min-h-screen lg:px-8">
       <HeroHeader translation={translation.heroHeader} language={language} />
 
-      <div className="mx-auto grid min-h-[calc(100vh-128px)] items-center justify-center gap-16 pb-16 sm:max-w-3xl lg:max-w-7xl lg:grid-cols-2">
+      <div className="mx-auto grid items-center  justify-center gap-16 pb-16 sm:max-w-3xl lg:min-h-[calc(100vh-128px)] lg:max-w-7xl lg:grid-cols-2">
         <div className="max-w-md">
           <Introduction translation={translation.intro} />
         </div>
