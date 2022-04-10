@@ -93,7 +93,7 @@ function NotificationProvider({
   notification?: Notification
 }) {
   return (
-    <Toast.Provider>
+    <Toast.Provider swipeThreshold={75}>
       {children}
 
       {notification ? <NotificationToast notification={notification} /> : null}
