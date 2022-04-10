@@ -37,16 +37,16 @@ export default function RadixHeroHeader({ translation, language }: Props) {
 
       <Popover.Anchor className="absolute top-0 left-0 right-0" />
       <Popover.Content>
-        <Popover.Close className="absolute right-2 top-2 inline-flex items-center justify-center rounded-md p-2 text-gray-11 hover:bg-gray-3 hover:text-gray-12 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-7">
-          <span className="sr-only">{translation['close-menu']}</span>
-          <Icon
-            id="cross"
-            className="block h-6 w-6 text-gray-11 group-hover:text-gray-12"
-            aria-hidden="true"
-          />
-        </Popover.Close>
-
         <div className="relative mt-2 min-w-[95vw] divide-y divide-gray-6 rounded-lg bg-gray-2 shadow-lg ring-1 ring-gray-7 ring-opacity-5 sm:min-w-[97.5vw]">
+          <Popover.Close className="absolute right-2 top-2 inline-flex items-center justify-center rounded-md p-2 text-gray-11 hover:bg-gray-3 hover:text-gray-12 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-7">
+            <span className="sr-only">{translation['close-menu']}</span>
+            <Icon
+              id="cross"
+              className="block h-6 w-6 text-gray-11 group-hover:text-gray-12"
+              aria-hidden="true"
+            />
+          </Popover.Close>
+
           <div className="pt-3 pb-2">
             <div className="flex items-center justify-between px-4">
               <Link to="/">
