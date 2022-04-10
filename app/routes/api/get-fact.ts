@@ -28,7 +28,3 @@ export const loader: LoaderFunction = async ({ request }) => {
     status: 400,
   })
 }
-
-export default function () {
-  return null
-}
