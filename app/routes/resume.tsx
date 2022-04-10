@@ -126,16 +126,9 @@ export default function ResumePage() {
                 <div className="mt-4 space-y-4">
                   {projects.map((project) => (
                     <div key={project.name}>
-                      <div className="items-center justify-between sm:flex">
-                        <h4 className="text-lg font-bold text-gray-12">
-                          {project.name}
-                        </h4>
-                        {project.current ? (
-                          <p className="mt-1 text-sm text-gray-11 sm:mt-0">
-                            current
-                          </p>
-                        ) : null}
-                      </div>
+                      <h4 className="text-lg font-bold text-gray-12">
+                        {project.name}
+                      </h4>
 
                       <ul className="mt-2 max-w-2xl space-y-1">
                         {project.list.map((item, idx) => (

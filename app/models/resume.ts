@@ -30,7 +30,6 @@ const infos: {
 const projects: {
   [key in Language]: {
     name: string
-    current: boolean
     deployedTo: string
     link: string
     list: string[]
@@ -39,7 +38,6 @@ const projects: {
   en: [
     {
       name: 'Portfolio Website',
-      current: true,
       deployedTo: 'Cloudflare Pages',
       link: 'https://jodygeraldo.com/',
       list: [
@@ -51,7 +49,6 @@ const projects: {
     },
     {
       name: 'UI Design Daily with Tailwind CSS',
-      current: true,
       deployedTo: 'Cloudflare Pages',
       link: 'https://ui-design-daily-tailwind.pages.dev/',
       list: [
@@ -61,7 +58,6 @@ const projects: {
     },
     {
       name: 'Notes app',
-      current: false,
       deployedTo: 'Vercel',
       link: 'https://for-tomorrow-you.vercel.app/',
       list: [
@@ -71,7 +67,6 @@ const projects: {
     },
     {
       name: 'Game companion',
-      current: false,
       deployedTo: 'Fly.io',
       link: 'https://traveler-main.fly.dev/',
       list: [
@@ -83,29 +78,27 @@ const projects: {
   id: [
     {
       name: 'Website Portfolio',
-      current: true,
       deployedTo: 'Cloudflare Pages',
       link: 'https://jodygeraldo.com/',
       list: [
         'Desain keseluruhan website',
         'Mengimplementasikan i18n(lokalisasi) untuk bahasa Inggris dan bahasa Indonesia',
-        'mengimplementasikan tema cerah dan gelap',
+        'Mengimplementasikan tema cerah dan gelap',
         'Menggunakan Elastic Email untuk mengimplementasikan form kontak',
       ],
     },
     {
       name: 'UI Design Daily with Tailwind CSS',
-      current: true,
+
       deployedTo: 'Cloudflare Pages',
       link: 'https://ui-design-daily-tailwind.pages.dev/',
       list: [
-        'mengimplementasikan pagination',
-        'mengimplementasikan komponen uidesigndaily.com(desain figma) menjadi HTML dengan Tailwind CSS',
+        'Mengimplementasikan pagination',
+        'Mengimplementasikan komponen uidesigndaily.com(desain figma) menjadi HTML dengan Tailwind CSS',
       ],
     },
     {
       name: 'Notes app',
-      current: false,
       deployedTo: 'Vercel',
       link: 'https://for-tomorrow-you.vercel.app/',
       list: [
@@ -115,7 +108,6 @@ const projects: {
     },
     {
       name: 'Game companion',
-      current: false,
       deployedTo: 'Fly.io',
       link: 'https://traveler-main.fly.dev/',
       list: [
