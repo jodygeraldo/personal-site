@@ -62,6 +62,7 @@ export default function HeroHeaderNavMobile({
                     {translation['contact']}
                   </Link>
                   <Link
+                    prefetch="intent"
                     className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
                     to="/resume"
                     onClick={setClose}

@@ -22,6 +22,7 @@ export default function HeroHeaderNav({ translation, language }: Props) {
           {translation['contact']}
         </Link>
         <Link
+          prefetch="intent"
           className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
           to="/resume"
         >
