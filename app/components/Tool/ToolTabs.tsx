@@ -1,4 +1,5 @@
 import * as Tabs from '@radix-ui/react-tabs'
+import { motion } from 'framer-motion'
 
 export type TabTriggerType = {
   id: string
@@ -39,7 +40,13 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
           value={id}
           className="mx-auto w-full max-w-7xl px-4 pt-6 sm:px-6 lg:px-8"
         >
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.ul
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {category.map(({ name, content }) => (
               <li key={name} className="col-span-1 text-left">
                 <h3 className="text-xl font-medium text-primary-9">{name}</h3>
@@ -52,7 +59,7 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
                 </ul>
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </Tabs.Content>
       ))}
     </Tabs.Root>
