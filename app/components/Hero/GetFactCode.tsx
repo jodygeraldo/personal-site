@@ -1,4 +1,5 @@
 import { useFetcher } from '@remix-run/react'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import Icon from '~/components/Icon'
 import type { Language, Translations } from '~/utils/i18n.server'
@@ -107,7 +108,8 @@ export default function GetFactCode({ translation }: Props) {
             <div className="w-full border-t border-gray-7" />
           </div>
           <form className="relative flex justify-center">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.95 }}
               type="button"
               onClick={handleSubmit}
               className="inline-flex items-center rounded-full border border-gray-7 bg-gray-3 px-4 py-1.5 text-sm font-medium text-gray-12 shadow-sm hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-3"
@@ -118,14 +120,29 @@ export default function GetFactCode({ translation }: Props) {
                 aria-hidden="true"
               />
               <span>{translation.button}</span>
-            </button>
+            </motion.button>
           </form>
         </div>
 
         {/* generated code */}
         <div className="flex items-center gap-4">
           <Icon id="paper-plane" className="h-5 w-5" aria-hidden="true" />
-          <span className="xl:text-base">{fetchedFact}</span>
+          <p>
+            {fetchedFact.split('').map((char, index) => (
+              <motion.span
+                key={`${char}-${index}`}
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                className="xl:text-base"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </p>
         </div>
       </div>
     </code>
