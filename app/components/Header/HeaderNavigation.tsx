@@ -28,6 +28,13 @@ export default function HeaderNavigation({ translation, language }: Props) {
         >
           Resume
         </Link>
+        <Link
+          prefetch="intent"
+          className="text-xl font-medium text-gray-11 transition-colors hover:text-gray-12"
+          to="/blog"
+        >
+          Blog
+        </Link>
       </nav>
       <div className="hidden lg:flex lg:items-center lg:gap-x-6">
         <DropdownMenu translation={translation} language={language} />

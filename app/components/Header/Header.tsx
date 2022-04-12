@@ -69,6 +69,13 @@ export default function Header({ translation, language }: Props) {
               >
                 Resume
               </Link>
+              <Link
+                prefetch="intent"
+                className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
+                to="/blog"
+              >
+                Blog
+              </Link>
               <a
                 className="block w-full rounded-md py-2 px-3 text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
                 href="https://github.com/jodygeraldo/personal-site"
