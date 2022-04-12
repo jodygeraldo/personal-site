@@ -14,6 +14,7 @@ import {
   ScrollRestoration,
   useCatch,
   useLoaderData,
+  useMatches,
 } from '@remix-run/react'
 import clsx from 'clsx'
 import ErrorPage from '~/components/ErrorPage'
@@ -28,7 +29,10 @@ import {
 import { getTheme } from './utils/theme.server'
 
 export const meta: MetaFunction = () => {
-  return { description: 'Get to know Jody Geraldo' }
+  return {
+    title: 'Jody Geraldo | Personal Site',
+    description: 'Get to know Jody Geraldo',
+  }
 }
 
 export const links: LinksFunction = () => {
@@ -56,12 +60,16 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export default function App() {
+  const noJs = useMatches().some(
+    (match) => match.handle && match.handle().noJs === true,
+  )
+
   const { theme, notification } = useLoaderData<loaderData>()
 
   const optimisticTheme = useTheme(theme)
 
   return (
-    <Document theme={optimisticTheme} title="Jody Geraldo | Personal Site">
+    <Document theme={optimisticTheme} noJs={noJs}>
       <NotificationProvider notification={notification}>
         <Outlet />
       </NotificationProvider>
@@ -91,7 +99,7 @@ export function CatchBoundary() {
   const caught = useCatch()
 
   return (
-    <Document theme={caught.data?.theme} title="Whoops...">
+    <Document theme={caught.data?.theme}>
       <ErrorPage page={404} translation={caught.data?.translation} />
     </Document>
   )
@@ -99,7 +107,7 @@ export function CatchBoundary() {
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <Document theme="dark" title="Whoops...">
+    <Document theme="dark">
       <ErrorPage page={500} message={error.message} />
     </Document>
   )
@@ -108,11 +116,11 @@ export function ErrorBoundary({ error }: { error: Error }) {
 function Document({
   children,
   theme,
-  title,
+  noJs,
 }: {
   children: React.ReactNode
   theme?: 'dark' | 'light' | 'system'
-  title?: string
+  noJs?: boolean
 }) {
   return (
     <html
@@ -126,7 +134,6 @@ function Document({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>{title}</title>
         <Meta />
         <Links />
       </head>
@@ -142,7 +149,7 @@ function Document({
         )}
         {/* End Cloudflare Web Analytics  */}
         <ScrollRestoration />
-        <Scripts />
+        {noJs ? null : <Scripts />}
         <LiveReload />
       </body>
     </html>
