@@ -209,7 +209,7 @@ export default function ResumePage() {
                     Remix
                   </p>
                   <p className="text-gray-9">
-                    <span className="text-gray-11">Tools:</span> Git, Github,
+                    <span className="text-gray-11">Tools:</span> Git, GitHub,
                     Prettier, ESLint
                   </p>
                   <p className="text-gray-9">
