@@ -120,7 +120,7 @@ export default function ContactForm({ translation }: Props) {
         <button
           name="action"
           value={ActionType.SUBMIT_MESSSAGE}
-          className="inline-flex justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
+          className="focus-ring-1 inline-flex justify-center rounded-md bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!isHydrated || fetcherSubmiting}
         >
           {fetcherSubmiting ? translation.buttonSubmitting : translation.button}

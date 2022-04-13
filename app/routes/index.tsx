@@ -4,8 +4,9 @@ import type { ShouldReloadFunction } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
 import Contact from '~/components/Contact/Contact'
-import Footer from '~/components/Footer/Footer'
+import Footer from '~/components/Footer'
 import Hero from '~/components/Hero/Hero'
+import PageContainer from '~/components/PageContainer'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import type { Language, Translations } from '~/utils/i18n.server'
@@ -207,12 +208,16 @@ export default function Index() {
   return (
     <>
       <Hero translation={translation.hero} language={language} />
-      <main>
+
+      <main className="pb-16">
         <Tool translation={translation.tool} />
         <Project translation={translation.project} />
         <Contact translation={translation.contact} />
       </main>
-      <Footer />
+
+      <PageContainer>
+        <Footer />
+      </PageContainer>
     </>
   )
 }

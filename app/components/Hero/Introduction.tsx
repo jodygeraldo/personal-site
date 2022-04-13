@@ -6,7 +6,7 @@ interface Props {
 
 export default function Introduction({ translation }: Props) {
   return (
-    <>
+    <div className="max-w-md">
       <h2 className="text-3xl font-bold leading-8 tracking-tight text-primary-12 md:text-4xl">
         {translation['title-1']}
         <br /> {translation['title-2']}
@@ -14,6 +14,6 @@ export default function Introduction({ translation }: Props) {
       <p className="mt-2 text-2xl font-bold leading-6 text-primary-11 md:text-3xl">
         {translation['subtitle']}
       </p>
-    </>
+    </div>
   )
 }

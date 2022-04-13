@@ -126,3 +126,9 @@
     --image-overlay-opacity: 0.25;
   }
 }
+
+@layer components {
+  .focus-ring-1:focus {
+    @apply outline-none ring-2 ring-gray-7 ring-offset-2 ring-offset-gray-1;
+  }
+}

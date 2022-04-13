@@ -1,11 +1,17 @@
-import type { LoaderFunction } from '@remix-run/cloudflare'
+import type { LoaderFunction, MetaFunction } from '@remix-run/cloudflare'
 import { json } from '@remix-run/cloudflare'
 import { Link, useLoaderData } from '@remix-run/react'
-import HeroHeader from '~/components/Hero/HeroHeader/HeroHeader'
+import Footer from '~/components/Footer'
+import Header from '~/components/Header/Header'
 import Icon from '~/components/Icon'
+import PageContainer from '~/components/PageContainer'
 import { getResumeData } from '~/models/resume'
 import type { Language, Translations } from '~/utils/i18n.server'
 import { getLanguage, getTranslations } from '~/utils/i18n.server'
+
+export const meta: MetaFunction = () => ({
+  title: 'Resume | Jody Geraldo',
+})
 
 interface LoaderData {
   translation: {
@@ -27,33 +33,38 @@ export default function ResumePage() {
   const { infos, projects } = getResumeData(language)
 
   return (
-    <>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <HeroHeader language={language} translation={translation.heroHeader} />
-      </div>
+    <PageContainer>
+      <Header language={language} translation={translation.heroHeader} />
 
-      <main className="pb-16">
-        <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="mt-16 justify-between sm:flex">
+      <main className="py-16">
+        <section
+          className="mx-auto max-w-md sm:max-w-3xl lg:max-w-7xl"
+          aria-labelledby="page-title"
+        >
+          <h1 className="sr-only" id="page-title">
+            Resume
+          </h1>
+
+          <div className="flex flex-col justify-between gap-4 sm:flex-row">
             <Link
               to="/"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5"
+              className="focus-ring-1 inline-flex max-w-fit items-center justify-center rounded-md bg-gray-3 py-3 px-6 font-medium text-gray-11 shadow-sm hover:bg-gray-4 active:bg-gray-5"
             >
-              <Icon id="arrowLeft" className="h-5 w-5" />
+              <Icon id="arrowLeft" className="mr-2 h-5 w-5" />
               <span>Back</span>
             </Link>
 
             <a
               download
               href="/assets/jody-geraldo-resume-id.pdf"
-              className="mt-4 inline-flex w-full justify-center rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5 sm:mt-0 sm:w-auto"
+              className="focus-ring-1 rounded-md bg-gray-3 py-3 px-6 text-center font-medium text-gray-11 shadow-sm hover:bg-gray-4 active:bg-gray-5"
             >
               Download PDF
               <span className="text-sm text-primary-11">&nbsp;(ID)</span>
             </a>
           </div>
 
-          <div className="mt-8 rounded bg-gray-3 px-8 py-12 font-resume">
+          <div className="mt-8 rounded bg-gray-3 px-4 py-5 sm:px-6">
             <div className="justify-between sm:flex">
               <div>
                 <h2 className="text-3xl font-bold text-gray-12 md:text-4xl lg:text-5xl">
@@ -178,15 +189,15 @@ export default function ResumePage() {
                         : 'S1 Teknik Informatika'}
                     </span>
                   </h4>
-                  <div className="item-start flex justify-between text-gray-9">
-                    <p>
+                  <div className="item-start flex flex-col justify-between text-gray-9 sm:flex-row">
+                    <p className="-mt-1 sm:order-2 sm:mt-0">Batam, ID</p>
+                    <p className="sm:order-1">
                       September 2018 (
                       {language === 'en'
                         ? 'Completed 115 of total 145 credits'
                         : 'Menyelesaikan 115 dari 145 SKS'}
                       )
                     </p>
-                    <p>Batam, ID</p>
                   </div>
                 </div>
               </section>
@@ -224,8 +235,10 @@ export default function ResumePage() {
               </section>
             </div>
           </div>
-        </div>
+        </section>
       </main>
-    </>
+
+      <Footer />
+    </PageContainer>
   )
 }

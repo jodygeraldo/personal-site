@@ -44,7 +44,7 @@ export default function DropdownMenu({ translation, language }: Props) {
   return (
     <Root>
       <Trigger
-        className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1"
+        className="focus-ring-1 group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
         aria-label={translation.setting}
       >
         <Icon

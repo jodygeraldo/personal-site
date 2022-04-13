@@ -30,8 +30,8 @@ export default function GetFactCode({ translation }: Props) {
   const fetchedFact = fetcher.data?.fact ?? '...'
 
   return (
-    <code className="break-all text-sm 2xl:text-base max-320:text-xs">
-      <div className="rounded-lg bg-gray-neutral-3 p-4 shadow-md sm:p-6">
+    <div className="w-full max-w-md text-sm text-gray-12 sm:text-base">
+      <div className="rounded-lg bg-gray-neutral-3 px-4 py-5 shadow-md sm:px-6">
         <div>
           <div>
             <span className="text-plum">async function</span>
@@ -137,7 +137,6 @@ export default function GetFactCode({ translation }: Props) {
                   hidden: { opacity: 0 },
                   visible: { opacity: 1 },
                 }}
-                className="xl:text-base"
               >
                 {char}
               </motion.span>
@@ -145,6 +144,6 @@ export default function GetFactCode({ translation }: Props) {
           </p>
         </div>
       </div>
-    </code>
+    </div>
   )
 }

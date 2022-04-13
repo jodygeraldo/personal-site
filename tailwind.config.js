@@ -1,17 +1,9 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      screens: {
-        'max-320': { max: '320px' },
-      },
-      fontFamily: {
-        sans: ['Raleway', ...defaultTheme.fontFamily.sans],
-        resume: ['Verdana', ...defaultTheme.fontFamily.sans],
-      },
       opacity: {
         'image-overlay': 'var(--image-overlay-opacity)',
       },
