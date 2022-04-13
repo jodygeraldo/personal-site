@@ -73,7 +73,7 @@ export default function ProjectItem({
         <div className="space-y-4 border-t border-gray-6 pt-4 text-gray-11">
           <div className="flex items-center gap-4">
             <Icon
-              id="external-link"
+              id="externalLink"
               className="h-6 w-6 shrink-0"
               aria-hidden={true}
             />

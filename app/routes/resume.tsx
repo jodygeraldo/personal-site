@@ -39,7 +39,7 @@ export default function ResumePage() {
               to="/"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1 active:bg-gray-5"
             >
-              <Icon id="arrow-left" className="h-5 w-5" />
+              <Icon id="arrowLeft" className="h-5 w-5" />
               <span>Back</span>
             </Link>
 

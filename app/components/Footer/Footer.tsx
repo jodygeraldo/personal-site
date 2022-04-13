@@ -1,7 +1,7 @@
-import type { IconIdType } from '~/components/Icon'
 import Icon from '~/components/Icon'
+import type { IconId } from '~/models/icons'
 
-const socials: { name: string; href: string; iconId: IconIdType }[] = [
+const socials: { name: string; href: string; iconId: IconId }[] = [
   {
     name: 'Discord',
     href: 'https://discordapp.com/users/321585722182205440',

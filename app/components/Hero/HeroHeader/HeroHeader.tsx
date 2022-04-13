@@ -27,7 +27,7 @@ export default function RadixHeroHeader({ translation, language }: Props) {
             <span className="sr-only">{translation['open-menu']}</span>
 
             <Icon
-              id="hamburger-menu"
+              id="hamburgerMenu"
               className="block h-6 w-6 text-gray-11 group-hover:text-gray-12"
               aria-hidden={true}
             />
