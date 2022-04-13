@@ -32,23 +32,7 @@ export const meta: MetaFunction = () => {
 }
 
 export const links: LinksFunction = () => {
-  return [
-    { rel: 'stylesheet', href: tailwindStylesUrl },
-    {
-      rel: 'preload',
-      href: '/assets/fonts/raleway-v26-latin-500.woff2',
-      as: 'font',
-      type: 'font/woff2',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      href: '/assets/fonts/raleway-v26-latin-700.woff2',
-      as: 'font',
-      type: 'font/woff2',
-      crossOrigin: 'anonymous',
-    },
-  ]
+  return [{ rel: 'stylesheet', href: tailwindStylesUrl }]
 }
 
 interface loaderData {
