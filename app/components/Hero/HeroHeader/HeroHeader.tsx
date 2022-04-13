@@ -16,9 +16,9 @@ export default function RadixHeroHeader({ translation, language }: Props) {
       <div className="flex h-16 justify-between py-16">
         <div className="flex w-full items-center justify-between px-2 lg:px-0">
           <Link to="/" className="flex items-center">
-            <h1 className="text-3xl font-medium tracking-tight text-primary-9">
+            <p className="text-3xl font-medium tracking-tight text-primary-9">
               Jody Geraldo
-            </h1>
+            </p>
           </Link>
           <HeroHeaderNav translation={translation} language={language} />
         </div>
