@@ -39,7 +39,7 @@ export default function GetFactCode({ translation }: Props) {
           </div>
           <div className="ml-2 sm:ml-4">
             <span className="text-plum">const</span>
-            <span className="text-red"> url</span> = &lsquo;
+            <span className="text-red"> url</span> = '
             <span className="text-grass">
               <a
                 href="https://get-fact.deno.dev"
@@ -50,7 +50,7 @@ export default function GetFactCode({ translation }: Props) {
                 https://get-fact.deno.dev
               </a>
             </span>
-            &rsquo;
+            '
           </div>
           <div className="ml-2 sm:ml-4">
             <span className="text-plum">const </span>
