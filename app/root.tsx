@@ -130,7 +130,7 @@ function Document({
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-1">
+      <body className="h-full">
         {children}
         {/* Cloudflare Web Analytics */}
         {process.env.NODE_ENV === 'production' && (
