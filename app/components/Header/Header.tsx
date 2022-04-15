@@ -12,7 +12,7 @@ interface Props {
 
 export default function Header({ translation, language }: Props) {
   return (
-    <Popover.Root modal={true}>
+    <Popover.Root>
       <div className="flex h-16 justify-between py-16">
         <div className="flex w-full items-center justify-between">
           <Link to="/" className="flex items-center">
