@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react'
-import Error500ImageUrl from '~/assets/images/undraw_lost.svg'
-import Error404ImageUrl from '~/assets/images/undraw_page_not_found.svg'
+import error500ImageUrl from '~/assets/images/undraw_lost.svg'
+import error404ImageUrl from '~/assets/images/undraw_page_not_found.svg'
 import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
@@ -33,7 +33,7 @@ export default function ErrorPage({ translation, page, message }: Props) {
               ? translation['title-500']
               : 'Internal server error'}
           </h1>
-          <p className="mt-2 text-base text-gray-11">
+          <p className="mt-2 text-gray-11">
             {message
               ? message
               : page === 404
@@ -47,7 +47,7 @@ export default function ErrorPage({ translation, page, message }: Props) {
           <div className="mt-6">
             <Link
               to="/"
-              className="text-base font-medium text-primary-9 hover:text-primary-10"
+              className="font-medium text-primary-9 hover:text-primary-10"
             >
               {translation ? translation['button'] : 'Back to home'}
               <span aria-hidden="true"> &rarr;</span>
@@ -56,23 +56,23 @@ export default function ErrorPage({ translation, page, message }: Props) {
         </div>
       </div>
       {page === 404 ? (
-        <svg
-          className="hidden self-center lg:block"
+        <img
+          src={error404ImageUrl}
+          alt=""
+          aria-hidden={true}
+          className="hidden max-h-96 self-center lg:block"
           width="860.13137"
           height="571.14799"
-          viewBox="0 0 860.13137 571.14799"
-        >
-          <use href={`${Error404ImageUrl}#page-not-found`} />
-        </svg>
+        />
       ) : (
-        <svg
+        <img
+          src={error500ImageUrl}
+          alt=""
+          aria-hidden={true}
           className="hidden max-h-96 self-center lg:block"
-          width="885.20079"
-          height="708.31655"
-          viewBox="0 0 885.20079 708.31655"
-        >
-          <use href={`${Error500ImageUrl}#lost`} />
-        </svg>
+          width="860.13137"
+          height="571.14799"
+        />
       )}
     </main>
   )

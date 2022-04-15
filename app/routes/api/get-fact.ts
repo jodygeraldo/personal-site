@@ -1,7 +1,8 @@
 import type { LoaderFunction } from '@remix-run/cloudflare'
 import { json } from '@remix-run/cloudflare'
 import { getRandomFact } from '~/utils/get-fact.server'
-import { getLanguage } from '~/utils/i18n.server'
+import { getLanguage, getTranslations } from '~/utils/i18n.server'
+import { getTheme } from '~/utils/theme.server'
 
 interface LoaderData {
   fact: string
@@ -11,11 +12,6 @@ interface LoaderData {
 export const loader: LoaderFunction = async ({ request }) => {
   const language = await getLanguage(request)
   const searchParams = new URL(request.url).searchParams
-  console.log(searchParams.get('ignore'))
-
-  new Promise(function (resolve) {
-    setTimeout(resolve, 3000)
-  })
 
   if (searchParams.get('ignore')) {
     const ignore = searchParams.get('ignore') ?? undefined
@@ -24,7 +20,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({ fact, isLastFact }, { status: 200 })
   }
 
-  return json(null, {
-    status: 400,
-  })
+  const translation = getTranslations(language, 'error')
+  const theme = await getTheme(request)
+  throw json({ theme, translation }, { status: 404 })
 }

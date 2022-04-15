@@ -38,18 +38,18 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
         <Tabs.Content
           key={id}
           value={id}
-          className="mx-auto w-full max-w-7xl px-4 pt-6 sm:px-6 lg:px-8"
+          className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6"
         >
           <motion.ul
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 20 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 justify-between gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {category.map(({ name, content }) => (
               <li key={name} className="col-span-1 text-left">
-                <h3 className="text-xl font-medium text-primary-9">{name}</h3>
+                <h3 className="text-lg font-medium text-primary-9">{name}</h3>
                 <ul className="mt-4 space-y-2">
                   {content.map((item) => (
                     <li className="text-gray-11" key={item}>

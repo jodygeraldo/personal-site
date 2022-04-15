@@ -29,7 +29,7 @@ export default function Contact({ translation }: Props) {
                 <dt className="sr-only">Email</dt>
                 <dd className="flex">
                   <Icon
-                    id="envelope-closed"
+                    id="envelopeClose"
                     className="h-6 w-6 flex-shrink-0 text-gray-11"
                     aria-hidden={true}
                   />

@@ -44,7 +44,7 @@ export default function DropdownMenu({ translation, language }: Props) {
   return (
     <Root>
       <Trigger
-        className="group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8 focus:outline-none focus:ring-2 focus:ring-gray-7 focus:ring-offset-2 focus:ring-offset-gray-1"
+        className="focus-ring-1 group rounded-full border-2 border-gray-7 p-3 transition-colors hover:border-gray-8"
         aria-label={translation.setting}
       >
         <Icon
@@ -58,7 +58,7 @@ export default function DropdownMenu({ translation, language }: Props) {
           <TriggerItem className="group flex select-none items-center justify-between rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5">
             <span>{translation.mode}</span>
             <Icon
-              id="chevron-right"
+              id="chevronRight"
               className="h-5 w-5 text-gray-11 group-focus:text-gray-12"
             />
           </TriggerItem>
@@ -97,7 +97,7 @@ export default function DropdownMenu({ translation, language }: Props) {
           <TriggerItem className="group mt-1 flex select-none items-center justify-between rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5">
             <span>{translation.translation}</span>
             <Icon
-              id="chevron-right"
+              id="chevronRight"
               className="h-5 w-5 text-gray-11 group-focus:text-gray-12"
             />
           </TriggerItem>

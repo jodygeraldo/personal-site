@@ -30,7 +30,7 @@ export default function ProjectItem({
   )
 
   return (
-    <li className="mx-auto max-w-lg rounded-lg bg-gray-2 p-4 shadow shadow-gray-6 sm:p-6 lg:flex lg:max-w-7xl">
+    <li className="mx-auto max-w-lg rounded-lg bg-gray-2 px-4 py-5 shadow shadow-gray-6 sm:px-6 lg:flex lg:max-w-7xl">
       <div className="relative">
         <picture>
           {sources.map((source) => (
@@ -73,7 +73,7 @@ export default function ProjectItem({
         <div className="space-y-4 border-t border-gray-6 pt-4 text-gray-11">
           <div className="flex items-center gap-4">
             <Icon
-              id="external-link"
+              id="externalLink"
               className="h-6 w-6 shrink-0"
               aria-hidden={true}
             />

@@ -1,15 +1,15 @@
-import type { IconIdType } from '~/components/Icon'
 import type { Language } from '~/utils/i18n.server'
+import type { IconId } from './icons'
 
 const infos: {
   id: string
-  icon?: IconIdType
+  icon?: IconId
   value: string
   link?: string
 }[] = [
   {
     id: 'email',
-    icon: 'envelope-closed',
+    icon: 'envelopeClose',
     value: 'jody.geraldo.jg@gmail.com',
   },
   { id: 'location', value: 'Bangka Belitung, ID' },
