@@ -10,7 +10,7 @@ import {
 import { useFetcher, useMatches } from '@remix-run/react'
 import Icon from '~/components/Icon'
 import { useTheme } from '~/hooks/useTheme'
-import { ActionType } from '~/routes'
+import { PreferenceAction } from '~/models/global'
 import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
@@ -27,15 +27,15 @@ export default function DropdownMenu({ translation, language }: Props) {
 
   function handleSubmitTheme(theme: string) {
     submitTheme(
-      { action: ActionType.SET_THEME, theme },
-      { method: 'post', replace: true, action: '/?index' },
+      { action: PreferenceAction.SET_THEME, theme },
+      { method: 'post', replace: true, action: '/api/preference' },
     )
   }
 
   function handleSubmitLanguage(language: string) {
     submitLanguage(
-      { action: ActionType.SET_LANGUAGE, language },
-      { method: 'post', replace: true, action: '/?index' },
+      { action: PreferenceAction.SET_LANGUAGE, language },
+      { method: 'post', replace: true, action: '/api/preference' },
     )
   }
 
