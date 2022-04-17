@@ -43,6 +43,41 @@ module.exports = {
         cyan: 'var(--cyan11)',
         grass: 'var(--grass11)',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {
+              'padding-left': 0,
+              'padding-right': 0,
+            },
+            'pre code': {
+              'border-radius': '0.25rem',
+            },
+            '--tw-prose-body': 'var(--sand11)',
+            '--tw-prose-headings': 'var(--amber12)',
+            '--tw-prose-lead': 'var(--sand10)',
+            '--tw-prose-links': 'var(--amber11)',
+            '--tw-prose-bold': 'var(--sand12)',
+            '--tw-prose-counters': 'var(--sand9)',
+            '--tw-prose-bullets': 'var(--sand7)',
+            '--tw-prose-hr': 'var(--sand6)',
+            '--tw-prose-quotes': 'var(--sand12)',
+            '--tw-prose-quote-borders': 'var(--sand6)',
+            '--tw-prose-captions': 'var(--sand9)',
+            '--tw-prose-code': 'var(--sand12)',
+            '--tw-prose-th-borders': 'var(--sand10)',
+            '--tw-prose-td-borders': 'var(--sand11)',
+          },
+        },
+        lg: {
+          css: {
+            pre: {
+              'padding-left': 0,
+              'padding-right': 0,
+            },
+          },
+        },
+      },
     },
   },
   plugins: [
@@ -52,5 +87,6 @@ module.exports = {
       addVariant('data-disabled', '&[data-disabled]')
     }),
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
   ],
 }
