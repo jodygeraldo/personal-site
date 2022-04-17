@@ -1,7 +1,8 @@
 import {
   Arrow,
   Content,
-  Item,
+  RadioGroup,
+  RadioItem,
   Root,
   Trigger,
   TriggerItem,
@@ -23,20 +24,16 @@ export default function DropdownMenu({ translation, language }: Props) {
 
   const optimisticTheme = useTheme(theme)
 
-  function handleSubmitTheme(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) {
+  function handleSubmitTheme(theme: string) {
     submit(
-      { action: ActionType.SET_THEME, theme: e.currentTarget.value },
+      { action: ActionType.SET_THEME, theme },
       { method: 'post', replace: true, action: '/?index' },
     )
   }
 
-  function handleSubmitLanguage(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) {
+  function handleSubmitLanguage(language: string) {
     submit(
-      { action: ActionType.SET_LANGUAGE, language: e.currentTarget.value },
+      { action: ActionType.SET_LANGUAGE, language },
       { method: 'post', replace: true, action: '/?index' },
     )
   }
@@ -63,33 +60,33 @@ export default function DropdownMenu({ translation, language }: Props) {
             />
           </TriggerItem>
           <Content className="w-56 rounded-md bg-gray-2 p-2 shadow shadow-gray-1">
-            <Item
-              disabled={optimisticTheme === 'system'}
-              className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              asChild={true}
+            <RadioGroup
+              value={optimisticTheme}
+              className="space-y-1"
+              onValueChange={handleSubmitTheme}
             >
-              <button onClick={handleSubmitTheme} value="system">
+              <RadioItem
+                value="system"
+                disabled={optimisticTheme === 'system'}
+                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
+              >
                 {translation.system}
-              </button>
-            </Item>
-            <Item
-              disabled={optimisticTheme === 'light'}
-              className="mt-1 flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              asChild={true}
-            >
-              <button onClick={handleSubmitTheme} value="light">
+              </RadioItem>
+              <RadioItem
+                value="light"
+                disabled={optimisticTheme === 'light'}
+                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
+              >
                 {translation.light}
-              </button>
-            </Item>
-            <Item
-              disabled={optimisticTheme === 'dark'}
-              className="mt-1 flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              asChild={true}
-            >
-              <button onClick={handleSubmitTheme} value="dark">
+              </RadioItem>
+              <RadioItem
+                value="dark"
+                disabled={optimisticTheme === 'dark'}
+                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
+              >
                 {translation.dark}
-              </button>
-            </Item>
+              </RadioItem>
+            </RadioGroup>
           </Content>
         </Root>
 
@@ -102,29 +99,26 @@ export default function DropdownMenu({ translation, language }: Props) {
             />
           </TriggerItem>
           <Content className="w-56 rounded-md bg-gray-2 p-2 shadow shadow-gray-1">
-            <input
-              type="hidden"
-              name="action"
-              value={ActionType.SET_LANGUAGE}
-            />
-            <Item
-              disabled={language === 'en'}
-              className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              asChild={true}
+            <RadioGroup
+              value={language}
+              className="space-y-1"
+              onValueChange={handleSubmitLanguage}
             >
-              <button onClick={handleSubmitLanguage} value="en">
+              <RadioItem
+                value="en"
+                disabled={language === 'en'}
+                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
+              >
                 {translation.english}
-              </button>
-            </Item>
-            <Item
-              disabled={language === 'id'}
-              className="mt-1 flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              asChild={true}
-            >
-              <button onClick={handleSubmitLanguage} value="id">
+              </RadioItem>
+              <RadioItem
+                value="id"
+                disabled={language === 'id'}
+                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
+              >
                 {translation.indonesia}
-              </button>
-            </Item>
+              </RadioItem>
+            </RadioGroup>
           </Content>
         </Root>
 
