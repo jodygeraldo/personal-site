@@ -1,8 +1,7 @@
 import type { LoaderFunction } from '@remix-run/cloudflare'
-import { json } from '@remix-run/cloudflare'
+import { json, redirect } from '@remix-run/cloudflare'
 import { getRandomFact } from '~/utils/get-fact.server'
-import { getLanguage, getTranslations } from '~/utils/i18n.server'
-import { getTheme } from '~/utils/theme.server'
+import { getLanguage } from '~/utils/i18n.server'
 
 interface LoaderData {
   fact: string
@@ -20,7 +19,5 @@ export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({ fact, isLastFact }, { status: 200 })
   }
 
-  const translation = getTranslations(language, 'error')
-  const theme = await getTheme(request)
-  throw json({ theme, translation }, { status: 404 })
+  return redirect('/404')
 }
