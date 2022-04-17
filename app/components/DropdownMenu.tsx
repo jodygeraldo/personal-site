@@ -19,20 +19,21 @@ interface Props {
 }
 
 export default function DropdownMenu({ translation, language }: Props) {
-  const { submit } = useFetcher()
+  const { submit: submitTheme } = useFetcher()
+  const { submit: submitLanguage } = useFetcher()
   const { theme } = useMatches()[0].data
 
   const optimisticTheme = useTheme(theme)
 
   function handleSubmitTheme(theme: string) {
-    submit(
+    submitTheme(
       { action: ActionType.SET_THEME, theme },
       { method: 'post', replace: true, action: '/?index' },
     )
   }
 
   function handleSubmitLanguage(language: string) {
-    submit(
+    submitLanguage(
       { action: ActionType.SET_LANGUAGE, language },
       { method: 'post', replace: true, action: '/?index' },
     )
