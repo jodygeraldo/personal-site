@@ -50,9 +50,9 @@ export default function Header({ translation, language }: Props) {
           <div className="pt-3 pb-2">
             <div className="flex items-center justify-between px-4">
               <Link to="/">
-                <h2 className="text-3xl font-medium tracking-tight text-primary-9">
+                <p className="text-3xl font-medium tracking-tight text-primary-11">
                   Jody Geraldo
-                </h2>
+                </p>
               </Link>
             </div>
             <div className="mt-3 space-y-1 px-2">

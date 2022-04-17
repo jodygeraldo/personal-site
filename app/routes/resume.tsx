@@ -86,7 +86,7 @@ export default function ResumePage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         href={info.link}
-                        className="order-2 text-sm underline underline-offset-1 hover:text-gray-9 sm:order-1"
+                        className="order-2 text-sm underline underline-offset-1 hover:text-gray-12 sm:order-1"
                       >
                         {info.value}
                       </a>
@@ -129,7 +129,7 @@ export default function ResumePage() {
               <section aria-labelledby="section-project">
                 <h3
                   id="section-project"
-                  className="text-lg font-bold text-primary-9 sm:text-xl"
+                  className="text-lg font-bold text-primary-11 sm:text-xl"
                 >
                   Projects
                 </h3>
@@ -152,7 +152,7 @@ export default function ResumePage() {
                         ))}
                       </ul>
 
-                      <p className="mt-2 text-gray-9">
+                      <p className="mt-2 text-gray-10">
                         {language === 'en' ? 'Deployed to' : 'Publish di'}{' '}
                         {project.deployedTo}{' '}
                         <a
@@ -172,7 +172,7 @@ export default function ResumePage() {
               <section aria-labelledby="section-education">
                 <h3
                   id="section-education"
-                  className="text-lg font-bold text-primary-9 sm:text-xl"
+                  className="text-lg font-bold text-primary-11 sm:text-xl"
                 >
                   Education
                 </h3>
@@ -189,7 +189,7 @@ export default function ResumePage() {
                         : 'S1 Teknik Informatika'}
                     </span>
                   </h4>
-                  <div className="item-start flex flex-col justify-between text-gray-9 sm:flex-row">
+                  <div className="item-start flex flex-col justify-between text-gray-10 sm:flex-row">
                     <p className="-mt-1 sm:order-2 sm:mt-0">Batam, ID</p>
                     <p className="sm:order-1">
                       September 2018 (
@@ -205,29 +205,29 @@ export default function ResumePage() {
               <section aria-labelledby="section-education">
                 <h3
                   id="section-education"
-                  className="text-lg font-bold text-primary-9 sm:text-xl"
+                  className="text-lg font-bold text-primary-11 sm:text-xl"
                 >
                   Skills
                 </h3>
 
                 <div className="mt-4 space-y-1">
-                  <p className="text-gray-9">
+                  <p className="text-gray-10">
                     <span className="text-gray-11">Languages:</span> JavaScript,
                     TypeScript
                   </p>
-                  <p className="text-gray-9">
+                  <p className="text-gray-10">
                     <span className="text-gray-11">Frameworks:</span> React,
                     Remix
                   </p>
-                  <p className="text-gray-9">
+                  <p className="text-gray-10">
                     <span className="text-gray-11">Tools:</span> Git, GitHub,
                     Prettier, ESLint
                   </p>
-                  <p className="text-gray-9">
+                  <p className="text-gray-10">
                     <span className="text-gray-11">Databases:</span> PostgreSQL,
                     Supabase
                   </p>
-                  <p className="text-gray-9">
+                  <p className="text-gray-10">
                     <span className="text-gray-11">Styling Frameworks:</span>{' '}
                     Tailwind CSS, HeadlessUI, Radix
                   </p>

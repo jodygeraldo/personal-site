@@ -15,13 +15,13 @@ export default function ErrorPage({ translation, page, message }: Props) {
       <div className="flex w-full flex-grow flex-col">
         <div className="flex-shrink-0 pt-10 sm:pt-16">
           <Link to="/" className="flex items-center">
-            <h1 className="text-3xl font-medium tracking-tight text-primary-9">
+            <p className="text-3xl font-medium tracking-tight text-primary-11">
               Jody Geraldo
-            </h1>
+            </p>
           </Link>
         </div>
         <div className="my-auto flex-shrink-0 py-16 sm:py-32">
-          <p className="text-sm font-semibold uppercase tracking-wide text-primary-9 lg:hidden">
+          <p className="text-sm font-semibold uppercase tracking-wide text-primary-11 lg:hidden">
             {page === 404 ? '404 error' : '500 error'}
           </p>
           <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-12 sm:text-5xl">
@@ -47,7 +47,7 @@ export default function ErrorPage({ translation, page, message }: Props) {
           <div className="mt-6">
             <Link
               to="/"
-              className="font-medium text-primary-9 hover:text-primary-10"
+              className="font-medium text-primary-11 hover:text-primary-10"
             >
               {translation ? translation['button'] : 'Back to home'}
               <span aria-hidden="true"> &rarr;</span>

@@ -16,9 +16,9 @@ export default function BlogLayout() {
           to="/"
           className="flex items-center decoration-primary-9 decoration-wavy underline-offset-4 focus:underline focus:outline-none"
         >
-          <h1 className="text-3xl font-medium tracking-tight text-primary-9">
+          <p className="text-3xl font-medium tracking-tight text-primary-11">
             Jody Geraldo
-          </h1>
+          </p>
         </Link>
 
         <a
