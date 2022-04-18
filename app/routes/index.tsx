@@ -1,4 +1,8 @@
-import type { ActionFunction, LoaderFunction } from '@remix-run/cloudflare'
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/cloudflare'
 import { json } from '@remix-run/cloudflare'
 import type { ShouldReloadFunction } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
@@ -16,6 +20,15 @@ import {
   commitNotificationSession,
   setFlashNotification,
 } from '~/utils/notification.server'
+
+export const meta: MetaFunction = ({ data }) => {
+  const { translation } = data as LoaderData
+
+  return {
+    title: 'Portfolio | Jody Geraldo',
+    description: `${translation.hero.intro['title-1']} ${translation.hero.intro['title-2']}. ${translation.hero.intro['subtitle']}`,
+  }
+}
 
 export interface ActionData {
   fieldErrors?: {
