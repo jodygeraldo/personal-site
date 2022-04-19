@@ -9,9 +9,10 @@ import {
   Separator,
   Trigger,
 } from '@radix-ui/react-dropdown-menu'
-import { useFetcher, useMatches } from '@remix-run/react'
+import { useFetcher } from '@remix-run/react'
+import { useContext } from 'react'
 import Icon from '~/components/Icon'
-import { useTheme } from '~/hooks/useTheme'
+import { ThemeContext } from '~/context/ThemeContext'
 import { PreferenceAction } from '~/models/global'
 import type { Language, Translations } from '~/utils/i18n.server'
 
@@ -23,11 +24,11 @@ interface Props {
 export default function DropdownMenu({ translation, language }: Props) {
   const { submit: submitTheme } = useFetcher()
   const { submit: submitLanguage } = useFetcher()
-  const { theme } = useMatches()[0].data
 
-  const optimisticTheme = useTheme(theme)
+  const { theme, updateTheme } = useContext(ThemeContext)
 
   function handleSubmitTheme(theme: string) {
+    updateTheme(theme)
     submitTheme(
       { action: PreferenceAction.SET_THEME, theme },
       { method: 'post', replace: true, action: '/api/preference' },
@@ -58,7 +59,7 @@ export default function DropdownMenu({ translation, language }: Props) {
           {translation.mode}
         </Label>
         <RadioGroup
-          value={optimisticTheme}
+          value={theme}
           className="space-y-1"
           onValueChange={handleSubmitTheme}
         >
