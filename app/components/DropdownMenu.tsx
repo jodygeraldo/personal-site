@@ -1,11 +1,13 @@
 import {
   Arrow,
   Content,
+  ItemIndicator,
+  Label,
   RadioGroup,
   RadioItem,
   Root,
+  Separator,
   Trigger,
-  TriggerItem,
 } from '@radix-ui/react-dropdown-menu'
 import { useFetcher, useMatches } from '@remix-run/react'
 import Icon from '~/components/Icon'
@@ -51,77 +53,73 @@ export default function DropdownMenu({ translation, language }: Props) {
         />
       </Trigger>
 
-      <Content className="w-56 rounded-md bg-gray-3 p-2 shadow shadow-gray-2">
-        <Root>
-          <TriggerItem className="group flex select-none items-center justify-between rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5">
-            <span>{translation.mode}</span>
-            <Icon
-              id="chevronRight"
-              className="h-5 w-5 text-gray-11 group-focus:text-gray-12"
-            />
-          </TriggerItem>
-          <Content className="w-56 rounded-md bg-gray-2 p-2 shadow shadow-gray-1">
-            <RadioGroup
-              value={optimisticTheme}
-              className="space-y-1"
-              onValueChange={handleSubmitTheme}
-            >
-              <RadioItem
-                value="system"
-                disabled={optimisticTheme === 'system'}
-                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              >
-                {translation.system}
-              </RadioItem>
-              <RadioItem
-                value="light"
-                disabled={optimisticTheme === 'light'}
-                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              >
-                {translation.light}
-              </RadioItem>
-              <RadioItem
-                value="dark"
-                disabled={optimisticTheme === 'dark'}
-                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              >
-                {translation.dark}
-              </RadioItem>
-            </RadioGroup>
-          </Content>
-        </Root>
+      <Content className="min-w-max rounded-md bg-gray-3 p-2 shadow shadow-gray-2">
+        <Label className="py-2 pl-8 text-sm text-gray-10">
+          {translation.mode}
+        </Label>
+        <RadioGroup
+          value={optimisticTheme}
+          className="space-y-1"
+          onValueChange={handleSubmitTheme}
+        >
+          <RadioItem
+            value="system"
+            className="relative flex select-none items-center rounded-md py-2 pl-8 pr-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none"
+          >
+            <ItemIndicator className="absolute left-0 inline-flex items-center justify-center pl-2">
+              <Icon id="dotFilled" className="h-5 w-5 fill-current" />
+            </ItemIndicator>
+            {translation.system}
+          </RadioItem>
+          <RadioItem
+            value="light"
+            className="relative flex select-none items-center rounded-md py-2 pl-8 pr-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none"
+          >
+            <ItemIndicator className="absolute left-0 inline-flex items-center justify-center pl-2">
+              <Icon id="dotFilled" className="h-5 w-5 fill-current" />
+            </ItemIndicator>
+            {translation.light}
+          </RadioItem>
+          <RadioItem
+            value="dark"
+            className="relative flex select-none items-center rounded-md py-2 pl-8 pr-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none"
+          >
+            <ItemIndicator className="absolute left-0 inline-flex items-center justify-center pl-2">
+              <Icon id="dotFilled" className="h-5 w-5 fill-current" />
+            </ItemIndicator>
+            {translation.dark}
+          </RadioItem>
+        </RadioGroup>
 
-        <Root>
-          <TriggerItem className="group mt-1 flex select-none items-center justify-between rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5">
-            <span>{translation.translation}</span>
-            <Icon
-              id="chevronRight"
-              className="h-5 w-5 text-gray-11 group-focus:text-gray-12"
-            />
-          </TriggerItem>
-          <Content className="w-56 rounded-md bg-gray-2 p-2 shadow shadow-gray-1">
-            <RadioGroup
-              value={language}
-              className="space-y-1"
-              onValueChange={handleSubmitLanguage}
-            >
-              <RadioItem
-                value="en"
-                disabled={language === 'en'}
-                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              >
-                {translation.english}
-              </RadioItem>
-              <RadioItem
-                value="id"
-                disabled={language === 'id'}
-                className="flex w-full select-none items-center rounded-md p-4 text-lg text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none state-open:bg-gray-5 focus:state-open:bg-gray-4 data-disabled:bg-gray-5"
-              >
-                {translation.indonesia}
-              </RadioItem>
-            </RadioGroup>
-          </Content>
-        </Root>
+        <Separator className="my-2 h-0.5 bg-gray-6" />
+
+        <Label className="py-2 pl-8 text-sm text-gray-10">
+          {translation.translation}
+        </Label>
+        <RadioGroup
+          value={language}
+          className="space-y-1"
+          onValueChange={handleSubmitLanguage}
+        >
+          <RadioItem
+            value="en"
+            className="relative flex select-none items-center rounded-md py-2 pl-8 pr-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none"
+          >
+            <ItemIndicator className="absolute left-0 inline-flex items-center justify-center pl-2">
+              <Icon id="dotFilled" className="h-5 w-5 fill-current" />
+            </ItemIndicator>
+            {translation.english}
+          </RadioItem>
+          <RadioItem
+            value="id"
+            className="relative flex select-none items-center rounded-md py-2 pl-8 pr-4 text-gray-11 focus:bg-gray-4 focus:text-gray-12 focus:outline-none"
+          >
+            <ItemIndicator className="absolute left-0 inline-flex items-center justify-center pl-2">
+              <Icon id="dotFilled" className="h-5 w-5 fill-current" />
+            </ItemIndicator>
+            {translation.indonesia}
+          </RadioItem>
+        </RadioGroup>
 
         <Arrow className="fill-gray-3" />
       </Content>
