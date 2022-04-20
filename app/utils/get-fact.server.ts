@@ -43,4 +43,4 @@ function getRandomFact(lang: Language, ignore?: string | string[]) {
   }
 }
 
-export { getRandomFact }
+export { fact, getRandomFact }
