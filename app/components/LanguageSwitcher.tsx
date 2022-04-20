@@ -16,7 +16,7 @@ export default function LanguageSwitcher({ translation, language }: Props) {
         action: PreferenceAction.SET_LANGUAGE,
         language,
       },
-      { method: 'post', action: '/?index', replace: true },
+      { method: 'post', action: '/api/preference', replace: true },
     )
   }
 
