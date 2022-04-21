@@ -59,10 +59,6 @@ async function sendMail(
   const elasticEmailApiUrl =
     'https://api.elasticemail.com/v4/emails/transactional'
 
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('X-ElasticEmail-ApiKey', apiKey)
-
   const body = {
     Recipients: { To: ['Jody Geraldo <jody.geraldo.jg@gmail.com>'] },
     Content: {
@@ -84,7 +80,10 @@ async function sendMail(
 
   const res = await fetch(elasticEmailApiUrl, {
     method: 'POST',
-    headers,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-ElasticEmail-ApiKey': apiKey,
+    },
     body: JSON.stringify(body),
   })
 
