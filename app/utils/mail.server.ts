@@ -78,12 +78,18 @@ async function sendMail(
     },
   }
 
+  const key =
+    process.env.NODE_ENV === 'development'
+      ? process.env.ELASTIC_EMAIL_API_KEY!
+      : apiKey
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('X-ElasticEmail-ApiKey', key)
+
   const res = await fetch(elasticEmailApiUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-ElasticEmail-ApiKey': apiKey,
-    },
+    headers,
     body: JSON.stringify(body),
   })
 
