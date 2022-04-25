@@ -142,7 +142,7 @@ export default function Index() {
   const { translation, language } = useLoaderData<LoaderData>()
 
   return (
-    <>
+    <div className="bg-gray-1">
       <Hero translation={translation.hero} language={language} />
 
       <main className="pb-16">
@@ -154,7 +154,7 @@ export default function Index() {
       <PageContainer>
         <Footer />
       </PageContainer>
-    </>
+    </div>
   )
 }
 

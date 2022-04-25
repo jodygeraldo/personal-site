@@ -49,7 +49,7 @@ export default function ToolTabs({ tabsTrigger, tabsContent }: Props) {
           >
             {category.map(({ name, content }) => (
               <li key={name} className="col-span-1 text-left">
-                <h3 className="text-lg font-medium text-primary-9">{name}</h3>
+                <h3 className="text-lg font-medium text-primary-11">{name}</h3>
                 <ul className="mt-4 space-y-2">
                   {content.map((item) => (
                     <li className="text-gray-11" key={item}>

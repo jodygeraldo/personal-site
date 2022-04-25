@@ -59,7 +59,7 @@ export default function ProjectItem({
         )}
       </div>
       <div className="mt-4 lg:mt-0 lg:ml-8 lg:flex-1">
-        <h3 className="text-xl font-medium text-primary-9">{name}</h3>
+        <h3 className="text-xl font-medium text-primary-11">{name}</h3>
         <p className="mt-2 text-gray-11">{description}</p>
         <div className="my-4 flex items-center gap-4 text-sm text-gray-11">
           <span className="sr-only">Built with</span>
