@@ -2,6 +2,8 @@ import { blacklistedWords } from '~/models/blacklist-words'
 import type { ActionData as IndexActionData } from '~/routes'
 import type { Notification } from './notification.server'
 
+const spamNames = ['henryguind']
+
 function validateMailRequest(mail: {
   name: string
   email: string
@@ -10,7 +12,11 @@ function validateMailRequest(mail: {
   const fieldErrors: IndexActionData['fieldErrors'] = {}
   let formError: string | undefined
 
-  if (!mail.name || mail.name.length < 3) {
+  if (
+    !mail.name ||
+    mail.name.length < 3 ||
+    spamNames.includes(mail.name.toLowerCase())
+  ) {
     fieldErrors.name = 'Name is required and must be at least 3 characters'
   }
 
