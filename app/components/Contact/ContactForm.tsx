@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import { useHydrated } from '~/hooks/useHydrated'
 import type { ActionData as IndexActionData } from '~/routes'
-import { ActionType } from '~/routes'
 import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
@@ -16,14 +15,13 @@ export default function ContactForm({ translation }: Props) {
 
   const ref = useRef<HTMLFormElement>(null)
 
-  const fetcherSubmiting =
-    fetcher.submission?.formData.get('action') === ActionType.SUBMIT_MESSSAGE
+  const busy = fetcher.state === 'submitting'
 
   useEffect(() => {
-    if (fetcher.submission && fetcherSubmiting) {
+    if (fetcher.state === 'loading') {
       ref.current?.reset()
     }
-  }, [fetcher.submission, fetcherSubmiting])
+  }, [fetcher.state])
 
   return (
     <fetcher.Form
@@ -118,12 +116,15 @@ export default function ContactForm({ translation }: Props) {
       </div>
       <div>
         <button
-          name="action"
-          value={ActionType.SUBMIT_MESSSAGE}
-          className="focus-ring-1 inline-flex justify-center rounded-md bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm hover:bg-gray-4 active:bg-gray-5 disabled:cursor-not-allowed disabled:opacity-50"
-          disabled={!isHydrated || fetcherSubmiting}
+          className={clsx(
+            !isHydrated || busy
+              ? 'disabled:cursor-not-allowed disabled:opacity-50'
+              : 'hover:bg-gray-4 active:bg-gray-5',
+            'focus-ring-1 inline-flex justify-center rounded-md bg-gray-3 py-3 px-6 text-base font-medium text-gray-11 shadow-sm',
+          )}
+          disabled={!isHydrated || busy}
         >
-          {fetcherSubmiting ? translation.buttonSubmitting : translation.button}
+          {busy ? translation.buttonSubmitting : translation.button}
         </button>
       </div>
     </fetcher.Form>

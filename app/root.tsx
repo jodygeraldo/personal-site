@@ -16,15 +16,17 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 import clsx from 'clsx'
+import { useContext } from 'react'
 import ErrorPage from '~/components/ErrorPage'
 import NotificationToast from '~/components/NotificationToast'
-import { useTheme } from './hooks/useTheme'
+import ThemeProvider, { ThemeContext } from './context/ThemeContext'
 import tailwindStylesUrl from './styles/build/tailwind.css'
 import type { Notification } from './utils/notification.server'
 import {
   commitNotificationSession,
   getFlashNotification,
 } from './utils/notification.server'
+import type { Theme } from './utils/theme.server'
 import { getTheme } from './utils/theme.server'
 
 export const meta: MetaFunction = () => {
@@ -36,7 +38,7 @@ export const links: LinksFunction = () => {
 }
 
 interface loaderData {
-  theme?: 'dark' | 'light'
+  theme: Theme
   notification?: Notification
 }
 export const loader: LoaderFunction = async ({ request }) => {
@@ -58,14 +60,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function App() {
   const { theme, notification } = useLoaderData<loaderData>()
 
-  const optimisticTheme = useTheme(theme)
-
   return (
-    <Document theme={optimisticTheme} title="Jody Geraldo | Personal Site">
-      <NotificationProvider notification={notification}>
-        <Outlet />
-      </NotificationProvider>
-    </Document>
+    <ThemeProvider currentTheme={theme}>
+      <Document title="Jody Geraldo | Personal Site">
+        <NotificationProvider notification={notification}>
+          <Outlet />
+        </NotificationProvider>
+      </Document>
+    </ThemeProvider>
   )
 }
 
@@ -99,7 +101,7 @@ export function CatchBoundary() {
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <Document theme="dark" title="Whoops...">
+    <Document title="Whoops...">
       <ErrorPage page={500} message={error.message} />
     </Document>
   )
@@ -111,15 +113,17 @@ function Document({
   title,
 }: {
   children: React.ReactNode
-  theme?: 'dark' | 'light' | 'system'
+  theme?: Theme
   title?: string
 }) {
+  const { theme: optimisticTheme } = useContext(ThemeContext)
+
   return (
     <html
       lang="en"
       className={clsx(
-        theme === 'dark' && 'dark',
-        theme === 'light' && 'light',
+        theme ? theme : optimisticTheme === 'dark' && 'dark',
+        theme ? theme : optimisticTheme === 'light' && 'light',
         'h-full scroll-smooth',
       )}
     >
@@ -130,7 +134,7 @@ function Document({
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-1">
+      <body className="h-full">
         {children}
         {/* Cloudflare Web Analytics */}
         {process.env.NODE_ENV === 'production' && (

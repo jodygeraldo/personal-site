@@ -125,9 +125,14 @@ export default function GetFactCode({ translation }: Props) {
         </div>
 
         {/* generated code */}
-        <div className="flex items-center gap-4">
-          <Icon id="paperPlane" className="h-5 w-5" aria-hidden="true" />
-          <p>
+        <div className="flex min-h-[60px] items-center gap-4">
+          <Icon
+            id="paperPlane"
+            className="h-5 w-5 shrink-0"
+            aria-hidden="true"
+          />
+
+          <p className="pr-9">
             {fetchedFact.split('').map((char, index) => (
               <motion.span
                 key={`${char}-${index}`}

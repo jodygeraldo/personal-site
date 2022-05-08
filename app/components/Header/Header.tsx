@@ -16,7 +16,7 @@ export default function Header({ translation, language }: Props) {
       <div className="flex h-16 justify-between py-16">
         <div className="flex w-full items-center justify-between">
           <Link to="/" className="flex items-center">
-            <p className="text-3xl font-medium tracking-tight text-primary-9">
+            <p className="text-3xl font-medium tracking-tight text-primary-11">
               Jody Geraldo
             </p>
           </Link>

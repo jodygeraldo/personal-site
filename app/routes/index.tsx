@@ -1,4 +1,8 @@
-import type { ActionFunction, LoaderFunction } from '@remix-run/cloudflare'
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/cloudflare'
 import { json } from '@remix-run/cloudflare'
 import type { ShouldReloadFunction } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
@@ -10,30 +14,20 @@ import PageContainer from '~/components/PageContainer'
 import Project from '~/components/Project/Project'
 import Tool from '~/components/Tool/Tool'
 import type { Language, Translations } from '~/utils/i18n.server'
-import {
-  commitLanguageSession,
-  getLanguage,
-  getTranslations,
-  setLanguage,
-} from '~/utils/i18n.server'
+import { getLanguage, getTranslations } from '~/utils/i18n.server'
 import { sendMail, validateMailRequest } from '~/utils/mail.server'
 import {
   commitNotificationSession,
   setFlashNotification,
 } from '~/utils/notification.server'
-import { commitThemeSession, setTheme } from '~/utils/theme.server'
 
-export enum ActionType {
-  SET_THEME = 'SET_THEME',
-  SET_LANGUAGE = 'SET_LANGUAGE',
-  SUBMIT_MESSSAGE = 'SUBMIT_MESSSAGE',
-}
+export const meta: MetaFunction = ({ data }) => {
+  const { translation } = data as LoaderData
 
-function isValidActionType(value: any): value is ActionType {
-  return (
-    typeof value === 'string' &&
-    Object.values<string>(ActionType).includes(value)
-  )
+  return {
+    title: 'Portfolio | Jody Geraldo',
+    description: `${translation.hero.intro['title-1']} ${translation.hero.intro['title-2']}. ${translation.hero.intro['subtitle']}`,
+  }
 }
 
 export interface ActionData {
@@ -51,126 +45,68 @@ export interface ActionData {
 export const action: ActionFunction = async ({ request, context }) => {
   const formData = await request.formData()
 
-  const actions = formData.get('action')
-  invariant(isValidActionType(actions), 'Invalid action type')
+  const apiKey = context.ELASTIC_EMAIL_API_KEY
+  const name = formData.get('name')
+  const email = formData.get('email')
+  const message = formData.get('message')
+  invariant(typeof name === 'string', 'Invalid name type')
+  invariant(typeof email === 'string', 'Invalid email type')
+  invariant(typeof message === 'string', 'Invalid message type')
 
-  switch (actions) {
-    case ActionType.SET_THEME:
-      const setTo = formData.get('theme')
-      invariant(typeof setTo === 'string', 'Invalid theme type')
-      invariant(
-        setTo === 'dark' || setTo === 'light' || setTo === 'system',
-        'Invalid theme',
-      )
+  const mail = {
+    name,
+    email,
+    message,
+  }
 
-      const themeSession = await setTheme(
-        request,
-        setTo === 'system' ? undefined : setTo,
-      )
+  const { fieldErrors, formError } = validateMailRequest(mail)
 
-      return new Response(null, {
-        status: 204,
-        headers: {
-          'Set-Cookie': await commitThemeSession(themeSession),
-        },
-      })
-    case ActionType.SET_LANGUAGE:
-      const language = formData.get('language')
-      invariant(typeof language === 'string', 'Invalid language type')
-      invariant(language === 'en' || language === 'id', 'Invalid language')
+  if (formError) {
+    const notificationSession = await setFlashNotification(request, {
+      type: 'ERROR',
+      message: formError,
+    })
 
-      const languageSession = await setLanguage(request, language)
-
-      return new Response(null, {
-        status: 204,
-        headers: {
-          'Set-Cookie': await commitLanguageSession(languageSession),
-        },
-      })
-    case ActionType.SUBMIT_MESSSAGE:
-      const apiKey = context.ELASTIC_EMAIL_API_KEY
-      const name = formData.get('name')
-      const email = formData.get('email')
-      const message = formData.get('message')
-      invariant(typeof name === 'string', 'Invalid name type')
-      invariant(typeof email === 'string', 'Invalid email type')
-      invariant(typeof message === 'string', 'Invalid message type')
-
-      const mail = {
-        name,
-        email,
-        message,
-      }
-
-      const { fieldErrors, formError } = validateMailRequest(mail)
-
-      if (formError) {
-        const notificationSession = await setFlashNotification(request, {
-          type: 'ERROR',
-          message: formError,
-        })
-
-        return json<ActionData>(
-          {
-            fieldErrors,
-            fields: mail,
-          },
-          {
-            status: 400,
-            headers: {
-              'Set-Cookie': await commitNotificationSession(
-                notificationSession,
-              ),
-            },
-          },
-        )
-      }
-
-      try {
-        const response = await sendMail(apiKey, mail)
-        const notificationSession = await setFlashNotification(
-          request,
-          response,
-        )
-        if (response.type === 'SUCCESS') {
-          return new Response(null, {
-            status: 200,
-            headers: {
-              'Set-Cookie': await commitNotificationSession(
-                notificationSession,
-              ),
-            },
-          })
-        } else {
-          return json<ActionData>(
-            { fields: mail },
-            {
-              status: 400,
-              headers: {
-                'Set-Cookie': await commitNotificationSession(
-                  notificationSession,
-                ),
-              },
-            },
-          )
-        }
-      } catch (error) {
-        console.log(error)
-      }
-      return null
-    default:
-      const notificationSession = await setFlashNotification(request, {
-        type: 'ERROR',
-        message: `Can't process action with name: ${actions}`,
-      })
-
-      return new Response(null, {
+    return json<ActionData>(
+      {
+        fieldErrors,
+        fields: mail,
+      },
+      {
         status: 400,
         headers: {
           'Set-Cookie': await commitNotificationSession(notificationSession),
         },
-      })
+      },
+    )
   }
+
+  try {
+    const response = await sendMail(apiKey, mail)
+    const notificationSession = await setFlashNotification(request, response)
+    if (response.type === 'SUCCESS') {
+      return new Response(null, {
+        status: 200,
+        headers: {
+          'Set-Cookie': await commitNotificationSession(notificationSession),
+        },
+      })
+    } else {
+      return json<ActionData>(
+        { fields: mail },
+        {
+          status: 400,
+          headers: {
+            'Set-Cookie': await commitNotificationSession(notificationSession),
+          },
+        },
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
+  throw new Error(`Action failed on ${request.url}`)
 }
 
 interface LoaderData {
@@ -206,7 +142,7 @@ export default function Index() {
   const { translation, language } = useLoaderData<LoaderData>()
 
   return (
-    <>
+    <div className="bg-gray-1">
       <Hero translation={translation.hero} language={language} />
 
       <main className="pb-16">
@@ -218,17 +154,10 @@ export default function Index() {
       <PageContainer>
         <Footer />
       </PageContainer>
-    </>
+    </div>
   )
 }
 
 export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
-  if (
-    !!submission &&
-    submission.formData.get('action') === ActionType.SUBMIT_MESSSAGE
-  ) {
-    return false
-  }
-
-  return true
+  return !!submission && submission.method !== 'GET'
 }

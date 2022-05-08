@@ -3,6 +3,7 @@ import arrowTopRight from '~/assets/icons/arrow-top-right.svg'
 import chevronRight from '~/assets/icons/chevron-right.svg'
 import cross from '~/assets/icons/cross.svg'
 import discord from '~/assets/icons/discord.svg'
+import dotFilled from '~/assets/icons/dot-filled.svg'
 import envelopeClose from '~/assets/icons/envelope-close.svg'
 import externalLink from '~/assets/icons/external-link.svg'
 import gear from '~/assets/icons/gear.svg'
@@ -22,6 +23,7 @@ export type IconId =
   | 'chevronRight'
   | 'cross'
   | 'discord'
+  | 'dotFilled'
   | 'envelopeClose'
   | 'externalLink'
   | 'gear'
@@ -41,6 +43,7 @@ export {
   chevronRight,
   cross,
   discord,
+  dotFilled,
   envelopeClose,
   externalLink,
   gear,

@@ -13,12 +13,12 @@ const { getSession, commitSession, destroySession } =
     },
   })
 
-type Theme = 'dark' | 'light' | undefined
+export type Theme = 'system' | 'dark' | 'light'
 
 async function getTheme(request: Request): Promise<Theme> {
   const session = await getSession(request.headers.get('Cookie'))
 
-  const theme: Theme = session.get('theme')
+  const theme: Theme = session.get('theme') ?? 'system'
 
   return theme
 }

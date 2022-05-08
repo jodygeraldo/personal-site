@@ -1,5 +1,5 @@
 import { useFetcher } from '@remix-run/react'
-import { ActionType } from '~/routes'
+import { PreferenceAction } from '~/models/global'
 import type { Language, Translations } from '~/utils/i18n.server'
 
 interface Props {
@@ -13,15 +13,16 @@ export default function LanguageSwitcher({ translation, language }: Props) {
   function handleSubmit(language: string) {
     submit(
       {
-        action: ActionType.SET_LANGUAGE,
+        action: PreferenceAction.SET_LANGUAGE,
         language,
       },
-      { method: 'post', action: '/?index', replace: true },
+      { method: 'post', action: '/api/preference', replace: true },
     )
   }
 
   return (
     <button
+      type="button"
       onClick={() => handleSubmit(language === 'en' ? 'id' : 'en')}
       className="w-full rounded-md py-2 px-3 text-left text-lg font-medium text-gray-11 hover:bg-gray-3 hover:text-gray-12"
     >

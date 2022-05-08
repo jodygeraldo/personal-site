@@ -11,6 +11,7 @@ import { getLanguage, getTranslations } from '~/utils/i18n.server'
 
 export const meta: MetaFunction = () => ({
   title: 'Resume | Jody Geraldo',
+  description: 'Resume of Jody Geraldo',
 })
 
 interface LoaderData {
