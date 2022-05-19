@@ -65,10 +65,6 @@ async function sendMail(
   const elasticEmailApiUrl =
     'https://api.elasticemail.com/v4/emails/transactional'
 
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('X-ElasticEmail-ApiKey', apiKey)
-
   const body = {
     Recipients: { To: ['Jody Geraldo <jody.geraldo.jg@gmail.com>'] },
     Content: {
@@ -87,6 +83,15 @@ async function sendMail(
       Subject: 'jodygeraldo.com contact form',
     },
   }
+
+  const key =
+    process.env.NODE_ENV === 'development'
+      ? process.env.ELASTIC_EMAIL_API_KEY!
+      : apiKey
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('X-ElasticEmail-ApiKey', key)
 
   const res = await fetch(elasticEmailApiUrl, {
     method: 'POST',

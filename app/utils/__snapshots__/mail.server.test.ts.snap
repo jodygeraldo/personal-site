@@ -1,0 +1,39 @@
+// Vitest Snapshot v1
+
+exports[`sendMail should return error object if message contains bad words 1`] = `
+{
+  "extendedMessage": "If you believe this is a mistake, please contact me through other means",
+  "message": "The message you sent, contains blacklisted words",
+  "type": "ERROR",
+}
+`;
+
+exports[`validateMailRequest should return fieldErrors and formError for bad form request 1`] = `
+{
+  "fieldErrors": {
+    "message": "Message is required and must be at least 20 characters",
+  },
+  "formError": "There were errors with your submission",
+}
+`;
+
+exports[`validateMailRequest should return fieldErrors and formError for bad form request 2`] = `
+{
+  "fieldErrors": {
+    "message": "Message is required and must be at least 20 characters",
+    "name": "Name is required and must be at least 3 characters",
+  },
+  "formError": "There were errors with your submission",
+}
+`;
+
+exports[`validateMailRequest should return fieldErrors and formError for bad form request 3`] = `
+{
+  "fieldErrors": {
+    "email": "Email is required",
+    "message": "Message is required and must be at least 20 characters",
+    "name": "Name is required and must be at least 3 characters",
+  },
+  "formError": "There were errors with your submission",
+}
+`;

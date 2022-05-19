@@ -1,0 +1,76 @@
+// Vitest Snapshot v1
+
+exports[`getTranslations should return right translations 1`] = `
+{
+  "subtitle": "I spent most of my time crushing bugs while listening to music",
+  "title-1": "Hi, I am Jody Geraldo,",
+  "title-2": "I am a web developer based in Indonesia",
+}
+`;
+
+exports[`getTranslations should return right translations 2`] = `
+{
+  "button": "Send",
+  "buttonSubmitting": "Sending...",
+  "message": "Message",
+  "name": "Name",
+  "subtitle": "Here where you can find me",
+  "title": "Contact",
+}
+`;
+
+exports[`getTranslations should return right translations 3`] = `
+{
+  "button": "Back to home",
+  "message-404": "Sorry, we couldn’t find the page you’re looking for.",
+  "message-500": "Sorry, something went wrong.",
+  "title-404": "Page not found",
+  "title-500": "Internal server error",
+}
+`;
+
+exports[`getTranslations should return right translations 4`] = `
+{
+  "button": "Generate",
+}
+`;
+
+exports[`getTranslations should return right translations 5`] = `
+{
+  "close-menu": "Tutup menu utama",
+  "contact": "Kontak",
+  "dark": "Mode gelap",
+  "english": "English",
+  "indonesia": "Bahasa Indonesia",
+  "light": "Mode cahaya",
+  "mode": "Tema tampilan",
+  "open-menu": "Buka menu utama",
+  "setting": "Pengaturan",
+  "source-code": "Source code di github",
+  "switch-english": "Ganti ke Bahasa Inggris",
+  "switch-indonesia": "Ganti ke Bahasa Indonesia",
+  "system": "Preferensi sistem",
+  "translation": "Ganti bahasa",
+}
+`;
+
+exports[`getTranslations should return right translations 6`] = `
+{
+  "current-tools": "Aktif digunakan",
+  "familiar-tools": "Familiar",
+  "other": "Lainnya",
+  "subtitle": "Tools development yang mendorong saya produktif",
+  "title": "Development Tools",
+}
+`;
+
+exports[`getTranslations should return right translations 7`] = `
+{
+  "description-1": "Kumpulan komponen dari UIDesignDaily yang dibuat dengan Tailwind CSS, SvelteKit dan dideploy ke Cloudflare pages",
+  "description-2": "Hanya sebuah aplikasi note lain dengan hal-hal yang menarik dari Supabase",
+  "description-3": "Traveler Main adalah aplikasi companion untuk Genshin Impact",
+  "description-4": "Simpel API untuk mengambil data dari database yang anda simpan dengan api key yang berkaitan",
+  "subtitle": "Project yang saya buat dan experimen",
+  "title": "Project Pribadi",
+}
+`;

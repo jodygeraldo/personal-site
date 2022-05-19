@@ -1,0 +1,55 @@
+// Vitest Snapshot v1
+
+exports[`should return object to build html picture source 1`] = `
+{
+  "fallback": {
+    "height": 288,
+    "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=512&h=288&af",
+    "width": 512,
+  },
+  "sources": [
+    {
+      "height": 216,
+      "media": "(max-width: 639px)",
+      "type": "image/webp",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=384&h=216&output=webp",
+      "width": 384,
+    },
+    {
+      "height": 216,
+      "media": "(max-width: 639px)",
+      "type": "image/png",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=384&h=216&af",
+      "width": 384,
+    },
+    {
+      "height": 261,
+      "media": "(min-width: 640px) and (max-width: 1023px)",
+      "type": "image/webp",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=464&h=261&output=webp",
+      "width": 464,
+    },
+    {
+      "height": 261,
+      "media": "(min-width: 640px) and (max-width: 1023px)",
+      "type": "image/png",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=464&h=261&af",
+      "width": 464,
+    },
+    {
+      "height": 288,
+      "media": "(min-width: 1024px)",
+      "type": "image/webp",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=512&h=288&output=webp",
+      "width": 512,
+    },
+    {
+      "height": 288,
+      "media": "(min-width: 1024px)",
+      "type": "image/png",
+      "url": "//images.weserv.nl/?url=https://jodygeraldo.com/assets/images/test.png&w=512&h=288&af",
+      "width": 512,
+    },
+  ],
+}
+`;
