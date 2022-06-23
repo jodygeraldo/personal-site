@@ -57,7 +57,6 @@ export const action: ActionFunction = async ({ request, context }) => {
   const email = formData.get('email')
   const message = formData.get('message')
   const token = formData.get('token')
-  console.log(token)
   invariant(typeof name === 'string', 'Invalid name type')
   invariant(typeof email === 'string', 'Invalid email type')
   invariant(typeof message === 'string', 'Invalid message type')
@@ -68,17 +67,15 @@ export const action: ActionFunction = async ({ request, context }) => {
     message,
   }
 
-  const {
-    fieldErrors,
-    formError,
-    message: rechaptchaError,
-  } = await validateMailRequest(mail, {
-    token,
-    secret: rechaptchaSecret,
-  })
+  const { fieldErrors, formError, rechaptchaError } = await validateMailRequest(
+    mail,
+    {
+      token,
+      secret: rechaptchaSecret,
+    },
+  )
 
   if (formError || rechaptchaError) {
-    console.log('Form error or rechaptcha error')
     const notificationSession = await setFlashNotification(request, {
       type: 'ERROR',
       message: formError ?? rechaptchaError ?? 'Unknown error',
@@ -102,7 +99,6 @@ export const action: ActionFunction = async ({ request, context }) => {
     const response = await sendMail(apiKey, mail)
     const notificationSession = await setFlashNotification(request, response)
     if (response.type === 'SUCCESS') {
-      console.log('Mail sent successfully')
       return new Response(null, {
         status: 200,
         headers: {
@@ -110,7 +106,6 @@ export const action: ActionFunction = async ({ request, context }) => {
         },
       })
     } else {
-      console.log("Mail couldn't be sent")
       return json<ActionData>(
         { fields: mail },
         {
@@ -122,7 +117,7 @@ export const action: ActionFunction = async ({ request, context }) => {
       )
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 
   throw new Error(`Action failed on ${request.url}`)

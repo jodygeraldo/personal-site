@@ -13,22 +13,19 @@ async function validateMailRequest(
     secret: string
   },
 ) {
-  const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-    method: 'POST',
-    body: JSON.stringify({
-      secret: rechaptcha.secret,
-      response: rechaptcha.token,
-    }),
-  })
+  const res = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${rechaptcha.secret}&response=${rechaptcha.token}`,
+    {
+      method: 'POST',
+    },
+  )
   const rechaptchaServerResponse = (await res.json()) as {
     success: boolean
   }
 
-  console.log(rechaptchaServerResponse)
   if (!rechaptchaServerResponse.success) {
-    console.log("Rechaptcha didn't validate")
     return {
-      message: 'Recaptcha failed',
+      rechaptchaError: 'Recaptcha failed',
     }
   }
 
@@ -62,8 +59,6 @@ function checkBadWords(words: string) {
       isBad = true
     }
   })
-
-  console.log('Is bad:', isBad)
 
   return isBad
 }
@@ -114,8 +109,6 @@ async function sendMail(
     headers,
     body: JSON.stringify(body),
   })
-
-  console.log(res.json())
 
   if (res.ok) {
     return { message: 'Message sent successfully', type: 'SUCCESS' }
