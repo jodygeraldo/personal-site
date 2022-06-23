@@ -1,3 +1,5 @@
+.vscode/
+.DS_Store
 node_modules
 
 /.cache
@@ -5,3 +7,4 @@ node_modules
 /public/build
 
 /app/styles/build
+.env
