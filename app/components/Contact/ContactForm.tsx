@@ -1,6 +1,7 @@
 import { useFetcher } from '@remix-run/react'
 import clsx from 'clsx'
-import { useEffect, useRef } from 'react'
+import { useRef, useState } from 'react'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { useHydrated } from '~/hooks/useHydrated'
 import type { ActionData as IndexActionData } from '~/routes'
 import type { Language, Translations } from '~/utils/i18n.server'
@@ -10,24 +11,36 @@ interface Props {
 }
 
 export default function ContactForm({ translation }: Props) {
+  const { executeRecaptcha } = useGoogleReCaptcha()
   const isHydrated = useHydrated()
+  const [busy, setBusy] = useState(false)
+  const ref = useRef<HTMLFormElement>(null)
   const fetcher = useFetcher<IndexActionData>()
 
-  const ref = useRef<HTMLFormElement>(null)
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!executeRecaptcha) return
 
-  const busy = fetcher.state === 'submitting'
+    setBusy(true)
+    const formData = new FormData(e.currentTarget)
 
-  useEffect(() => {
-    if (fetcher.state === 'loading') {
-      ref.current?.reset()
-    }
-  }, [fetcher.state])
+    const token = await executeRecaptcha('submit')
+    formData.append('token', token)
+
+    fetcher.submit(formData, {
+      method: 'post',
+      action: '/?index',
+      replace: true,
+    })
+    ref.current?.reset()
+
+    setBusy(false)
+  }
 
   return (
-    <fetcher.Form
+    <form
       ref={ref}
-      method="post"
-      replace={true}
+      onSubmit={handleSubmit}
       className="grid grid-cols-1 gap-y-6"
     >
       <div>
@@ -116,6 +129,7 @@ export default function ContactForm({ translation }: Props) {
       </div>
       <div>
         <button
+          type="submit"
           className={clsx(
             !isHydrated || busy
               ? 'disabled:cursor-not-allowed disabled:opacity-50'
@@ -127,6 +141,6 @@ export default function ContactForm({ translation }: Props) {
           {busy ? translation.buttonSubmitting : translation.button}
         </button>
       </div>
-    </fetcher.Form>
+    </form>
   )
 }

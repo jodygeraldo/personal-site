@@ -2,21 +2,37 @@ import { blacklistedWords } from '~/models/blacklist-words'
 import type { ActionData as IndexActionData } from '~/routes'
 import type { Notification } from './notification.server'
 
-const spamNames = ['henryguind']
+async function validateMailRequest(
+  mail: {
+    name: string
+    email: string
+    message: string
+  },
+  rechaptcha: {
+    token: string
+    secret: string
+  },
+) {
+  const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    body: JSON.stringify({
+      secret: rechaptcha.secret,
+      response: rechaptcha.token,
+    }),
+  })
+  const recaptcha = (await res.json()) as {
+    success: boolean
+  }
+  if (!recaptcha.success) {
+    return {
+      message: 'Recaptcha failed',
+    }
+  }
 
-function validateMailRequest(mail: {
-  name: string
-  email: string
-  message: string
-}) {
   const fieldErrors: IndexActionData['fieldErrors'] = {}
   let formError: string | undefined
 
-  if (
-    !mail.name ||
-    mail.name.length < 3 ||
-    spamNames.includes(mail.name.toLowerCase())
-  ) {
+  if (!mail.name || mail.name.length < 3) {
     fieldErrors.name = 'Name is required and must be at least 3 characters'
   }
 

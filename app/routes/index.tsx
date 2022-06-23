@@ -46,25 +46,41 @@ export const action: ActionFunction = async ({ request, context }) => {
   const formData = await request.formData()
 
   const apiKey = context.ELASTIC_EMAIL_API_KEY
+  const rechaptchaSecret = context.RECAPTCHA_SECRET
+  invariant(typeof apiKey === 'string', 'ELASTIC_EMAIL_API_KEY is not defined')
+  invariant(
+    typeof rechaptchaSecret === 'string',
+    'RECAPTCHA_SECRET is not defined',
+  )
+
   const name = formData.get('name')
   const email = formData.get('email')
   const message = formData.get('message')
+  const token = formData.get('token')
+  console.log(token)
   invariant(typeof name === 'string', 'Invalid name type')
   invariant(typeof email === 'string', 'Invalid email type')
   invariant(typeof message === 'string', 'Invalid message type')
-
+  invariant(typeof token === 'string', 'Invalid token type')
   const mail = {
     name,
     email,
     message,
   }
 
-  const { fieldErrors, formError } = validateMailRequest(mail)
+  const {
+    fieldErrors,
+    formError,
+    message: rechaptchaError,
+  } = await validateMailRequest(mail, {
+    token,
+    secret: rechaptchaSecret,
+  })
 
-  if (formError) {
+  if (formError || rechaptchaError) {
     const notificationSession = await setFlashNotification(request, {
       type: 'ERROR',
-      message: formError,
+      message: formError ?? rechaptchaError ?? 'Unknown error',
     })
 
     return json<ActionData>(
