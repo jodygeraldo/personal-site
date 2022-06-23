@@ -20,10 +20,13 @@ async function validateMailRequest(
       response: rechaptcha.token,
     }),
   })
-  const recaptcha = (await res.json()) as {
+  const rechaptchaServerResponse = (await res.json()) as {
     success: boolean
   }
-  if (!recaptcha.success) {
+
+  console.log(rechaptchaServerResponse)
+  if (!rechaptchaServerResponse.success) {
+    console.log("Rechaptcha didn't validate")
     return {
       message: 'Recaptcha failed',
     }
@@ -59,6 +62,8 @@ function checkBadWords(words: string) {
       isBad = true
     }
   })
+
+  console.log('Is bad:', isBad)
 
   return isBad
 }
@@ -109,6 +114,8 @@ async function sendMail(
     headers,
     body: JSON.stringify(body),
   })
+
+  console.log(res.json())
 
   if (res.ok) {
     return { message: 'Message sent successfully', type: 'SUCCESS' }

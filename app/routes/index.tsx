@@ -78,6 +78,7 @@ export const action: ActionFunction = async ({ request, context }) => {
   })
 
   if (formError || rechaptchaError) {
+    console.log('Form error or rechaptcha error')
     const notificationSession = await setFlashNotification(request, {
       type: 'ERROR',
       message: formError ?? rechaptchaError ?? 'Unknown error',
@@ -101,6 +102,7 @@ export const action: ActionFunction = async ({ request, context }) => {
     const response = await sendMail(apiKey, mail)
     const notificationSession = await setFlashNotification(request, response)
     if (response.type === 'SUCCESS') {
+      console.log('Mail sent successfully')
       return new Response(null, {
         status: 200,
         headers: {
@@ -108,6 +110,7 @@ export const action: ActionFunction = async ({ request, context }) => {
         },
       })
     } else {
+      console.log("Mail couldn't be sent")
       return json<ActionData>(
         { fields: mail },
         {
