@@ -28,6 +28,7 @@ import {
 } from './utils/notification.server'
 import type { Theme } from './utils/theme.server'
 import { getTheme } from './utils/theme.server'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 export const meta: MetaFunction = () => {
   return { description: 'Get to know Jody Geraldo' }
@@ -135,8 +136,10 @@ function Document({
         <Links />
       </head>
       <body className="h-full bg-gray-1">
-        {children}
-        {/* Cloudflare Web Analytics */}
+        <GoogleReCaptchaProvider reCaptchaKey="6Lc5RZIgAAAAAIjGdj-HO78KAISSSOac3RAP1xaF">
+          {children}
+        </GoogleReCaptchaProvider>
+        {/* <script src="https://www.google.com/recaptcha/api.js?render=6Lc5RZIgAAAAAIjGdj-HO78KAISSSOac3RAP1xaF"></script> */}
         {process.env.NODE_ENV === 'production' && (
           <script
             defer
@@ -144,7 +147,6 @@ function Document({
             data-cf-beacon='{"token": "3519ed47081940f2b04fa12b014444ac"}'
           ></script>
         )}
-        {/* End Cloudflare Web Analytics  */}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

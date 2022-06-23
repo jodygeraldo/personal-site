@@ -3,7 +3,8 @@
 node_modules
 
 /.cache
-/functions/\[\[path\]\].js
+/functions
 /public/build
 
-/app/tailwind.css
+/app/styles/build
+.env
