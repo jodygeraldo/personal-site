@@ -4,6 +4,8 @@
 
 @layer utilities {
   :root {
+    color-scheme: light dark;
+
     --amber1: hsl(39, 70%, 99%);
     --amber2: hsl(40, 100%, 96.5%);
     --amber3: hsl(44, 100%, 91.7%);
